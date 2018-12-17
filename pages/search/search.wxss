@@ -1,0 +1,30 @@
+/* pages/search/search.wxss */
+.table {
+  display: table;
+  width: 99%;
+  /* border-collapse 属性设置表格的边框是否被合并为一个单一的边框，解决相邻单元格边框未合并导致有些边框变粗的视觉效果 */
+  border-collapse: collapse;
+  overflow-x: hidden;
+}
+
+.tr {
+  display: table-row;
+  width: 100%;
+  height: 200rpx;
+}
+
+.th {
+  display: table-cell;
+  font-weight: bold;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #ccc;
+}
+
+.td {
+  display: table-cell;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+}

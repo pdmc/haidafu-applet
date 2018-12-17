@@ -1,0 +1,18 @@
+<!--pages/my/my.wxml-->
+<text>pages/my/my.wxml</text>
+<view class="container">
+    <!-- audio测试 2 -->
+    <view wx:if="{{!authorized}}">
+      <button 
+        wx:if="{{canIUse}}" 
+        open-type="getUserInfo" 
+        bindgetuserinfo="bindGetUserInfo"
+      >授权登录</button>
+      <view wx:else>请升级微信版本</view>
+    </view>
+    <block wx:else>
+      <image bindtap="alert('hi')" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+
+</view>

@@ -1,0 +1,36 @@
+<!--pages/project/project.wxml-->
+<text>pages/project/project.wxml</text>
+<!--详情页-->
+<!--等待框-->
+<loading hidden="{{!loading}}">加载中...</loading>
+<!--滚动列表-->
+<scroll-view scroll-y="true" wx:if="{{project.pName}}">
+  <view class='meta'>
+    <swiper class="sw"
+      indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}"
+      interval="{{interval}}"
+      duration="{{duration}}"
+      circular="{{circular}}"
+      vertical="{{vertical}}"
+      previousMargin="{{previousMargin}}"
+      nextMargin="{{nextMargin}}"
+    >
+      <block wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item class="swiper-item">
+          <image src="{{item}}" class="slide-image" mode='widthFix'/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <image class='poster' src='{{project.picture1}}' background-size="cover"></image>
+    <text class='title'>{{project.title}}({{project.year}})</text>
+    <text class='info'>{{project.countryId}}</text>
+    <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
+    <text>{{item.minPrice}}万~{{item.maxPrice}}万</text>
+    <text class='info'><block wx:for="{{project.casts}}" wx:key="id">{{item.name}}</block></text>
+  </view>
+  <view class='summary'>
+    <text class='label'>介绍：</text>
+    <text class='content'>{{project.description}}</text>
+  </view>
+</scroll-view>
