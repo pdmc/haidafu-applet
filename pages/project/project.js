@@ -29,7 +29,7 @@ Page({
   onLoad: function (options) {
     const _this = this;
     // 拼接请求url
-    const url = 'https://zhuabo.pk4yo.com/projects/getbyid?pId=' + options.pId;
+    const url = 'https://zhuabo.pk4yo.com/projects/getbyid1?pId=' + options.pId;
       // 请求数据
       wx.request({
         url: url,
@@ -38,13 +38,17 @@ Page({
           'content-type': 'json' // 默认值
         },
         success: function (res) {
+          console.log(res.data);
           // 赋值
           _this.setData({
-            project: res.data,
+            project: res.data.data[0],
             loading: false // 隐藏等待框
           })
+        },
+        fail: function() {
+          console.log('wx request failed !!!')
         }
-      })
+      });
   },
 
   /**
@@ -53,7 +57,7 @@ Page({
   onReady: function () {
     // 修改导航栏标题
     wx.setNavigationBarTitle({
-      title: this.data.pName
+      title: "abc" //this.project.pName
     })
   },
 

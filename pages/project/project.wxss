@@ -1,35 +1,144 @@
 /* pages/project/project.wxss */
+
+.sw {
+  width: 100%;
+  text-align: center;
+}
+.swiper-item{
+  text-align: center;
+  width: 100%;
+  overflow:show;
+}
+.slide-image {
+  width:100%;
+  overflow:show;
+}
+.main-body {
+  padding: 30rpx 30rpx;
+}
 .meta {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 1000rpx;
-  padding: 50rpx 40rpx;
-}
-.poster {
-  width: 80%;
-  height: 80%;
-  margin: 20rpx;
+  /*align-items: center;
+  padding: 20rpx 50rpx;
+  height: 1000rpx;*/
 }
 .title {
   font-size: 42rpx;
-  color: #444;
+  color: #101010;
+  margin-bottom: 20rpx;
 }
 .info {
-  font-size: 18rpx;
-  color: #888;
-  margin-top: 20rpx;
-  width: 80%;
+  font-size: 30rpx;
+  color: #BBBBBB;
+  width: 100%;
 }
-.summary {
-  width: 80%;
-  margin: 30rpx auto;
+.flex-inline-between {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;  
+  align-items: center;
 }
-.label {
-  display: block;
+.flex-inline-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;  
+  align-items: center;
+}
+.flex-inline-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;  
+  align-items: center;
+}
+.flex-vertical {
+  display: flex;
+  flex-direction: column; 
+}
+.markable {
+  margin: 39rpx 0rpx;
+}
+.price {
+  font-size: 42rpx;
+  color: #FF4081;
+}
+.state {
+  font-size: 30rpx;
+  color: #1FAFFF;
 }
 .content {
-  color: #666;
-  font-size: 20rpx;
+  margin-top: 40rpx;
+  margin-bottom: 14rpx;
+}
+.desc {
+  font-size: 30rpx;
+  color: #BBBBBB;
+  width: 100%;
+}
+.address {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 40rpx 0rpx;
+}
+.layout {
+  margin-top: 60rpx;
+  margin-bottom: 40rpx;
+}
+.etcc {
+  border-top: 1rpx solid #EEEEEE;
+  border-bottom: 1rpx solid #EEEEEE;
+  padding: 39rpx 0rpx;
+  margin: 0rpx 0rpx;
+}
+.sentence {
+  font-size: 30rpx;
+  color: #737373;
+  margin-left: 45rpx;
+}
+.sentence1 {
+  font-size: 30rpx;
+  color: #737373;
+  margin-left: 75rpx;
+}
+.rent {
+  font-size: 30rpx;
+  color: #FF4081;
+
+}
+.predict {
+  margin: 60rpx 0rpx;
+}
+.bottom {
+  background-color: #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 150rpx;
+}
+.bottomleft image {
+  width: 100rpx;
+  height: 100rpx;
+}
+.btm-btn {
   padding: 10rpx;
+}
+.btnlbl {
+  color: #4B4B4B;
+  font-size: 28rpx;
+  text-align: center;
+}
+.share {
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 45%;
+  background-color: #1FAFFF;
+  align-items: stretch;
+}
+.hongbao {
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 55%;
+  background-color: #FFA94D;
+  align-items: stretch;
 }

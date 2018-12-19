@@ -1,11 +1,10 @@
 <!--pages/project/project.wxml-->
-<text>pages/project/project.wxml</text>
 <!--详情页-->
 <!--等待框-->
 <loading hidden="{{!loading}}">加载中...</loading>
 <!--滚动列表-->
-<scroll-view scroll-y="true" wx:if="{{project.pName}}">
-  <view class='meta'>
+<scroll-view scroll-y="true" wx:if="{{true}}">
+  <view class="page-body">
     <swiper class="sw"
       indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}"
@@ -22,15 +21,68 @@
         </swiper-item>
       </block>
     </swiper>
-    <image class='poster' src='{{project.picture1}}' background-size="cover"></image>
-    <text class='title'>{{project.title}}({{project.year}})</text>
-    <text class='info'>{{project.countryId}}</text>
-    <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
-    <text>{{item.minPrice}}万~{{item.maxPrice}}万</text>
-    <text class='info'><block wx:for="{{project.casts}}" wx:key="id">{{item.name}}</block></text>
   </view>
-  <view class='summary'>
-    <text class='label'>介绍：</text>
-    <text class='content'>{{project.description}}</text>
+  <view class="main-body">
+    <view class='meta'>
+      <!--image class='poster' src='{{project.picture1}}' background-size="cover"></image-->
+      <text class='title'>{{project.pName}}</text>
+      <text class='info'>{{project.area__name}}</text>
+      <text class='info'>{{project.minSquare}}m2-{{project.maxSquare}}m2</text>
+      <view class='flex-inline-between markable'>
+        <text class='price'>{{project.minPrice}}万~{{project.maxPrice}}万</text>
+        <text class='state'>{{project.minPrice}}万~{{project.maxPrice}}万</text>
+      </view>
+    </view>
+    <view class='content'>
+      <text class='desc'>{{project.description}}</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>楼盘地址</text>
+      <text class='sentence'>{{project.area__name}}</text>
+    </view>
+    <view class='layout'>
+      <text class='title'>户型介绍</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>产权年限</text>
+      <text class='sentence'>{{project.prighttype__name}}</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>交房时间</text>
+      <text class='sentence'>{{project.handoverYear}}年{{project.handoverMonth}}月</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>能否贷款</text>
+      <text class='sentence' wx:if="{{project.canLoad}}">能</text>
+      <text class='sentence' wx:else>否</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>规划面积</text>
+      <text class='sentence'>{{project.totalSquare}}平方米</text>
+    </view>
+    <view class='etcc'>
+      <text class='info'>总户数</text>
+      <text class='sentence1'>{{project.totalAmount}}</text>
+    </view>
+    <view class='flex-inline-between predict'>
+      <text class='title'>预计包租收益</text>
+      <text class='rent'>￥{{project.predictYearRent}}/年</text>
+    </view>
   </view>
 </scroll-view>
+<view class="bottom flex-inline-between">
+  <view class="bottomleft flex-inline-left">
+    <view class="btm-btn flex-vertical">
+      <image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
+      <text class='btnlbl'>首页</text>
+    </view>
+    <view class="btm-btn flex-vertical">
+      <image src="../../static/images/ic_menu_fav_nor.png" bindtap=""></image>
+      <text class='btnlbl'>收藏</text>
+   </view>
+  </view>
+  <view class="bottomright flex-inline-right">
+    <text class='share'>分享得红包</text>
+    <text class='hongbao'>预约看房拿红包</text>
+  </view>
+</view>
