@@ -21,23 +21,23 @@ Page({
     const url = 'https://zhuabo.pk4yo.com/projects';
       // + options.type;
       // 请求数据
-      wx.request({
-        url: url,
-        data: {},
-        header: {
-          'content-type': 'json' // 默认值
-        },
-        success: function (res) {
-          console.log(res.data);
-          // 赋值
-          _this.setData({
-            title: '', //res.data.title,
-            list: res.data,
-            type: 'us_box',
-            loading: false // 关闭等待框
-          })
-        }
-      })
+    wx.request({
+      url: url,
+      data: {},
+      header: {
+        'content-type': 'json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data);
+        // 赋值
+        _this.setData({
+          title: '', //res.data.title,
+          list: res.data,
+          type: 'us_box',
+          loading: false // 关闭等待框
+        })
+      }
+    })
   },
 
   /**

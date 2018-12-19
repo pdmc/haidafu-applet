@@ -1,5 +1,4 @@
 <!--pages/projectlist/projectlist.wxml-->
-<text>pages/projectlist/projectlist.wxml</text>
 <!--pages/list/list.wxml-->
 <!--列表页-->
 <view class='container'>
