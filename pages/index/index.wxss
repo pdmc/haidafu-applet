@@ -1,5 +1,6 @@
 /*@import "./weui.wxss";
 */
+@import "../../static/css/common.wxss";
 page {
   background-color: #F8F8F8;
   height: 100%;
@@ -7,12 +8,10 @@ page {
   font-size: 32rpx;
   line-height: 1.6;
 }
-.container{
-  width:100%;
-}
 .page-body{
   width: 100%;
-  padding-top: 10rpx;
+  margin-top: 10rpx;
+  padding: 0rpx 0rpx;
 }
 .page-body .sw {
   width: 100%;
@@ -31,7 +30,98 @@ page {
   text-align: center;
   align-items:center;/*垂直居中*/
   justify-content: center;/*水平居中*/
+  margin: 0rpx 0rpx;
+  padding: 0rpx 0rpx;
 }
 .search_section > image {
+  width: 700rpx;
   height: 150rpx;
+  margin: 0rpx 0rpx;
+}
+
+.select-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;  
+  align-items: center;
+  padding: 0rpx 0rpx;
+  margin: 0rpx 30rpx;
+}
+.img-select {
+  height: 60rpx;
+  width: 60rpx;
+}
+.select-title {
+  font-size: 42rpx;
+  color: #101010;
+  margin-left: 15rpx;
+  font-family: 方正兰亭黑-标准;
+}
+.select-tab{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  height:130rpx;
+  font-size: 32rpx;
+  /*background-color: #fff;
+  border-top:1px solid #FFFFFF;
+  border-bottom:1px solid #FFFFFF;*/
+}
+.select-tab > view{
+  display: flex;
+  align-items: center;
+  margin: 30rpx 0rpx;
+  padding: 24rpx 0rpx;
+}
+.select-tab > view.inactive {
+  border-bottom:1px solid inherit;
+}
+.select-tab > view.active{
+  color: #1FAFFF;
+  border-bottom:1px solid #1FAFFF;
+}
+.select-swiper {
+  height: 350rpx;
+}
+.select-swiper-item {
+  padding: 0rpx 30rpx;
+  height: 100%;
+}
+.select-swiper-view {
+  border-radius: 10rpx;
+  height: 100%;
+}
+.select-text-high {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  font-family: 方正兰亭黑-标准;
+  padding: 220rpx 0rpx 0rpx 30rpx;
+}
+.select-text-low {
+  color: #FFFFFF;
+  font-family: 方正兰亭黑-标准;
+  padding: 0rpx 20rpx 10rpx 30rpx;
+}
+.flex-inline-between {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;  
+  align-items: center;
+}
+.select-text-price{
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+.select-text-sq{
+  font-size: 32rpx;
+}
+.select-text-country{
+  font-size: 28rpx;
+}
+.hidden {
+  display: none;
+}
+.show {
+  display:block;
 }

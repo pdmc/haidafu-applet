@@ -1,85 +1,64 @@
 <view class="container">
+  <swiper class="sw"
+    indicator-dots="{{indicatorDots}}"
+    circular="{{circular}}"
+    vertical="{{vertical}}"
+    previousMargin="{{previousMargin}}"
+    nextMargin="{{nextMargin}}"
+  >
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+      <swiper-item class="swiper-item">
+        <image src="{{item}}" class="slide-image" mode='widthFix'/>
+      </swiper-item>
+    </block>
+  </swiper>
   <view class="page-body">
-    <swiper class="sw"
-      indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}"
-      interval="{{interval}}"
-      duration="{{duration}}"
-      circular="{{circular}}"
-      vertical="{{vertical}}"
-      previousMargin="{{previousMargin}}"
-      nextMargin="{{nextMargin}}"
-    >
-      <block wx:for="{{imgUrls}}" wx:key="*this">
-        <swiper-item class="swiper-item">
-          <image src="{{item}}" class="slide-image" mode='widthFix'/>
-        </swiper-item>
-      </block>
-    </swiper>
     <view class="search_section">
-      <image bindtap="bindViewTap" src='{{search_img}}'></image>
+      <image bindtap="bindViewTap" src='{{search_img}}' mode='aspectFit'></image>
     </view>
-    <!--view class="page-section page-section-spacing swiper">
-      <swiper
-        indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
-        interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
-        <block wx:for="{{background}}" wx:key="*this">
-          <swiper-item>
-            <view class="swiper-item {{item}}"></view>
-          </swiper-item>
-        </block>
-      </swiper>
+    <view class='select-header'>
+      <image src='../../static/images/ic_lbl_select.png' class='img-select'></image>
+      <text class='select-title'>精选房源</text>
     </view>
 
-    <view class="page-section" style="margin-top: 40rpx;margin-bottom: 0;">
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">指示点</view>
-          <view class="weui-cell__ft">
-            <switch checked="{{indicatorDots}}" bindchange="changeProperty" data-property-name="indicatorDots" />
-          </view>
+    <view class="select-tab">
+      <block wx:for="{{cities}}" wx:for-index="bindex"  wx:key="*this">
+        <view data-index='{{bindex}}' class="{{_num==bindex?'active':'inactive'}}" bindtap='toggle'>
+          {{item}}
         </view>
-        <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">自动播放</view>
-          <view class="weui-cell__ft">
-            <switch checked="{{autoplay}}" bindchange="changeProperty" data-property-name="autoplay" />
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">衔接滑动</view>
-          <view class="weui-cell__ft">
-            <switch checked="{{circular}}" bindchange="changeProperty" data-property-name="circular" />
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_switch">
-          <view class="weui-cell__bd">竖向</view>
-          <view class="weui-cell__ft">
-            <switch checked="{{vertical}}" bindchange="changeProperty" data-property-name="vertical" />
-          </view>
-        </view>
-      </view>
+      </block>
     </view>
-    <view class="page-section page-section-spacing">
-      <view class="page-section-title">
-        <text>幻灯片切换时长(ms)</text>
-        <text class="info">{{duration}}</text>
+    <loading hidden="{{!loading}}">加载中...</loading>
+    <block wx:for="{{cities}}" wx:for-index="cindex" wx:key="*this">
+      <view  class="{{_num==cindex?'show':'hidden'}}">
+        <swiper current="0" class="select-swiper" 
+          indicator-dots="{{indicatorDots2}}"
+          circular="false"
+          previousMargin="{{previousMargin2}}"
+          nextMargin="{{nextMargin2}}"
+          bindchange="bindChange">
+          <block wx:for="{{select_list[cindex]}}" wx:for-index="sindex" wx:key="*this">
+            <swiper-item class="select-swiper-item">
+              <!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
+              <view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
+                <view class='select-text-high'>
+                  <text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
+                  </text>
+                </view>
+                <view class='select-text-low flex-inline-between'>
+                  <view>
+                    <text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
+                    <text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
+                  </view>
+                  <view>
+                    <text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>
+                  </view>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
       </view>
-      <slider value="{{duration}}" min="500" max="2000" bindchange="changeProperty" data-property-name="duration" />
-      <view class="page-section-title">
-        <text>自动播放间隔时长(ms)</text>
-        <text class="info">{{interval}}</text>
-      </view>
-      <slider value="{{interval}}" min="2000" max="10000" bindchange="changeProperty" data-property-name="interval" />
-      <view class="page-section-title">
-        <text>前边距(px)</text>
-        <text class="info">{{previousMargin}}</text>
-      </view>
-      <slider value="{{previousMargin}}" min="0" max="50" bindchange="changeProperty" data-property-name="previousMargin" />
-      <view class="page-section-title">
-        <text>后边距(px)</text>
-        <text class="info">{{nextMargin}}</text>
-      </view>
-      <slider value="{{nextMargin}}" min="0" max="50" bindchange="changeProperty" data-property-name="nextMargin" />
-    </view-->
+    </block>
   </view>
 </view>
