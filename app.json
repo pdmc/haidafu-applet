@@ -15,13 +15,13 @@
   "tabBar": {
     "backgroundColor": "#fafafa",
     "borderStyle": "white",
-    "selectedColor": "#b4282d",
-    "color": "#666",
+    "selectedColor": "#1FAFFF",
+    "color": "#4B4B4B 100%",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/images/ic_menu_choice_nor.png",
-        "selectedIconPath": "static/images/ic_menu_choice_pressed.png",
+        "iconPath": "static/images/ic_menu_home_nor.png",
+        "selectedIconPath": "static/images/ic_menu_home_pressed.png",
         "text": "首页"
       },
       {
