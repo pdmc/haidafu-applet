@@ -77,7 +77,7 @@
       <text class='btnlbl'>首页</text>
     </view>
     <view class="btm-btn flex-vertical">
-      <image src="../../static/images/ic_menu_fav_nor.png" bindtap=""></image>
+      <image src="../../static/images/ic_btn_fav_nor.png" bindtap=""></image>
       <text class='btnlbl'>收藏</text>
    </view>
   </view>

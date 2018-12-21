@@ -1,5 +1,5 @@
 /* pages/project/project.wxss */
-
+@import "../../static/css/common.wxss";
 .sw {
   width: 100%;
   text-align: center;
@@ -33,28 +33,7 @@
   color: #BBBBBB;
   width: 100%;
 }
-.flex-inline-between {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;  
-  align-items: center;
-}
-.flex-inline-left {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;  
-  align-items: center;
-}
-.flex-inline-right {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;  
-  align-items: center;
-}
-.flex-vertical {
-  display: flex;
-  flex-direction: column; 
-}
+
 .markable {
   margin: 39rpx 0rpx;
 }

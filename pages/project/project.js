@@ -29,7 +29,7 @@ Page({
   onLoad: function (options) {
     const _this = this;
     // 拼接请求url
-    const url = 'https://zhuabo.pk4yo.com/projects/getbyid1?pId=' + options.pId;
+    const url = 'https://zhuabo.pk4yo.com/projects/getbyid?pId=' + options.pId;
       // 请求数据
       wx.request({
         url: url,
