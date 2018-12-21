@@ -1,16 +1,232 @@
 /* pages/projectlist/projectlist.wxss */
+@import "../../static/css/common.wxss";
+
+/* 带遮罩层的下拉菜单 *//*根布局-点击项*/ 
+.container {   
+	width: 100%;   
+	height: 100%;  
+	position: absolute; 
+} 
+
+
+/*  -------------- 下拉列表 ------------------ */
+
 .page-header {
+	width: 100%;   
+	position: absolute;   
+	z-index: 20; 
+  font-family: 'PingFang SC',
+                 'Helvetica Neue',
+                 Helvetica,
+                 'Droid Sans Fallback',
+                 'Microsoft Yahei',
+                 sans-serif;
+  /*position:fixed;*/
+  background: #fff;
+  overflow: hidden;
+}
+.nav {
+	position: fixed;   
+	z-index: 60;   
   display: flex;
+  border-top: 1px solid #d1d3d4;
   justify-content: center;
   border-bottom: 1rpx solid #ccc;
+  background: #fff;
+	width: 100%;   
+	padding: 20rpx 20rpx;  
+	font-size: 28rpx;  
+	color: #666;  
 }
-.page-title {
-  padding: 20rpx 40rpx;
-  color: #999;
-  font-size: 38rpx;
+
+/*筛选项隐藏 显示动画 end*/ /*筛选项显示出来的时候的阴影*/ 
+.shadow {   
+	width: 100%;   
+	height: 500rpx;  
+	background-color: rgba(0, 0, 0, 0.3);   
+	z-index: 40;   
+	top: 112rpx; 
+} 
+
+
+.nav-son {
+  display: flex;
+  flex: 1;
   text-align: center;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
-.page-body {
+
+.borders {
+  border-left: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+}
+
+.content {
+  display: inline-block;
+}
+
+.icon {
+  display: inline-block;
+  border: 4px solid transparent;
+  border-top: 4px solid #9b9b9b;
+  margin-left: 5px;
+}
+
+.temp {
+	position: absolute;   
+	z-index: 50;   
+	top: -540rpx; 
+  font-size: 14px;
+}
+
+.temp1 {
+  display: flex;
+  width: 100%;
+  height: 1150rpx;
+  overflow-y: scroll;
+  background: #fff;
+  color: #666;
+}
+
+
+
+.slidedown {
+  transform: translateY(0%);
+}
+
+.quyu {
+	position: absolute;   
+	z-index: 50;   
+	top: -540rpx; 
+  /*height: 750rpx;*/
+}
+
+.quyu .qy {
+  overflow-y: scroll;
+  float: left;
+  width: 33.33%;
+  height: 750rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #717273;
+}
+
+
+.fullbg {
+	position: absolute;   
+	z-index: 50;   
+	top: -540rpx; 
+  width: 100%;
+  height: 100%;
+  background: rgb(1, 1, 1);
+  transition: all 2s;
+  opacity: 0;
+}
+
+.fullopacity {
+  opacity: 0.2;
+}
+
+.nav-son.active .content {
+  color: #fa871e;
+}
+
+.nav-son.active .icon {
+  border-bottom: 4px solid #fa871e;
+  border-top: 0;
+}
+
+ /*筛选项隐藏 显示动画 start*/ 
+ @keyframes slidown {   
+ 	from {     transform: translateY(0%);   }   
+ 	to {     transform: translateY(100%);   } 
+ } 
+ .slidown {   
+ 	display: block;   
+ 	animation: slidown 0.1s ease-in both; 
+ } 
+ @keyframes slidup {   
+ 	from { transform: translateY(100%); }   
+ 	to { transform: translateY(0%); } 
+} 
+.slidup {  
+	display: block;   
+	animation: slidup 0.2s ease-in both; 
+} 
+/*
+@keyframes slidown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.slidown {
+  display: block;
+  animation: slidown 0.2s ease-in both;
+}
+
+@keyframes slidup {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.slidup {
+  display: block;
+  animation: slidup 0.2s ease-in both;
+}
+*/
+.disappear {
+  display: none;
+}
+
+.slidowntop {
+  display: flex;
+  flex-direction: row;
+  padding: 20rpx 24rpx 10rpx 24rpx;
+}
+
+
+.temp2 {
+  width: 100%;
+  height: 1150rpx;
+  overflow-y: scroll;
+  background: #fff;
+  color: #666;
+}
+.commanders{
+  padding: 10rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sdbitem.active{  
+  color: #fa871e;  
+  background-color: #F1E6B8;
+} 
+
+
+/*  -------------- 查询返回列表 ------------------ */
+.page-body {   
+	width: 100%;   
+	position: absolute;   
+	top: 150rpx;   
+	z-index: 20; 
+}
+
+.page-list {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -18,7 +234,7 @@
 .item {
   display: flex;
   padding: 20rpx 40rpx;
-  border-bottom: 1rpx solid #eee;
+  border-bottom: 1rpx solid #1ee;
   cursor: pointer;
 }
 .item .poster {
@@ -63,3 +279,22 @@
 .tips image,.tips text {
   vertical-align: middle;
 }
+
+/*
+.header-tab > view.inactive {
+  border-bottom:1px solid inherit;
+}
+.header-tab > view.active{
+  color: #1FAFFF;
+  border-bottom:1px solid #1FAFFF;
+}
+*/
+
+
+
+
+
+
+
+
+

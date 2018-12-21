@@ -2,31 +2,73 @@
 <!--pages/list/list.wxml-->
 <!--列表页-->
 <view class='container'>
+  <view class="page-header">
+    <view class="nav">
+      <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
+        <view class="content">{{city}}</view>
+        <view class="icon"></view>
+      </view>
+      <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
+        <view class="content">{{city1}}</view>
+        <view class="icon"></view>
+      </view>
+      <view class="nav-son {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
+        <view class="content">{{model}}</view>
+        <view class="icon"></view>
+      </view>
+    </view>
+    <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}  {{needAnimation?(openPicker?'slidown':'slidup'):''}}">
+      地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。
+    </view>
+    <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}"> 
+      page2
+    </view>   
+    <view class="temp temp2 {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}">
+      page3
+    </view>
+    <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+  </view>
+  <view class="shadow" hidden="{{!openPicker}}"></view>
+
   <!--等待框-->
   <loading hidden="{{!loading}}">加载中...</loading>
-  <!--顶部标题栏-->
-  <view class='page-header'>
-    <text class='page-title'>{{title}}</text>
-  </view>
+  <!--顶部下拉选择栏-->
+  <!--view class='page-header flex-vertical'>
+    <block wx:for="{{menus}}" wx:for-index="mindex" wx:key="*this" class='header-tab flex-inline-between'>
+      <view data-index='{{mindex}}' class="{{_num==mindex?'active':'inactive'}}" bindtap='toggle'>
+        {{item}}
+      </view>
+    </block>
+    <view>
+      <view class="{{_num==0?'show':'hidden'}}">
+      <text>aaaaaaaaaa</text>
+      </view>
+      <view class="{{_num==1?'show':'hidden'}}">
+      <text>bbbbbbbbbb</text>
+      </view>
+    </view>
+  </view-->
   <!--列表-->
-  <view class='page-body' wx:for="{{list.data}}" wx:key="id">
-    <!--类型判断,显示不同的数据-->
-    <block wx:if="{{type === 'us_box'}}">
-      <navigator url='../project/project?pId={{item.pId}}'>
-        <view class='item'>
-          <image class='poster' src='{{item.thumbnail}}'></image>
-          <view class='meta'>
-            <text class='title'>{{item.pName}}</text>
-            <text class='sub-title'>{{item.countryId}}</text>
-            <view class='square'>
-              <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
-            </view>
-            <view class='price'>
-              <text>{{item.minPrice}}万~{{item.maxPrice}}万</text>
+  <view class='page-body'>
+    <view class='page-list' wx:for="{{list.data}}" wx:key="id">
+      <!--类型判断,显示不同的数据-->
+      <block wx:if="{{type === 'us_box'}}">
+        <navigator url='../project/project?pId={{item.pId}}'>
+          <view class='item'>
+            <image class='poster' src='{{item.thumbnail}}'></image>
+            <view class='meta'>
+              <text class='title'>{{item.pName}}</text>
+              <text class='sub-title'>{{item.countryId}}</text>
+              <view class='square'>
+                <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
+              </view>
+              <view class='price'>
+                <text>{{item.minPrice}}万~{{item.maxPrice}}万</text>
+              </view>
             </view>
           </view>
-        </view>
-      </navigator>
-    </block>
+        </navigator>
+      </block>
+    </view>
   </view>
 </view>
