@@ -2,52 +2,87 @@
 <!--pages/list/list.wxml-->
 <!--列表页-->
 <view class='container'>
-  <view class="page-header">
-    <view class="nav">
-      <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
-        <view class="content">{{city}}</view>
-        <view class="icon"></view>
+  <view class="pick-header flex-inline-between">
+    <block wx:for="{{menus}}" wx:key="*this">
+      <view class="pick-tab flex-inline-left {{opickers[index]?'active':''}}" data-index="{{index}}" bindtap="onPickTabClick">
+        <view class="pick-text">{{menus[index]}}</view>
+        <view class="pick-icon"></view>
       </view>
-      <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
-        <view class="content">{{city1}}</view>
-        <view class="icon"></view>
-      </view>
-      <view class="nav-son {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
-        <view class="content">{{model}}</view>
-        <view class="icon"></view>
-      </view>
-    </view>
-    <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}  {{needAnimation?(openPicker?'slidown':'slidup'):''}}">
-      地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。地区选择卡。
-    </view>
-    <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}"> 
-      page2
-    </view>   
-    <view class="temp temp2 {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}">
-      page3
-    </view>
-    <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
+    </block>
   </view>
-  <view class="shadow" hidden="{{!openPicker}}"></view>
+	<!------------------Tab1-------------------->
+  <view class="tab1 {{needAnimation[0]?(opickers[0]?'slidown':'slidup'):''}}">
+    <block wx:for="{{tabPriceList}}" wx:for-item="item" wx:key="*this">
+      <view data-index="{{index}}" bindtap='clickPick'>
+        <text style="{{index == priceItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}">{{item}} </text>
+      </view>
+    </block>
+    <view class='showvalue flex-inline-left' style="{{tabPriceList.length == priceItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}"  bindtap='clickPick1'>
+      <text class='price'>自定义： </text>
+      <text class='price'>￥{{leftValue<rightValue?leftValue:rightValue}}万 - ￥{{leftValue<rightValue?rightValue:leftValue}}万</text>
+    </view>
+    <view class='sliderView'>
+      <slider class='left' block-color='#1FAFFF' bindchange="leftChange" min='{{leftMin}}' max='{{leftMax}}' value='{{leftValue}}' activeColor='rgb(115,115,115)' backgroundColor='rgb(115,115,115)' block-size='14' />
+      <slider class='right' block-color='#1FAFFF' bindchange="rightChange" min='{{rightMin}}' max='{{rightMax}}' value='{{rightValue}}' activeColor='rgb(115,115,115)' backgroundColor='rgb(115,115,115)' block-size='14' />
+    </view>
+    <view class='button-area flex-inline-between'>
+      <button bindtap='priceReset'>重置</button>
+      <button bindtap='priceOk'>确认</button>
+    </view>
+  </view>
+	<!------------------Tab2-------------------->
+  <view class="tab2 {{needAnimation[1]?(opickers[1]?'slidown':'slidup'):''}}">
+		<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="areaChange">
+			<picker-view-column>
+				<view>不限</view>
+				<view wx:for="{{countries}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view>不限</view>
+				<view wx:for="{{provinces}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view>不限</view>
+				<view wx:for="{{cities}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+			</picker-view-column>
+		</picker-view>
+  </view>
+	<!------------------Tab3-------------------->
+  <view class="tab3 {{needAnimation[2]?(opickers[2]?'slidown':'slidup'):''}}  flex-vertical">
+		<text class="marginLeft">户型</text>
+		<view class="type-area  flex-inline-left">
+			<block wx:for="{{tabLayouts}}" wx:key="*this">
+				<view class="type-tab" data-index="{{index}}" bindtap='layoutChange'>
+					<text style="{{index == layoutItemId?'background-color:#1FAFFF;color:#FFFFFF;border:1rpx #FFFFFF solid':''}}">{{item}} </text>
+				</view>
+			</block>
+		</view>
+		<text class="marginLeft">物业类型</text>
+		<view class="type-area  flex-inline-left">
+			<block wx:for="{{tabTypes}}" wx:key="*this">
+				<view class="type-tab" data-index="{{index}}" bindtap='typeChange'>
+					<text style="{{index == typeItemId?'background-color:#1FAFFF;color:#FFFFFF;border:1rpx #FFFFFF solid':''}}">{{item}} </text>
+				</view>
+			</block>
+		</view>
+    <view class='button-area flex-inline-between'>
+      <button bindtap='typeReset'>重置</button>
+      <button bindtap='typeOk'>确认</button>
+    </view>
+	</view>
+	<!------------------Tab4-------------------->
+	<view class="tab4 {{needAnimation[3]?(opickers[3]?'slidown':'slidup'):''}}">
+		<block wx:for="{{tabOrders}}" wx:for-item="item" wx:key="*this">
+      <view data-index="{{index}}" bindtap='orderChange'>
+        <text style="{{index == orderItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}">{{item}} </text>
+      </view>
+    </block>
+	</view>
+  <view class="shadow" hidden="{{!shadow_on}}" bindtap='clearModals'></view>
 
   <!--等待框-->
   <loading hidden="{{!loading}}">加载中...</loading>
-  <!--顶部下拉选择栏-->
-  <!--view class='page-header flex-vertical'>
-    <block wx:for="{{menus}}" wx:for-index="mindex" wx:key="*this" class='header-tab flex-inline-between'>
-      <view data-index='{{mindex}}' class="{{_num==mindex?'active':'inactive'}}" bindtap='toggle'>
-        {{item}}
-      </view>
-    </block>
-    <view>
-      <view class="{{_num==0?'show':'hidden'}}">
-      <text>aaaaaaaaaa</text>
-      </view>
-      <view class="{{_num==1?'show':'hidden'}}">
-      <text>bbbbbbbbbb</text>
-      </view>
-    </view>
-  </view-->
+
   <!--列表-->
   <view class='page-body'>
     <view class='page-list' wx:for="{{list.data}}" wx:key="id">

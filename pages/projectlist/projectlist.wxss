@@ -11,135 +11,55 @@
 
 /*  -------------- 下拉列表 ------------------ */
 
-.page-header {
+/*筛选头部*/ 
+.pick-header {      /* == nav */
 	width: 100%;   
-	position: absolute;   
-	z-index: 20; 
-  font-family: 'PingFang SC',
-                 'Helvetica Neue',
-                 Helvetica,
-                 'Droid Sans Fallback',
-                 'Microsoft Yahei',
-                 sans-serif;
-  /*position:fixed;*/
-  background: #fff;
-  overflow: hidden;
-}
-.nav {
-	position: fixed;   
 	z-index: 60;   
-  display: flex;
-  border-top: 1px solid #d1d3d4;
-  justify-content: center;
-  border-bottom: 1rpx solid #ccc;
-  background: #fff;
-	width: 100%;   
-	padding: 20rpx 20rpx;  
+	position: fixed;   
+  margin: 0rpx;
 	font-size: 28rpx;  
-	color: #666;  
-}
-
-/*筛选项隐藏 显示动画 end*/ /*筛选项显示出来的时候的阴影*/ 
-.shadow {   
-	width: 100%;   
-	height: 500rpx;  
-	background-color: rgba(0, 0, 0, 0.3);   
-	z-index: 40;   
-	top: 112rpx; 
+	color: #737373;  
+	background-color: #FFFFFF; 
 } 
-
-
-.nav-son {
-  display: flex;
-  flex: 1;
+.pick-tab {      /* == nav-son */
   text-align: center;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+	padding: 40rpx 30rpx 40rpx 20rpx;  
+  /*height: 40px;
+  font-size: 32rpx;*/
 }
-
-.borders {
-  border-left: 1px solid #e6e6e6;
-  border-right: 1px solid #e6e6e6;
-}
-
-.content {
-  display: inline-block;
-}
-
-.icon {
+.pick-icon {
   display: inline-block;
   border: 4px solid transparent;
-  border-top: 4px solid #9b9b9b;
+  border-top: 4px solid #737373;
   margin-left: 5px;
 }
 
-.temp {
-	position: absolute;   
-	z-index: 50;   
-	top: -540rpx; 
-  font-size: 14px;
+.pick-tab.active .pick-text {
+  color: #1FAFFF;
 }
-
-.temp1 {
-  display: flex;
-  width: 100%;
-  height: 1150rpx;
-  overflow-y: scroll;
-  background: #fff;
-  color: #666;
-}
-
-
-
-.slidedown {
-  transform: translateY(0%);
-}
-
-.quyu {
-	position: absolute;   
-	z-index: 50;   
-	top: -540rpx; 
-  /*height: 750rpx;*/
-}
-
-.quyu .qy {
-  overflow-y: scroll;
-  float: left;
-  width: 33.33%;
-  height: 750rpx;
-  line-height: 80rpx;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: #717273;
-}
-
-
-.fullbg {
-	position: absolute;   
-	z-index: 50;   
-	top: -540rpx; 
-  width: 100%;
-  height: 100%;
-  background: rgb(1, 1, 1);
-  transition: all 2s;
-  opacity: 0;
-}
-
-.fullopacity {
-  opacity: 0.2;
-}
-
-.nav-son.active .content {
-  color: #fa871e;
-}
-
-.nav-son.active .icon {
-  border-bottom: 4px solid #fa871e;
+.pick-tab.active .pick-icon {
+  border-bottom: 4px solid #1FAFFF;
   border-top: 0;
 }
 
+
+
+/*  -------------- 选项卡 1 ------------------ */
+.tab1 {     /*   == quyu */
+	width: 100%;   
+	background-color: #fff;   
+	position: absolute;   
+	z-index: 50;  
+  /*height: 1200rpx;  相差选择栏高度120rpx */
+	top: -840rpx; 
+	font-size: 28rpx;  
+} 
+.tab1 text { 
+ 	display: block;  
+	line-height: 78rpx;  
+	margin-left: 30rpx;
+ 	border-bottom: 1px solid #FFFFFF;
+ }
  /*筛选项隐藏 显示动画 start*/ 
  @keyframes slidown {   
  	from {     transform: translateY(0%);   }   
@@ -157,72 +77,123 @@
 	display: block;   
 	animation: slidup 0.2s ease-in both; 
 } 
-/*
-@keyframes slidown {
-  from {
-    transform: translateY(-100%);
-  }
-
-  to {
-    transform: translateY(0%);
-  }
-}
-
-.slidown {
-  display: block;
-  animation: slidown 0.2s ease-in both;
-}
-
-@keyframes slidup {
-  from {
-    transform: translateY(0%);
-  }
-
-  to {
-    transform: translateY(-100%);
-  }
-}
-
-.slidup {
-  display: block;
-  animation: slidup 0.2s ease-in both;
-}
-*/
-.disappear {
-  display: none;
-}
-
-.slidowntop {
-  display: flex;
-  flex-direction: row;
-  padding: 20rpx 24rpx 10rpx 24rpx;
-}
-
-
-.temp2 {
-  width: 100%;
-  height: 1150rpx;
-  overflow-y: scroll;
-  background: #fff;
-  color: #666;
-}
-.commanders{
-  padding: 10rpx;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.sdbitem.active{  
-  color: #fa871e;  
-  background-color: #F1E6B8;
+/*筛选项隐藏 显示动画 end*/ /*筛选项显示出来的时候的阴影*/ 
+.shadow {   
+	width: 100%;   
+	height: 100%;  
+	background-color: rgba(0, 0, 0, 0.3);   
+	z-index: 40;   
+	top: 0rpx; 
 } 
+
+.sliderView{
+  position: relative;
+  width: 93%;
+  margin: 0rpx 0rpx 30rpx 0rpx;
+	background-color: #fff;
+}
+.left{
+  position: absolute;
+	top: -30rpx;
+  width: 90%;
+}
+.right{
+  position: absolute;
+	top: -30rpx;
+  width: 90%;
+}
+.button-area {
+	width: 90%;
+	margin: 70rpx 20rpx 20rpx 20rpx;
+	font-size: 32rpx;
+}
+.button-area button {
+	width: 45%;
+	font-size: 32rpx;
+}
+.button-area button:active {
+	background-color: #1FAFFF;
+	color: #FFFFFF;
+}
+
+
+
+/*  -------------- 选项卡 2 ------------------ */
+
+.tab2 {     /*   == quyu */
+	width: 100%;   
+	background-color: #FFFFFF;   
+	position: absolute;   
+	z-index: 50;  
+  /* height: 400rpx;  120rpx */
+  border: 1rpx #000 solid;
+	top: -586rpx; 
+	font-size: 28rpx;  
+} 
+.tab2 picker-view {
+  height: 300rpx;
+}
+
+
+
+/*  -------------- 选项卡 3 ------------------ */
+.tab3 {
+	width: 100%;   
+	background-color: #FFFFFF;   
+	position: absolute;   
+	z-index: 50;  
+  /* 
+	height: 400rpx;  120rpx 
+  border: 1rpx #000 solid;
+	*/
+	top: -688rpx; 
+	padding: 40rpx 0rpx;
+	font-size: 28rpx;  
+}
+.type-area {
+	margin: 30rpx 0rpx 0rpx 30rpx;
+	flex-flow: row wrap;
+	align-content: space-around;
+}
+.type-tab {
+	padding: 15rpx 10rpx;
+}
+.type-area text {
+	background-color: #FFFFFF;
+	padding: 25rpx;
+	margin: 30rpx 0rpx;
+	border-radius: 10rpx;
+	line-height: 80rpx;
+	color: #737373;  
+	border: 1rpx #7373735e solid;
+}
+
+
+
+/*  -------------- 选项卡 4 ------------------ */
+.tab4 {     /*   == quyu */
+	width: 100%;   
+	background-color: #fff;   
+	position: absolute;   
+	z-index: 50;  
+  /*height: 1200rpx;  相差选择栏高度120rpx */
+	top: -285rpx; 
+	font-size: 28rpx;  
+} 
+.tab4 text { 
+ 	display: block;  
+	line-height: 78rpx;  
+	margin-left: 30rpx;
+ 	border-bottom: 1px solid #FFFFFF;
+ }
+
 
 
 /*  -------------- 查询返回列表 ------------------ */
 .page-body {   
 	width: 100%;   
 	position: absolute;   
-	top: 150rpx;   
+	top: 120rpx;   
 	z-index: 20; 
 }
 
@@ -234,7 +205,7 @@
 .item {
   display: flex;
   padding: 20rpx 40rpx;
-  border-bottom: 1rpx solid #1ee;
+  border-bottom: 1rpx solid #eeeeee;
   cursor: pointer;
 }
 .item .poster {
