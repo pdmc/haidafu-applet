@@ -26,3 +26,6 @@
   display: flex;
   flex-direction: column; 
 }
+.marginLeft {
+	margin-left: 30rpx;
+}
