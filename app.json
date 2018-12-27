@@ -1,15 +1,19 @@
 {
   "pages":[
-		"pages/projectlist/projectlist",
 		"pages/index/index",
-    "pages/search/search",
-    "pages/project/project",
-    "pages/my/my"
+		"pages/my/my",
+		"pages/myfavorite/myfavorite",
+		"pages/myhongbao/myhongbao",
+		"pages/projectlist/projectlist",
+		"pages/activity/activity",
+		"pages/reserve/reserve",
+		"pages/reserveok/reserveok",
+		"pages/project/project"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "抓贝BHOST",
+    "navigationBarTitleText": "抓贝",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
