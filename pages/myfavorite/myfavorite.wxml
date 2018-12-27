@@ -1,0 +1,25 @@
+<!--pages/myfavorite/myfavorite.wxml-->
+  <!--列表-->
+<view class="container">
+  <view class='page-body'>
+    <view class='page-list flex-inline-between' wx:for="{{list}}" wx:key="*this">
+			<navigator url='../project/project?pId={{item.project.pId}}'>
+				<!--view data-index="{{index}}" class='item' style="{{txtStyle}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"-->
+				<view data-index="{{index}}" class='item'>
+					<image class='poster' src='{{item.project.thumbnail}}'></image>
+					<view class='meta'>
+						<text class='title'>{{item.project.pName}}</text>
+						<text class='area'>{{item.project.countryId}}</text>
+						<view class='square'>
+							<text>{{item.project.minSquare}}平米-{{item.project.maxSquare}}平米</text>
+						</view>
+						<view class='price'>
+							<text>{{item.project.minPrice}}万~{{item.project.maxPrice}}万</text>
+						</view>
+					</view>
+				</view>
+			</navigator>
+			<view class="delete" bindtap="delItem">删除</view>
+    </view>
+  </view>
+</view>

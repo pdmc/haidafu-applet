@@ -91,9 +91,9 @@
         <navigator url='../project/project?pId={{item.pId}}'>
           <view class='item'>
             <image class='poster' src='{{item.thumbnail}}'></image>
-            <view class='meta'>
+            <view class='meta flex-vertical'>
               <text class='title'>{{item.pName}}</text>
-              <text class='sub-title'>{{item.countryId}}</text>
+              <text class='area'>{{item.countryId}}</text>
               <view class='square'>
                 <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
               </view>

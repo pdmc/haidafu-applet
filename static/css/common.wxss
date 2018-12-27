@@ -29,3 +29,19 @@
 .marginLeft {
 	margin-left: 30rpx;
 }
+.smallLabel {
+	font-size: 28rpx;
+}
+.smallGrayLabel {
+	font-size: 28rpx;
+	color: #BBBBBB;
+}
+.bigLabel {
+	font-size: 36rpx;
+}
+.hidden {
+  display: none;
+}
+.show {
+  display:block;
+}

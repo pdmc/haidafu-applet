@@ -14,7 +14,7 @@
   overflow:show;
 }
 .main-body {
-  padding: 30rpx 30rpx;
+  padding: 30rpx 30rpx 200rpx 30rpx;
 }
 .meta {
   display: flex;
@@ -86,14 +86,19 @@
 
 }
 .predict {
-  margin: 60rpx 0rpx;
+  margin-top: 60rpx;
+  border-bottom: 1rpx solid #EEEEEE;
 }
+/*   --------------- 底部固定栏 -----------------   */
 .bottom {
   background-color: #FFFFFF;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 150rpx;
+}
+.bottomleft {
+	padding: 10rpx;
 }
 .bottomleft image {
   width: 100rpx;
@@ -107,6 +112,14 @@
   font-size: 28rpx;
   text-align: center;
 }
+.bottomright {
+	height: 100%;
+	width: 100%;
+}
+.hongbao-nav {
+	height: 100%;
+  width: 55%;
+}
 .share {
   font-size: 30rpx;
   height: 100rpx;
@@ -115,9 +128,12 @@
   align-items: stretch;
 }
 .hongbao {
-  font-size: 30rpx;
-  height: 100rpx;
-  width: 55%;
+  font-size: 36rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+	padding: 0rpx 30rpx;
   background-color: #FFA94D;
-  align-items: stretch;
+	color: #FFFFFF;
+	text-align: center;
+	font-family: 方正兰亭黑-标准;
 }

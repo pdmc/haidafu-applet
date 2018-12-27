@@ -119,9 +119,3 @@ page {
 .select-text-country{
   font-size: 28rpx;
 }
-.hidden {
-  display: none;
-}
-.show {
-  display:block;
-}

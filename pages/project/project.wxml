@@ -4,7 +4,7 @@
 <loading hidden="{{!loading}}">加载中...</loading>
 <!--滚动列表-->
 <scroll-view scroll-y="true" wx:if="{{true}}">
-  <view class="page-body">
+  <view class="sliderarea">
     <swiper class="sw"
       indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}"
@@ -42,6 +42,36 @@
     </view>
     <view class='layout'>
       <text class='title'>户型介绍</text>
+
+			<swiper current="0" class="layout-swiper" 
+				indicator-dots="false"
+				circular="true"
+				bindchange="bindChange111">
+				<block wx:for="{{select_list[cindex]}}" wx:for-index="sindex" wx:key="*this">
+					<swiper-item class="select-swiper-item">
+						<view class="flex-vertical">
+							<!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
+							<view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
+								<view class='select-text-high'>
+									<text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
+									</text>
+								</view>
+								<view class='select-text-low flex-inline-between'>
+									<view>
+										<text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
+										<text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
+									</view>
+									<view>
+										<text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
+					</swiper-item>
+				</block>
+			</swiper>
+
+
     </view>
     <view class='etcc'>
       <text class='info'>产权年限</text>
@@ -72,17 +102,21 @@
 </scroll-view>
 <view class="bottom flex-inline-between">
   <view class="bottomleft flex-inline-left">
-    <view class="btm-btn flex-vertical">
-      <image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
-      <text class='btnlbl'>首页</text>
-    </view>
-    <view class="btm-btn flex-vertical">
-      <image src="../../static/images/ic_btn_fav_nor.png" bindtap=""></image>
-      <text class='btnlbl'>收藏</text>
+		<navigator url='../index/index'>
+			<view class="btm-btn flex-vertical">
+				<image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
+				<text class='btnlbl'>首页</text>
+			</view>
+		</navigator>
+    <view class="btm-btn flex-vertical" bindtap="favChange">
+      <image src="{{addfav?'../../static/images/ic_btn_fav_pressed.png':'../../static/images/ic_btn_fav_nor.png'}}"></image>
+      <text class='btnlbl'>{{addfav?"已收藏":"收藏"}}</text>
    </view>
   </view>
   <view class="bottomright flex-inline-right">
-    <text class='share'>分享得红包</text>
-    <text class='hongbao'>预约看房拿红包</text>
+    <!--text class='share'>分享得红包</text-->
+		<!--navigator class="hongbao-nav" url='../index/index'-->
+    	<text class='hongbao' bindtap="gotoHongbao">预约看房拿红包</text>
+		<!--/navigator-->
   </view>
 </view>

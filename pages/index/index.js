@@ -5,6 +5,7 @@ Page({
       'http://image.pk4yo.com/tooopen_sy_175866434296.jpg',
       'http://image.pk4yo.com/tooopen_sy_175833047715.jpg'
     ],
+		activities: [],
     search_img: '../../static/images/search_button.png',
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
     indicatorDots: true,
@@ -27,12 +28,32 @@ Page({
   },
   onLoad: function(options) {
     const _this = this;
+		const url_act = 'https://zhuabo.pk4yo.com/activity';
+		// + options.type;
+		// 请求数据
+		wx.request({
+			url: url_act,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				console.log(res.data);
+				if (res.data == undefined) {
+					return;
+				} 
+				_this.setData({
+					activities: res.data.data,
+					loading: false // 关闭等待框
+				});
+			}
+		});
     // 拼接请求url
-    const url = 'https://zhuabo.pk4yo.com/projects/getbycond?select=1';
+    const url_proj = 'https://zhuabo.pk4yo.com/projects/getbycond?select=1';
     // + options.type;
     // 请求数据
     wx.request({
-      url: url,
+      url: url_proj,
       data: {},
       header: {
         'content-type': 'json' // 默认值

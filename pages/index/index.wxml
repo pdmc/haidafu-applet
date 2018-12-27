@@ -6,9 +6,11 @@
     previousMargin="{{previousMargin}}"
     nextMargin="{{nextMargin}}"
   >
-    <block wx:for="{{imgUrls}}" wx:key="*this">
+    <block wx:for="{{activities}}" wx:key="*this">
       <swiper-item class="swiper-item">
-        <image src="{{item}}" class="slide-image" mode='widthFix'/>
+				<navigator url='../activity/activity?actId={{item.actId}}'>
+        	<image src="{{item.imgurl}}" class="slide-image" mode='widthFix'/>
+				</navigator>
       </swiper-item>
     </block>
   </swiper>
@@ -36,25 +38,27 @@
           circular="false"
           previousMargin="{{previousMargin2}}"
           nextMargin="{{nextMargin2}}"
-          bindchange="bindChange">
+          bindchange="bindChange1111">
           <block wx:for="{{select_list[cindex]}}" wx:for-index="sindex" wx:key="*this">
             <swiper-item class="select-swiper-item">
-              <!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
-              <view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
-                <view class='select-text-high'>
-                  <text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
-                  </text>
-                </view>
-                <view class='select-text-low flex-inline-between'>
-                  <view>
-                    <text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
-                    <text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
-                  </view>
-                  <view>
-                    <text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>
-                  </view>
-                </view>
-              </view>
+							<navigator url='../project/project?pId={{select_list[cindex][sindex].pId}}'>
+								<!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
+								<view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
+									<view class='select-text-high'>
+										<text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
+										</text>
+									</view>
+									<view class='select-text-low flex-inline-between'>
+										<view>
+											<text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
+											<text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
+										</view>
+										<view>
+											<text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>
+										</view>
+									</view>
+								</view>
+							</navigator>
             </swiper-item>
           </block>
         </swiper>

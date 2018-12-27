@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+		title: '我的',
     userInfo: {},
     logged: false,
     takeSession: false,
@@ -18,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+		var _this = this;
     console.log("--- index::onLoad() ---")
     // 查看是否授权
     wx.getSetting({
@@ -30,10 +32,10 @@ Page({
               console.log("User has authorized before!!!")
               //用户已经授权过
               //this.authorized = true
-              /*this.setData({
-                nickName: userInfo.nickName,
-                avatarUrl: userInfo.avatarUrl,
-              })*/
+              _this.setData({
+								userInfo: res.userInfo,
+								authorized: true,
+              })
             },
             fail: function () {
               wx.showModal({
@@ -54,7 +56,8 @@ Page({
                             }
                           })
                         }
-                      }, fail: function (res) {
+                      }, 
+											fail: function (res) {
                         console.log("wx.showModal failed")
                       }
                     })
@@ -92,10 +95,24 @@ Page({
     }
   },
 
+	gotoFav: function () {
+		wx.navigateTo({
+			url: '/pages/myfavorite/myfavorite'
+		})
+	},
+	gotoHongbao: function () {
+		wx.navigateTo({
+			url: '/pages/myhongbao/myhongbao'
+		})
+	},
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+		wx.setNavigationBarTitle({
+			title: this.data.title //"项目详情" //this.project.pName
+		})
 
   },
 
