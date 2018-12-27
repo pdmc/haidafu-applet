@@ -1,0 +1,73 @@
+/* pages/reserve/reserve.wxss */
+@import "../../static/css/common.wxss";
+
+.formView {
+	padding: 20rpx 0rpx;
+}
+.formView > input {
+	font-size: 36rpx;
+	width: 100%;
+	line-height: 100rpx;
+	margin-bottom: 30rpx;
+	padding: 20rpx;
+
+}
+.mobileArea {
+	font-size: 36rpx;
+	width: 100%;
+	line-height: 100rpx;
+	margin-bottom: 30rpx;
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+}
+.mobileInput {
+	width: 60%;
+	padding: 20rpx;
+}
+.mobileBtn {
+	width: 240rpx;
+	margin: 20rpx;
+	font-size: 30rpx;
+	background-color: #1FAFFF;
+	color: #FFFFFF;
+	border-radius: 10rpx;
+}
+.normal {
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+}
+.error {	
+	border-top: 1rpx #FF0000 solid;
+	border-bottom: 1rpx #FF0000 solid;
+}
+.timeArea {
+	margin: 60rpx 30rpx 60rpx 30rpx;
+}
+
+.buttonArea button {
+	background-color: #1FAFFF;
+	color: #FFFFFF;
+}
+
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #aaa;
+}
+.usermotto {
+  margin-top: 200px;
+}
+
+
+
+

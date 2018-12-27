@@ -1,0 +1,10 @@
+<!--pages/reserveok/reserveok.wxml-->
+<view class="container">
+	<view class="content flex-vertical">
+		<text class="title bigLabel">预约成功</text>
+		<text class="congtext smallLabel">恭喜您预约成功，请到我的红包查看预约红包</text>
+		<view class="navigator" bindtap="goHome">
+      <text class="returnText">返回首页</text>
+    </view>
+	</view>
+</view>
