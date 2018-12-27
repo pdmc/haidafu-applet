@@ -1,0 +1,35 @@
+<!--pages/activity/activity.wxml-->
+<view class="container">
+  <view class='activityArea' style="background-image: url({{activity.imgurl}});  background-repeat:no-repeat; background-size:100% 100%">
+    <view class='text-high'>
+      <text>{{activity.subject}}</text>
+    </view>
+    <view class='text-low'>
+      <view>
+        <text class='text-sq'>活动地址：</text>
+        <text class='text-sq'>{{activity.address}}</text>
+      </view>
+      <view>
+        <text class='text-sq'>活动时间：</text>
+        <text class='text-sq'>{{activity.startTime}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+  </view>
+  <view wx:if="{{!iHaveReserved}}" class="formView flex-vertical">
+    <input class="nameInput {{nameError?'error':'normal'}}" auto-focus placeholder="真实姓名" bindinput="nameInput" />
+    <view class="mobileArea flex-inline-between {{mobileError?'error':'normal'}}">
+      <input class="mobileInput" auto-focus placeholder="手机号码" bindinput="mobileInput" />
+      <button class="mobileBtn" bindtap='sendVerify'>发送验证码</button>
+    </view>
+    <input class="verifyInput {{verifyError?'error':'normal'}}" auto-focus placeholder="验证码" bindinput="verifyInput" />
+    <view class='buttonArea'>
+      <button bindtap='submit'>确定</button>
+    </view>
+  </view>
+	<view wx:else>
+		<text class="reservedText bigLabel">您已报名，期待您的光临！</text>
+	</view>
+</view>

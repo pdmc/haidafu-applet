@@ -1,0 +1,105 @@
+/* pages/activity/activity.wxss */
+@import "../../static/css/common.wxss";
+
+.activityArea {
+  height: 100%;
+}
+.text-high {
+  font-size: 36rpx;
+  color: #FFFFFF;
+  font-family: 方正兰亭黑-标准;
+  padding: 150rpx 0rpx 40rpx 30rpx;
+}
+.text-low {
+	font-size: 30rpx;
+  color: #FFFFFF;
+  font-family: 方正兰亭黑-标准;
+  padding: 0rpx 20rpx 00rpx 30rpx;
+}
+.text-low view {
+	padding-bottom: 20rpx;
+}
+.flex-inline-between {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;  
+  align-items: center;
+}
+
+.text-sq{
+  font-size: 32rpx;
+}
+
+
+
+
+
+.formView {
+	padding: 20rpx 0rpx;
+}
+.formView > input {
+	font-size: 36rpx;
+	width: 100%;
+	line-height: 100rpx;
+	margin-bottom: 30rpx;
+	padding: 20rpx;
+
+}
+.mobileArea {
+	font-size: 36rpx;
+	width: 100%;
+	line-height: 100rpx;
+	margin-bottom: 30rpx;
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+}
+.mobileInput {
+	width: 60%;
+	padding: 20rpx;
+}
+.mobileBtn {
+	width: 240rpx;
+	margin: 20rpx;
+	font-size: 30rpx;
+	background-color: #1FAFFF;
+	color: #FFFFFF;
+	border-radius: 10rpx;
+}
+.normal {
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+}
+.error {	
+	border-top: 1rpx #FF0000 solid;
+	border-bottom: 1rpx #FF0000 solid;
+}
+.timeArea {
+	margin: 60rpx 30rpx 60rpx 30rpx;
+}
+
+.buttonArea button {
+	background-color: #1FAFFF;
+	color: #FFFFFF;
+}
+
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #aaa;
+}
+.usermotto {
+  margin-top: 200px;
+}
+
+
+
