@@ -73,8 +73,12 @@ Page({
 			},
 			success: function (res) {
 				//console.log(res.data);
+				var activity = res.data.data[0];
+				if (activity.startTime.length > 16 && activity.startTime.indexOf('T') > 0) {
+					activity.startTime = activity.startTime.substr(0, 10) + ' ' + activity.startTime.substr(11, 5);
+				}
 				_this.setData({
-					activity: res.data.data[0],
+					activity: activity,
 					loading: false // 隐藏等待框
 				});
 				/*
@@ -140,10 +144,9 @@ Page({
 	},
 
 
-	dateChange: function (e) {
-		console.log('picker发送选择改变，携带值为', e.detail.value)
-		this.setData({
-			reserveDate: e.detail.value
+	goHome: function () {
+		wx.navigateTo({
+			url: '../index/index',
 		})
 	},
 
@@ -184,23 +187,31 @@ Page({
 	loginUser: function () {
 		if (app.globalData.userInfo && !app.globalData.isLogin) {
 			var _this = this;
+			var userinfo = app.globalData.userInfo;
+			userinfo.code = app.globalData.userCode;
 			// 请求数据
-			const url = "https://zhuabo.pk4yo.com/users/login?name=" + app.globalData.userInfo.nickName + "&code=" + app.globalData.userCode;
+			//const url = "https://zhuabo.pk4yo.com/users/login?name=" + app.globalData.userInfo.nickName + "&code=" + app.globalData.userCode;
+			const url = "https://zhuabo.pk4yo.com/users/login";
 			wx.request({
 				url: url,
-				data: {},
+				method: "POST",
+				data: userinfo,
 				header: {
-					'content-type': 'json' // 默认值
+					'content-type': 'application/json' // 默认值
 				},
 				success: function (res) {
-					console.log(res.data);
-					// 赋值
-					var uinfo = _this.data.userInfo;
-					uinfo.userId = res.data.data.userId;
-					_this.setData({
-						isLogin: true,
-						userInfo: uinfo
-					})
+					if (res.statusCode == 200) {
+						console.log(res.data);
+						// 赋值
+						var uinfo = _this.data.userInfo;
+						uinfo.userId = res.data.data.userId;
+						_this.setData({
+							isLogin: true,
+							userInfo: uinfo
+						})
+					} else {
+						console.log(res.errMsg);
+					}
 				},
 				fail: function () {
 					console.log('wx request failed !!!')
