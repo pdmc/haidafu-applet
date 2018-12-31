@@ -1,0 +1,10 @@
+<!--pages/activityok/activityok.wxml-->
+<view class="container">
+	<view class="content flex-vertical">
+		<text class="title bigLabel">恭候光临</text>
+		<text class="congtext smallLabel">您已预约成功，恭候您的光临！</text>
+		<view class="navigator" bindtap="goHome">
+      <text class="returnText">返回首页</text>
+    </view>
+	</view>
+</view>

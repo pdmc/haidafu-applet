@@ -16,7 +16,7 @@
     </view>
   </view>
   <view class="userinfo">
-    <button class="userBtn" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button class="userBtn" wx:if="{{!userInfo.isLogin && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
   </view>
   <view wx:if="{{!iHaveReserved}}" class="formView flex-vertical">
     <input class="nameInput {{nameError?'error':'normal'}}" auto-focus placeholder="真实姓名" bindinput="nameInput" />
@@ -31,7 +31,7 @@
   </view>
 	<view class="reservedArea" wx:else>
 		<text class="bigLabel">您已报名，期待您的光临！</text>
-		<button class="returnBtn bigLabel" bintap="goHome">返回首页</button>
+		<button class="returnBtn bigLabel" bindtap="goHome">返回首页</button>
 		<!--navigator redirect="true" open-type="navigate" url="../index/index">
 		</navigator-->
 	</view>

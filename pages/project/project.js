@@ -1,4 +1,5 @@
 // pages/project/project.js
+const app = getApp();
 var util = require('../../utils/util.js');
 Page({
 
@@ -23,6 +24,7 @@ Page({
     previousMargin: 0,
     nextMargin: 0,
     addfav: false,
+		userId: -1
   },
 
   /**
@@ -30,6 +32,22 @@ Page({
    */
   onLoad: function(options) {
     const _this = this;
+		/*
+		var userinfo = wx.getStorageSync('userinfo');
+		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
+			var logcb = function () {
+				var uinfo = wx.getStorageSync('userinfo');
+				_this.setData({
+					userId: uinfo.userId
+				});
+			};
+			app.checkUserLogin(logcb);
+		} else {
+			this.setData({
+				userId: userinfo.userId
+			});
+		}
+		*/
     // 拼接请求url
     const url = 'https://zhuabo.pk4yo.com/projects/getbyid?pId=' + options.pId;
     // 请求数据
@@ -42,25 +60,48 @@ Page({
       success: function(res) {
         //console.log(res.data);
         // 赋值
-        var imgs = [];
-        if (res.data.data[0].picture1) imgs.push(res.data.data[0].picture1);
-        if (res.data.data[0].picture2) imgs.push(res.data.data[0].picture2);
-        if (res.data.data[0].picture3) imgs.push(res.data.data[0].picture3);
-        if (res.data.data[0].picture4) imgs.push(res.data.data[0].picture4);
-        _this.setData({
-          project: res.data.data[0],
-          imgUrls: imgs,
-          loading: false // 隐藏等待框
-        });
-				const key = 'myfavorites';
-				var pid = res.data.data[0].pId;
-				var favs = wx.getStorageSync(key) || [];
-				var fi = util.array_find_obj(favs, "pid", pid);
-				if (fi >= 0) {
+				if (res.statusCode == 200 && res.data.data.length > 0) {
+					var imgs = [];
+					if (res.data.data[0].picture1) imgs.push(res.data.data[0].picture1);
+					if (res.data.data[0].picture2) imgs.push(res.data.data[0].picture2);
+					if (res.data.data[0].picture3) imgs.push(res.data.data[0].picture3);
+					if (res.data.data[0].picture4) imgs.push(res.data.data[0].picture4);
 					_this.setData({
-						addfav: true
+						project: res.data.data[0],
+						imgUrls: imgs,
+						loading: false // 隐藏等待框
 					});
-				}				
+					const key = 'myfavorites';
+					var pid = res.data.data[0].pId;
+					var favs = wx.getStorageSync(key) || [];
+					var fi = util.array_find_obj(favs, "pid", pid);
+					if (fi >= 0) {
+						_this.setData({
+							addfav: true
+						});
+					} /*else if (_this.data.userId && _this.data.userId > 0) {	// 存在即修正，虚无非真空
+						// 拼接请求url
+						const url = 'https://zhuabo.pk4yo.com/favorites/getbycond?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+						// 请求数据
+						//var _res = res;
+						wx.request({
+							url: url,
+							data: {},
+							header: {
+								'content-type': 'json' // 默认值
+							},
+							success: function (res) {
+								if (res.statusCode == 200 && res.data.data.length > 0) {
+									favs.unshift(res.data.data[0]);
+									wx.setStorage({
+										key: key,
+										data: favs,
+									})
+								}
+							}
+						});
+					}*/
+				}
       },
       fail: function() {
         console.log('wx request failed !!!')

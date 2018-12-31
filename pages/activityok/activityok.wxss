@@ -1,0 +1,25 @@
+/* pages/activityok/activityok.wxss */
+@import "../../static/css/common.wxss";
+
+.container {
+	width: 100%;
+}
+.content {
+	padding: 60rpx;
+}
+.content text{
+	text-align: center;
+	margin: 30rpx 0rpx;
+}
+.content .navigator {
+	width: 100%;
+	height: 200rpx;
+	text-align: center;
+	margin-top: 60rpx;
+}
+.returnText {
+	line-height: 80rpx;
+	border: 1rpx #BBBBBB solid;
+	border-radius: 40rpx;
+	padding: 20rpx 80rpx;
+}

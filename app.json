@@ -2,10 +2,13 @@
   "pages":[
 		"pages/index/index",
 		"pages/my/my",
+		"pages/myactivity/myactivity",
 		"pages/myfavorite/myfavorite",
+		"pages/myreservation/myreservation",
 		"pages/myhongbao/myhongbao",
 		"pages/projectlist/projectlist",
 		"pages/activity/activity",
+		"pages/activityok/activityok",
 		"pages/reserve/reserve",
 		"pages/reserveok/reserveok",
 		"pages/project/project"

@@ -9,7 +9,7 @@ Page({
 	data: {
 		title: '活动报名',
 		activity: {},
-		iHaveReserved: true,
+		iHaveReserved: false,
 		reserveDate: '2019-01-01',
 		dateError: false,
 		name: '',
@@ -20,8 +20,8 @@ Page({
 		verifyError: false,
 
 		userInfo: {},
-		hasUserInfo: false,
-		isLogin: false,
+		//isLogin: false,
+		//hasUserInfo: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo')
 	},
 
@@ -31,38 +31,22 @@ Page({
 	onLoad: function (options) {
 		const _this = this;
 		// 拼接请求url
-		console.log(options.actId);
-
-		if (app.globalData.userInfo) {
-			this.setData({
-				userInfo: app.globalData.userInfo,
-				hasUserInfo: true
-			})
-		} else if (this.data.canIUse) {
-			// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-			// 所以此处加入 callback 以防止这种情况
-			app.userInfoReadyCallback = res => {
-				this.setData({
-					userInfo: res.userInfo,
-					hasUserInfo: true
-				})
-			}
+		//console.log(options.actId);
+		var userinfo = wx.getStorageSync('userinfo');
+		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
+			var logcb = function () {
+				var userinfo = wx.getStorageSync('userinfo');
+				_this.setData({
+					userInfo: userinfo
+				});
+			};
+			app.checkUserLogin(logcb);
 		} else {
-			// 在没有 open-type=getUserInfo 版本的兼容处理
-			wx.getUserInfo({
-				success: res => {
-					app.globalData.userInfo = res.userInfo
-					this.setData({
-						userInfo: res.userInfo,
-						hasUserInfo: true
-					})
-				}
-			})
+			this.setData({
+				userInfo: userinfo
+			});
 		}
-		this.loginUser();
-		app.test();
-	
-	
+		
 		const url = 'https://zhuabo.pk4yo.com/activity/getbyid?actId=' + options.actId;
 		// 请求数据
 		wx.request({
@@ -73,26 +57,52 @@ Page({
 			},
 			success: function (res) {
 				//console.log(res.data);
-				var activity = res.data.data[0];
-				if (activity.startTime.length > 16 && activity.startTime.indexOf('T') > 0) {
-					activity.startTime = activity.startTime.substr(0, 10) + ' ' + activity.startTime.substr(11, 5);
-				}
-				_this.setData({
-					activity: activity,
-					loading: false // 隐藏等待框
-				});
-				/*
-				 *	判断当前用户是否已预约。
-				 */
-				/*const key = 'myfavorites';
-				var pid = res.data.data[0].pId;
-				var favs = wx.getStorageSync(key) || [];
-				var fi = util.array_find_obj(favs, "pid", pid);
-				if (fi >= 0) {
+				if (res.statusCode == 200 && res.data.data.length > 0) {
+					var activity = res.data.data[0];
+					if (activity.startTime.length > 16 && activity.startTime.indexOf('T') > 0) {
+						activity.startTime = activity.startTime.substr(0, 10) + ' ' + activity.startTime.substr(11, 5);
+					}
 					_this.setData({
-						addfav: true
+						activity: activity,
+						loading: false // 隐藏等待框
 					});
-				}*/
+					
+					/*
+					*	检查storage缓存，判断当前用户是否已预约。
+					*/
+					const key = 'myactivites';
+					var activities = wx.getStorageSync(key) || [];
+					var fi = util.array_find_obj(activities, "actid", activity.actId);
+					if (fi >= 0) {
+						_this.setData({
+							iHaveReserved: true
+						});
+					} else if (_this.data.userInfo && _this.data.userInfo.userId > 0) {	// 存在即修正，虚无非真空
+						// 拼接请求url
+						const url = 'https://zhuabo.pk4yo.com/myactivity/getbycond?actId=' + options.actId + '&userId=' + _this.data.userInfo.userId;
+						// 请求数据
+						//var _res = res;
+						wx.request({
+							url: url,
+							data: {},
+							header: {
+								'content-type': 'json' // 默认值
+							},
+							success: function (res) {
+								if (res.statusCode == 200 && res.data.data.length > 0) {
+									activities.unshift(res.data.data[0]);
+									wx.setStorage({
+										key: key,
+										data: activities,
+									});
+									_this.setData({
+										iHaveReserved: true
+									});
+								}
+							}
+						});
+					}
+				}
 			},
 			fail: function () {
 				console.log('wx request failed !!!')
@@ -103,7 +113,7 @@ Page({
 
 	nameInput: function (e) {
 		var name = e.detail.value;
-		let reg = new RegExp('/^[\u4E00-\u9FA5 A-Za-z]+$/');
+		let reg = new RegExp(/^[\u4E00-\u9FA5 A-Za-z]+$/);
 		if (reg.test(name)) {
 			console.log("姓名格式正确");
 		}
@@ -116,6 +126,10 @@ Page({
 				nameError: true
 			});
 		}
+		this.setData({
+			name: name
+		});
+
 	},
 
 	mobileInput: function (e) {
@@ -129,7 +143,11 @@ Page({
 				mobileError: true
 			});
 		}
+		this.setData({
+			mobile: mobile
+		});
 	},
+
 	verifyInput: function (e) {
 		var verify = e.detail.value;
 		if (verify.length == 6) {
@@ -141,16 +159,29 @@ Page({
 				verifyError: false
 			});
 		}
+		this.setData({
+			verify: verify
+		});
 	},
 
-
-	goHome: function () {
-		wx.navigateTo({
-			url: '../index/index',
+	sendVerify: function () {
+		wx.showToast({
+			title: '暂时不需要短信验证码！',
+			icon: 'success',
+			duration: 1000,
+			mask: false
 		})
 	},
 
+	goHome: function () {
+		//wx.navigateTo({
+		//	url: '../index/index',
+		//});
+		wx.navigateBack();
+	},
+
 	submit: function () {
+		var _this = this;
 		if (this.data.name == '') {
 			this.setData({
 				nameError: true
@@ -167,56 +198,66 @@ Page({
 			});
 		}
 		if (!this.data.nameError && !this.data.mobileError && !this.data.verifyError) {
-			//wx.request();
-		}
-		wx.navigateTo({
-			url: "/pages/reserveok/reserveok"
-		})
+			var userinfo = wx.getStorageSync('userinfo');
 
+			if (!userinfo || userinfo.userId == undefined) {
+				wx.showToast({
+					title: '用户未登录！',
+					icon: 'none',
+					duration: 1500,
+					mask: false
+				});
+				return;
+			}
+			const url = 'https://zhuabo.pk4yo.com/myactivity/add?actId=' + this.data.activity.actId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify;
+			// 请求数据
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					//console.log(res.data);
+					var key = "myactivites";
+					var activities = wx.getStorageSync(key) || [];
+					activities.unshift({ "actid": _this.data.activity.actId, "activity": _this.data.activity });
+					wx.setStorage({
+						key: key,
+						data: activities
+					});
+
+					wx.navigateTo({
+						url: "/pages/activityok/activityok"
+					});
+				}
+			});
+		}
 	},
 
 	getUserInfo: function (e) {
-		console.log(e)
-		app.globalData.userInfo = e.detail.userInfo
-		this.setData({
-			userInfo: e.detail.userInfo,
-			hasUserInfo: true
-		})
-	},
-
-	loginUser: function () {
-		if (app.globalData.userInfo && !app.globalData.isLogin) {
-			var _this = this;
-			var userinfo = app.globalData.userInfo;
-			userinfo.code = app.globalData.userCode;
-			// 请求数据
-			//const url = "https://zhuabo.pk4yo.com/users/login?name=" + app.globalData.userInfo.nickName + "&code=" + app.globalData.userCode;
-			const url = "https://zhuabo.pk4yo.com/users/login";
-			wx.request({
-				url: url,
-				method: "POST",
-				data: userinfo,
-				header: {
-					'content-type': 'application/json' // 默认值
-				},
-				success: function (res) {
-					if (res.statusCode == 200) {
-						console.log(res.data);
-						// 赋值
-						var uinfo = _this.data.userInfo;
-						uinfo.userId = res.data.data.userId;
-						_this.setData({
-							isLogin: true,
-							userInfo: uinfo
-						})
-					} else {
-						console.log(res.errMsg);
-					}
-				},
-				fail: function () {
-					console.log('wx request failed !!!')
-				}
+		var _this = this;
+		console.log(e);
+		var userinfo = wx.getStorageSync('userinfo');
+		if (!userinfo){
+			app.globalData.userInfo = e.detail.userInfo;
+			wx.setStorage({
+				key: "userinfo",
+				data: e.detail.userInfo
 			});
+		}
+		if (userinfo && userinfo.userId && userinfo.isLogin) {	// 数据不一致
+			this.setData({
+				userInfo: userinfo
+			});
+		} else {
+			var logcb = function () {
+				var userinfo = wx.getStorageSync('userinfo');
+				_this.setData({
+					userInfo: userinfo
+				});
+			};
+			app.loginUser(logcb);
 		}
 	},
 

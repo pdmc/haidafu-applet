@@ -7,7 +7,7 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-	<view class="formView flex-vertical">
+	<view wx:if="{{!iHaveReserved}}" class="formView flex-vertical">
 		<input class="nameInput {{nameError?'error':'normal'}}" auto-focus placeholder="真实姓名" bindinput="nameInput" />
 		<view class="mobileArea flex-inline-between {{mobileError?'error':'normal'}}">
 			<input class="mobileInput" auto-focus placeholder="手机号码" bindinput="mobileInput" />
@@ -26,5 +26,11 @@
 		<view class='buttonArea'>
       <button bindtap='submit'>确定</button>
     </view>
+	</view>
+	<view class="reservedArea" wx:else>
+		<text class="bigLabel">您已报名，期待您的光临！</text>
+		<button class="returnBtn bigLabel" bindtap="goHome">返回首页</button>
+		<!--navigator redirect="true" open-type="navigate" url="../index/index">
+		</navigator-->
 	</view>
 </view>

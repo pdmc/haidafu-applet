@@ -1,4 +1,4 @@
-// pages/reserveok/reserveok.js
+// pages/activityok/activityok.js
 Page({
 
 	/**
@@ -8,7 +8,7 @@ Page({
 		title: '预约成功'
 	},
 
-	goHome: function(){
+	goHome: function () {
 		wx.switchTab({
 			url: "../index/index",
 			fail: function (e) {

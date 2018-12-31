@@ -15,7 +15,7 @@
       	<image class="avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 				<view class="nameArea flex-vertical">
 					<text class="nickname bigLabel">{{userInfo.nickName}}</text>
-					<text class="mobile smallGrayLabel">{{userInfo.mobile?userInfo.mobile:"未预约"}}</text>
+					<text class="mobile smallGrayLabel">{{userInfo.mobile && userInfo.mobile.length > 0?userInfo.mobile:"未预约"}}</text>
 				</view>
 			</view>
     </block>
@@ -28,6 +28,20 @@
 			</view>
 			<view class="arrow"></view>
 		</view>
+		<view class="mylist flex-inline-between" bindtap="gotoActivity">
+			<view class="flex-inline-left">
+				<image src="../../static/images/ic_list_reserve.png"></image>
+				<text>我的活动</text>
+			</view>
+			<view class="arrow"></view>
+		</view>
+		<!--view class="mylist flex-inline-between" bindtap="gotoReserve">
+			<view class="flex-inline-left">
+				<image src="../../static/images/ic_list_reserve.png"></image>
+				<text>我的预约</text>
+			</view>
+			<view class="arrow"></view>
+		</view-->
 		<view class="mylist flex-inline-between" bindtap="gotoHongbao">
 			<view class="flex-inline-left">
 				<image src="../../static/images/ic_list_hongbao.png"></image>
