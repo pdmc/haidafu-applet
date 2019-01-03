@@ -70,9 +70,9 @@ Page({
 					/*
 					*	检查storage缓存，判断当前用户是否已预约。
 					*/
-					const key = 'myactivites';
-					var activities = wx.getStorageSync(key) || [];
-					var fi = util.array_find_obj(activities, "actid", activity.actId);
+					const key = 'myactivities';
+					var myactivities = wx.getStorageSync(key) || [];
+					var fi = util.array_find_obj(myactivities, "actid", activity.actId);
 					if (fi >= 0) {
 						_this.setData({
 							iHaveReserved: true
@@ -90,10 +90,16 @@ Page({
 							},
 							success: function (res) {
 								if (res.statusCode == 200 && res.data.data.length > 0) {
-									activities.unshift(res.data.data[0]);
+									var time = res.data.data[0].pkactivity__startTime;
+									if (time.length > 16 && time.indexOf('T') > 0) {
+										time = time.substr(0, 10) + ' ' + time.substr(11, 5);
+									}
+									var activity = { "actid": res.data.data[0].pkactivity__actId, "name": res.data.data[0].pkactivity__subject, "address": res.data.data[0].pkactivity__address, "time": time, "image": res.data.data[0].pkactivity__imgurl};
+									var myactivity = { "maid": res.data.data[0].maId, "userid": _this.data.userInfo.userId, "actid": res.data.data[0].pkactivity__actId, "myactivity": res.data.data[0], "activity": activity};
+									myactivities.unshift(myactivity);
 									wx.setStorage({
 										key: key,
-										data: activities,
+										data: myactivities,
 									});
 									_this.setData({
 										iHaveReserved: true
@@ -209,7 +215,7 @@ Page({
 				});
 				return;
 			}
-			const url = 'https://zhuabo.pk4yo.com/myactivity/add?actId=' + this.data.activity.actId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify;
+			const url = 'https://zhuabo.pk4yo.com/myactivity/addifnotexist?actId=' + this.data.activity.actId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&status=0';
 			// 请求数据
 			wx.request({
 				url: url,
@@ -219,17 +225,26 @@ Page({
 				},
 				success: function (res) {
 					//console.log(res.data);
-					var key = "myactivites";
-					var activities = wx.getStorageSync(key) || [];
-					activities.unshift({ "actid": _this.data.activity.actId, "activity": _this.data.activity });
-					wx.setStorage({
-						key: key,
-						data: activities
-					});
+					if (res.statusCode == 200 && res.data.maId > 0) {
+						var key = "myactivities";
+						var myactivities = wx.getStorageSync(key) || [];
+						var time = _this.data.activity.startTime;
+						if (time.length > 16 && time.indexOf('T') > 0) {
+							time = time.substr(0, 10) + ' ' + time.substr(11, 5);
+						}
+						var activity = { "actid": _this.data.activity.actId, "name": _this.data.activity.subject, "address": _this.data.activity.address, "time": time, "image": _this.data.activity.imgurl };
+						var myact = { "maid": res.data.maId, "actid": _this.data.activity.actId, "userid": userinfo.userId, "status": 0};
+						var myactivity = { "maid": res.data.maId, "userid": userinfo.userId, "actid": _this.data.activity.actId, "activity": activity, "myactivity": myact};
+						myactivities.unshift(myactivity);
+						wx.setStorage({
+							key: key,
+							data: activities
+						});
 
-					wx.navigateTo({
-						url: "/pages/activityok/activityok"
-					});
+						wx.navigateTo({
+							url: "/pages/activityok/activityok"
+						});
+					}
 				}
 			});
 		}

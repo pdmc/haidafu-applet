@@ -11,6 +11,7 @@ Page({
 		reserveDate: '2019-01-01',
 		iHaveReserved: false,
 		pId: -1,
+		project: {},
 		dateError: false,
 		name: '',
 		nameError: false,
@@ -30,10 +31,12 @@ Page({
 	 */
 	onLoad: function (options) {
 		var _this = this;
+		var project = { "pid":options.pId, "name": options.pName, "country": options.country, "city": options.city, "lowsq": options.lowsq, "highsq": options.highsq, "lowprice": options.lowprice, "highprice": options.highprice, "image": options.image };
 		// 拼接请求url
-		//console.log(options.pId);
+		//console.log(options.project.pName);
 		this.setData({
-			pId: options.pId
+			pId: options.pId,
+			project: project
 		});
 
 		var userinfo = wx.getStorageSync('userinfo');
@@ -52,7 +55,8 @@ Page({
 				hasUserInfo: true
 			});
 		}
-		const url = 'https://zhuabo.pk4yo.com/reservations/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
+		// check reservation db
+		var url = 'https://zhuabo.pk4yo.com/reservations/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
 		// 请求数据
 		wx.request({
 			url: url,
@@ -74,12 +78,44 @@ Page({
 					var myreservations = wx.getStorageSync(key) || [];
 					var fi = util.array_find_obj(myreservations, "rid", rid);
 					if (fi < 0) {
-						myreservations.unshift({ "rid": rid, "reservation": res.data.data[0] });
+						myreservations.unshift({ "rid": rid, "userid": _this.data.userInfo.userId, "reservation": res.data.data[0], "project": project });
 						wx.setStorage({
 							key: key,
 							data: myreservations
 						});
 					} 
+				}
+			},
+			fail: function () {
+				console.log('reservation: wx request failed !!!')
+			}
+		});
+		// check hongbao db
+		url = 'https://zhuabo.pk4yo.com/hongbaos/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
+		// 请求数据
+		wx.request({
+			url: url,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				//console.log(res.data);
+				if (res.statusCode == 200 && res.data.data.length > 0) {
+					var hbid = res.data.data[0] ? res.data.data[0].hbId : 0;
+					/*
+					*	更新hongbao缓存
+					*/
+					const key = 'myhongbaos';
+					var myhongbaos = wx.getStorageSync(key) || [];
+					var fi = util.array_find_obj(myhongbaos, "hbid", hbid);
+					if (fi < 0) {
+						myhongbaos.unshift({ "hbid": hbid, "userid": _this.data.userInfo.userId, "hongbao": res.data.data[0], "project": project });
+						wx.setStorage({
+							key: key,
+							data: myhongbaos
+						});
+					}
 				}
 			},
 			fail: function () {
@@ -183,7 +219,7 @@ Page({
 				});
 				return;
 			}
-			const url = 'https://zhuabo.pk4yo.com/reservations/add?pId=' + this.data.pId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&source=1&amount=1000';
+			const url = 'https://zhuabo.pk4yo.com/reservations/addwithhbifnotexist?pId=' + this.data.pId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&applyTime=' + this.data.reserveDate + '&source=1&amount=10000';
 			// 请求数据
 			wx.request({
 				url: url,
@@ -203,8 +239,12 @@ Page({
 						var reservations = wx.getStorageSync(key1) || [];
 						var fi = util.array_find_obj(reservations, "rid", rid);
 						if (fi < 0) {
-							var reservation = { "rid": rid, "userId": userinfo.userId, "pId": _this.data.pId };
-							reservations.unshift({ "rid": rid, "reservation": reservation });
+							var applytime = _this.data.reserveDate;
+							if (applytime.length > 16 && applytime.indexOf('T') > 0) {
+								applytime = applytime.substr(0, 10) + ' ' + applytime.substr(11, 5);
+							}
+							var reservation = { "rid": rid, "userid": userinfo.userId, "pid": _this.data.pId, "applytime": applytime, "name": _this.data.trueName, "mobile": _this.data.phone };
+							reservations.unshift({ "rid": rid, "userid": _this.data.userInfo.userId, "reservation": reservation, "project": _this.data.project });
 							wx.setStorage({
 								key: key1,
 								data: reservations
@@ -217,14 +257,13 @@ Page({
 						var myhongbaos = wx.getStorageSync(key2) || [];
 						var fi = util.array_find_obj(myhongbaos, "hbid", hbid);
 						if (fi < 0) {
-							var hongbao = { "hbid": hbid, "userId": userinfo.userId, "pId": _this.data.pId, "amount": 1000, "source": 1 };
-							myhongbaos.unshift({ "hbid": hbid, "hongbao": hongbao });
+							var hongbao = { "hbid": hbid, "userid": userinfo.userId, "pid": _this.data.pId, "amount": 10000, "source": 1 };
+							myhongbaos.unshift({ "hbid": hbid, "userid": _this.data.userInfo.userId, "hongbao": hongbao, "project": _this.data.project});
 							wx.setStorage({
 								key: key2,
 								data: myhongbaos
 							});
 						} 
-
 
 						wx.navigateTo({
 							url: "/pages/reserveok/reserveok"

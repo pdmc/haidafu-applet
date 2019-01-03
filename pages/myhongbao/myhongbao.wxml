@@ -1,2 +1,27 @@
 <!--pages/myhongbao/myhongbao.wxml-->
-<text>pages/myhongbao/myhongbao.wxml</text>
+<view class="container">
+  <view class='page-body'>
+    <view class='page-list flex-vertical' wx:for="{{list}}" wx:key="*this">
+			<view class='hongbao flex-inline-between'>
+				<text class="hbtext" decode="{{true}}">红包总额： ￥{{item.hongbao.amount}}</text>
+				<text class="state {{item.hongbao.state==1?'used':'unused'}}">{{item.hongbao.state==1?"已使用":"未使用"}}</text>
+			</view>
+			<navigator url='../project/project?pId={{item.project.pId}}' class='flex-inline-between'>
+				<!--view data-index="{{index}}" class='item' style="{{txtStyle}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"-->
+				<view data-index="{{index}}" class='item'>
+					<image class='poster' src='{{item.project.image}}'></image>
+					<view class='meta'>
+						<text class='title' decode="{{true}}" space="{{true}}">{{item.project.country}}&nbsp;{{item.project.name}}</text>
+						<text class='area'>{{item.project.country}}</text>
+						<view class='square'>
+							<text>{{item.project.lowsq}}平米-{{item.project.highsq}}平米</text>
+						</view>
+						<view class='price'>
+							<text>{{item.project.lowprice}}万~{{item.project.highprice}}万</text>
+						</view>
+					</view>
+				</view>
+			</navigator>
+    </view>
+  </view>
+</view>

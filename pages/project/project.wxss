@@ -64,6 +64,20 @@
   margin-top: 60rpx;
   margin-bottom: 40rpx;
 }
+.provider {
+	border-bottom: 1rpx #E5E5E5 solid;
+}
+.spimage {
+	height: 100rpx;
+	width: 100rpx;
+}
+.openicon {
+	height: 40rpx;
+	width: 40rpx;
+	border-top: 4rpx rgba(0,0,0,0.9) solid;
+	border-right: 4rpx rgba(0,0,0,0.9) solid;
+	transform:rotate(45deg);
+}
 .etcc {
   border-top: 1rpx solid #EEEEEE;
   border-bottom: 1rpx solid #EEEEEE;

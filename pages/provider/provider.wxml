@@ -1,0 +1,32 @@
+<!--pages/provider/provider.wxml-->
+<view class='page-body'>
+	<view class="header flex-inline-left">
+		<image src="{{provider.image}}"></image>
+		<text class="name">{{provider.name}}</text>
+	</view>
+	<view class="detail flex-vertical">
+		<text class="title">服务商简介</text>
+		<text class="desc">{{provider.detail}}</text>
+	</view>
+	<view>
+		<!--类型判断,显示不同的数据-->
+		<text class="title">房源</text>
+		<block class='page-list' wx:for="{{projects}}" wx:key="id">
+			<navigator url='../project/project?pId={{item.pId}}'>
+				<view class='item'>
+					<image class='poster' src='{{item.thumbnail}}'></image>
+					<view class='meta flex-vertical'>
+						<text class='title'>{{item.pName}}</text>
+						<text class='area'>{{item.area__countryId__name}}</text>
+						<view class='square'>
+							<text>{{item.minSquare}}平米-{{item.maxSquare}}平米</text>
+						</view>
+						<view class='price'>
+							<text>{{item.minPrice}}万~{{item.maxPrice}}万</text>
+						</view>
+					</view>
+				</view>
+			</navigator>
+		</block>
+	</view>
+</view>

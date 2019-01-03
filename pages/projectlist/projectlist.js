@@ -104,9 +104,9 @@ Page({
 				})
 			}
 		});
+		// 请求户型图数据
 		const url_layout = 'https://zhuabo.pk4yo.com/layout/get';
 		// + options.type;
-		// 请求数据
 		wx.request({
 			url: url,
 			data: {},

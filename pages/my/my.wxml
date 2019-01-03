@@ -6,7 +6,7 @@
       <button 
         wx:if="{{canIUse}}" 
         open-type="getUserInfo" 
-        bindgetuserinfo="bindGetUserInfo"
+        bindgetuserinfo="getUserInfo"
       >授权登录</button>
       <view wx:else>请升级微信版本</view>
     </view>
@@ -28,20 +28,13 @@
 			</view>
 			<view class="arrow"></view>
 		</view>
-		<view class="mylist flex-inline-between" bindtap="gotoActivity">
-			<view class="flex-inline-left">
-				<image src="../../static/images/ic_list_reserve.png"></image>
-				<text>我的活动</text>
-			</view>
-			<view class="arrow"></view>
-		</view>
-		<!--view class="mylist flex-inline-between" bindtap="gotoReserve">
+		<view class="mylist flex-inline-between" bindtap="gotoReserve">
 			<view class="flex-inline-left">
 				<image src="../../static/images/ic_list_reserve.png"></image>
 				<text>我的预约</text>
 			</view>
 			<view class="arrow"></view>
-		</view-->
+		</view>
 		<view class="mylist flex-inline-between" bindtap="gotoHongbao">
 			<view class="flex-inline-left">
 				<image src="../../static/images/ic_list_hongbao.png"></image>

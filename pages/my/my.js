@@ -110,6 +110,33 @@ Page({
   /**
    * 授权按钮回调函数
    */
+	getUserInfo: function (e) {
+		var _this = this;
+		console.log(e);
+		var userinfo = wx.getStorageSync('userinfo');
+		if (!userinfo) {
+			app.globalData.userInfo = e.detail.userInfo;
+			wx.setStorage({
+				key: "userinfo",
+				data: e.detail.userInfo
+			});
+		}
+		if (userinfo && userinfo.userId && userinfo.isLogin) {	// 数据不一致
+			this.setData({
+				authorized: true,
+				userInfo: userinfo
+			});
+		} else {
+			var logcb = function () {
+				var userinfo = wx.getStorageSync('userinfo');
+				_this.setData({
+					authorized: true,
+					userInfo: userinfo
+				});
+			};
+			app.loginUser(logcb);
+		}
+	},
   bindGetUserInfo: function (e) {
     console.log(e.detail.userInfo)
     if (e.detail.userInfo) {

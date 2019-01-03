@@ -1,7 +1,8 @@
 <!--pages/activity/activity.wxml-->
 <view class="container">
   <view class='activityArea' style="background-image: url({{activity.imgurl}});  background-repeat:no-repeat; background-size:100% 100%">
-    <view class='text-high'>
+    <view class='text-high flex-inline-left'>
+      <text class='actlabel'>活动</text>
       <text>{{activity.subject}}</text>
     </view>
     <view class='text-low'>

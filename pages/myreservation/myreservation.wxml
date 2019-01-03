@@ -1,2 +1,65 @@
 <!--pages/myreservation/myreservation.wxml-->
-<text>pages/myreservation/myreservation.wxml</text>
+<view class="container">
+	<view class="select-tab">
+		<block wx:for="{{labels}}" wx:for-index="bindex"  wx:key="*this">
+			<view data-index='{{bindex}}' class="{{_num==bindex?'active':'inactive'}}" bindtap='toggle'>
+				{{item}}
+			</view>
+		</block>
+	</view>
+	<loading hidden="{{!loading}}">加载中...</loading>
+	<view data-index="0"  class="select-page {{_num==0?'show':'hidden'}}">
+		<block wx:for="{{activities}}" wx:for-index="index" wx:key="*this">
+		<view class="actitem flex-vertical">
+			<view class='text-high flex-inline-left'>
+				<text class='actlabel'>活动</text>
+				<text>{{item.activity.name}}</text>
+			</view>
+			<view class='text-low'>
+				<view>
+					<text class='text-sq'>活动地址：</text>
+					<text class='text-sq'>{{item.activity.address}}</text>
+				</view>
+			</view>
+			<view class='text-low flex-inline-between'>
+				<view>
+					<text class='text-sq'>活动时间：</text>
+					<text class='text-sq'>{{item.activity.time}}</text>
+				</view>
+				<view>
+					<text class="status {{item.activity.status == 0?'new':(item.activity.status == 1?'pass':'unpass')}}">{{item.activity.status == 0?'待审批':(item.activity.status == 1?'已通过':'未通过')}}</text>
+				</view>
+			</view>
+		</view>
+		</block>
+	</view>
+	<view data-index="1" class="select-page {{_num==1?'show':'hidden'}}">
+		<block wx:for="{{reservations}}" wx:for-index="pindex" wx:key="*this">
+			<navigator url='../project/project?pId={{item.project.pid}}' class='flex-inline-between'>
+				<view data-index="{{index}}" class='item'>
+					<image class='poster' src='{{item.project.image}}'></image>
+					<view class='meta'>
+						<text class='title' decode="{{true}}" space="{{true}}">{{item.project.country}}&nbsp;{{item.project.city}}&nbsp;{{item.project.name}}</text>
+						<text class='area'>{{item.project.country}}</text>
+						<view class='square'>
+							<text>总价￥{{item.project.lowprice}}万起</text>
+						</view>
+						<view class='price'>
+							<text>预约时间：{{item.reservation.applytime}}</text>
+						</view>
+					</view>
+				</view>
+			</navigator>
+			<view class="reserveinfo flex-inline-between">
+				<view class="flex-vertical">
+					<text class="smallGrayLabel">预约人姓名：{{item.reservation.name}}</text>
+					<text class="smallGrayLabel">预约人电话：{{item.reservation.mobile}}</text>
+				</view>
+				<view>
+					<text class="contact">联系客服</text>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>
+

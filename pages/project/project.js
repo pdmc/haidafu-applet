@@ -10,6 +10,7 @@ Page({
     title: '',
     loading: true,
     project: {},
+		favorite: {},
     imgUrls: [
       'http://image.pk4yo.com/tooopen_sy_143912755726.jpg',
       'http://image.pk4yo.com/tooopen_sy_175866434296.jpg',
@@ -32,7 +33,7 @@ Page({
    */
   onLoad: function(options) {
     const _this = this;
-		/*
+		
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
 			var logcb = function () {
@@ -47,7 +48,7 @@ Page({
 				userId: userinfo.userId
 			});
 		}
-		*/
+		
     // 拼接请求url
     const url = 'https://zhuabo.pk4yo.com/projects/getbyid?pId=' + options.pId;
     // 请求数据
@@ -79,7 +80,7 @@ Page({
 						_this.setData({
 							addfav: true
 						});
-					} /*else if (_this.data.userId && _this.data.userId > 0) {	// 存在即修正，虚无非真空
+					} else if (_this.data.userId && _this.data.userId > 0) {	// 存在即修正，虚无非真空
 						// 拼接请求url
 						const url = 'https://zhuabo.pk4yo.com/favorites/getbycond?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
 						// 请求数据
@@ -92,15 +93,19 @@ Page({
 							},
 							success: function (res) {
 								if (res.statusCode == 200 && res.data.data.length > 0) {
-									favs.unshift(res.data.data[0]);
+									favs.unshift({ "pid": pid, "fid": res.data.data[0].fId, "favorite": res.data.data[0], "project": _this.data.project }); //res.data.data[0]);
 									wx.setStorage({
 										key: key,
 										data: favs,
-									})
+									}); 
+									_this.setData({
+										favorite: res.data.data[0],
+										addfav: true
+									});
 								}
 							}
 						});
-					}*/
+					}
 				}
       },
       fail: function() {
@@ -113,21 +118,49 @@ Page({
   favChange: function() {
 		var added = this.data.addfav;
 
-		if(!added){
-			this.setData({
-				addfav: true
+		if(this.data.userId == -1){
+			wx.switchTab({
+				url: '/pages/my/my',
 			});
+			return;
+		}
+
+		if(!added){
 			const key = 'myfavorites';
 			var pid = this.data.project.pId;
 			var favs = wx.getStorageSync(key) || [];
 			var fi = util.array_find_obj(favs, "pid", pid);
-			if(fi == -1) {
-				favs.unshift({ "pid": pid, "project": this.data.project });
+			if (fi == -1) {
+				favs.unshift({ "pid": pid, "fid": 0, "favorite": { "fId": 0, "pId": pid, "userId": this.data.userId}, "project": this.data.project });
 				wx.setStorage({
 					key: key,
 					data: favs
 				});
+				/*
+				const url = 'https://zhuabo.pk4yo.com/favorites/add?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+				// 请求数据
+				//var _res = res;
+				wx.request({
+					url: url,
+					data: {},
+					header: {
+						'content-type': 'json' // 默认值
+					},
+					success: function (res) {
+						if (res.statusCode == 200 && res.data.fId > 0) {
+							favs.unshift({ "pid": pid, "project": this.data.project });
+							wx.setStorage({
+								key: key,
+								data: favs,
+							})
+						}
+					}
+				});
+			*/
 			}
+			this.setData({
+				addfav: true
+			});
 		} else {
 			this.setData({
 				addfav: false
@@ -151,9 +184,83 @@ Page({
 
   gotoHongbao: function() {
     wx.navigateTo({
-      url: "/pages/reserve/reserve?pId=" + this.data.project.pId
+			url: "/pages/reserve/reserve?pId=" + this.data.project.pId + "&pName=" + this.data.project.pName + "&country=" + this.data.project.area__countryId__name + "&city=" + this.data.project.area__cityId__name+ "&lowsq=" + this.data.project.minSquare + "&highsq=" + this.data.project.maxSquare + "&lowprice=" + this.data.project.minPrice + "&highprice=" + this.data.project.maxPrice + "&image=" + this.data.project.thumbnail
     })
   },
+
+	syncFav: function () {
+		if (this.data.userId == -1) {
+			console.log("project: fav unsync for unlogin user.");
+			return;
+		}
+		var _this = this;
+		var added = this.data.addfav;
+		if (added) {
+			const url = 'https://zhuabo.pk4yo.com/favorites/addifnotexist?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+			// 请求数据
+			//var _res = res;
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					if (res.statusCode == 200 && res.data.fId > 0) {
+						console.log("addifnotexist");
+						const key = 'myfavorites';
+						var pid = _this.data.project.pId;
+						var favs = wx.getStorageSync(key) || [];
+						var fi = util.array_find_obj(favs, "pid", pid);
+						if (fi == -1) {
+							favs.unshift({ "pid": pid, "fid": res.data.fId, "favorite": { "fId": res.data.fId, "pId": pid, "userId": _this.data.userId }, "project": _this.data.project });
+							wx.setStorage({
+								key: key,
+								data: favs
+							});
+						}
+
+					}
+				}
+			});
+		} else {
+			const key = 'myfavorites';
+			var favs = wx.getStorageSync(key);
+			var pid = this.data.project.pId;
+			var fi = util.array_find_obj(favs, "pid", pid);	// not pid and fid???
+			if (fi >= 0 && favs.length > 0){
+				console.log(fi);
+				favs.splice(fi, 1);
+				wx.setStorage({
+					key: key,
+					data: favs
+				});
+			}
+
+			const url = 'https://zhuabo.pk4yo.com/favorites/delete?fId=' + _this.data.favorite.fId;
+			// 请求数据
+			//var _res = res;
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					if (res.statusCode == 200 && res.data.code == 0) {
+						console.log("delete ok");
+					}
+				}
+			});
+
+		}
+	},
+
+	gotoProvider: function () {
+		wx.navigateTo({
+			url: '../provider/provider?spid=' + this.data.project.pkprovider__spId + '&name=' + this.data.project.pkprovider__spName + '&detail=' + this.data.project.pkprovider__description + '&image=' + this.data.project.pkprovider__imgurl,
+		})
+	},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -163,47 +270,5 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title //"项目详情" //this.project.pName
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
   }
 })

@@ -2,7 +2,6 @@
   "pages":[
 		"pages/index/index",
 		"pages/my/my",
-		"pages/myactivity/myactivity",
 		"pages/myfavorite/myfavorite",
 		"pages/myreservation/myreservation",
 		"pages/myhongbao/myhongbao",
@@ -11,6 +10,7 @@
 		"pages/activityok/activityok",
 		"pages/reserve/reserve",
 		"pages/reserveok/reserveok",
+		"pages/provider/provider",
 		"pages/project/project"
   ],
   "window":{
@@ -23,7 +23,7 @@
     "backgroundColor": "#fafafa",
     "borderStyle": "white",
     "selectedColor": "#1FAFFF",
-    "color": "#4B4B4B 100%",
+    "color": "#4B4B4B",
     "list": [
       {
         "pagePath": "pages/index/index",

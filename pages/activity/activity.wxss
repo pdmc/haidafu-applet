@@ -4,6 +4,15 @@
 .activityArea {
   height: 100%;
 }
+.actlabel {
+	background-color: rgba(255, 169, 77, 1);
+	color: rgba(255, 255, 255, 1);
+	font-size: 24rpx;
+	text-align: center;
+	border-radius: 100px;
+	padding: 6rpx 30rpx;
+	margin-right: 30rpx;
+}
 .text-high {
   font-size: 36rpx;
   color: #FFFFFF;
@@ -14,7 +23,7 @@
 	font-size: 30rpx;
   color: #FFFFFF;
   font-family: 方正兰亭黑-标准;
-  padding: 0rpx 20rpx 00rpx 30rpx;
+  padding: 0rpx 20rpx 0rpx 30rpx;
 }
 .text-low view {
 	padding-bottom: 20rpx;

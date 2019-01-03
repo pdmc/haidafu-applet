@@ -25,12 +25,12 @@
   <view class="main-body">
     <view class='meta'>
       <!--image class='poster' src='{{project.picture1}}' background-size="cover"></image-->
-      <text class='title'>{{project.pName}}</text>
-      <text class='info'>{{project.area__name}}</text>
-      <text class='info'>{{project.minSquare}}m2-{{project.maxSquare}}m2</text>
+      <text class='title'decode="{{true}}">{{project.area__countryId__name}}&nbsp;{{project.area__cityId__name}}&nbsp;{{project.pName}}</text>
+      <text class='info'>{{project.area__countryId__name}}</text>
+      <text class='info'>{{project.minSquare}}平米-{{project.maxSquare}}平米</text>
       <view class='flex-inline-between markable'>
         <text class='price'>{{project.minPrice}}万~{{project.maxPrice}}万</text>
-        <text class='state'>{{project.minPrice}}万~{{project.maxPrice}}万</text>
+        <text class='state'>{{project.status==0?"待开盘":(project.status==1?"在售":"售完")}}</text>
       </view>
     </view>
     <view class='content'>
@@ -38,8 +38,17 @@
     </view>
     <view class='etcc'>
       <text class='info'>楼盘地址</text>
-      <text class='sentence'>{{project.area__name}}</text>
+      <text class='sentence'>{{project.fullAddr}}</text>
     </view>
+    <view class='provider flex-inline-between' bindtap="gotoProvider">
+			<view class="flex-inline-left">
+				<text class='title'>服务商</text>
+				<image class="spimage" src="{{project.pkprovider__imgurl}}"></image>
+				<text class='sentence'>{{project.pkprovider__spName}}</text>
+			</view>
+			<view class="openicon">
+			</view>
+		</view>
     <view class='layout'>
       <text class='title'>户型介绍</text>
 

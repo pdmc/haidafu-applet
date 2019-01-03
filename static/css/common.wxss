@@ -39,9 +39,3 @@
 .bigLabel {
 	font-size: 36rpx;
 }
-.hidden {
-  display: none;
-}
-.show {
-  display:block;
-}
