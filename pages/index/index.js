@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
   data: {
     imgUrls: [
@@ -28,7 +29,7 @@ Page({
   },
   onLoad: function(options) {
     const _this = this;
-		const url_act = 'https://zhuabo.pk4yo.com/activity';
+		const url_act = app.globalData.main_url + '/activity';
 		// + options.type;
 		// 请求数据
 		wx.request({
@@ -49,7 +50,7 @@ Page({
 			}
 		});
     // 拼接请求url
-    const url_proj = 'https://zhuabo.pk4yo.com/projects/getbycond?select=1';
+		const url_proj = app.globalData.main_url + '/projects/getbycond?select=1';
     // + options.type;
     // 请求数据
     wx.request({

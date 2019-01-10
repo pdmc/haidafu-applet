@@ -19,7 +19,7 @@
     </block>
     <view class='showvalue flex-inline-left' style="{{tabPriceList.length == priceItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}"  bindtap='clickPick1'>
       <text class='price'>自定义： </text>
-      <text class='price'>￥{{leftValue<rightValue?leftValue:rightValue}}万 - ￥{{leftValue<rightValue?rightValue:leftValue}}万</text>
+      <text class='price'>￥{{minprice}}万 - ￥{{maxprice}}万</text>
     </view>
     <view class='sliderView'>
       <slider class='left' block-color='#1FAFFF' bindchange="leftChange" min='{{leftMin}}' max='{{leftMax}}' value='{{leftValue}}' activeColor='rgb(115,115,115)' backgroundColor='rgb(115,115,115)' block-size='14' />
@@ -53,7 +53,7 @@
 		<view class="type-area  flex-inline-left">
 			<block wx:for="{{tabLayouts}}" wx:key="*this">
 				<view class="type-tab" data-index="{{index}}" bindtap='layoutChange'>
-					<text style="{{index == layoutItemId?'background-color:#1FAFFF;color:#FFFFFF;border:1rpx #FFFFFF solid':''}}">{{item}} </text>
+					<text style="{{index == layoutItemId?'background-color:#1FAFFF;color:#FFFFFF;':''}}">{{item}} </text>
 				</view>
 			</block>
 		</view>
@@ -61,11 +61,11 @@
 		<view class="type-area  flex-inline-left">
 			<block wx:for="{{tabTypes}}" wx:key="*this">
 				<view class="type-tab" data-index="{{index}}" bindtap='typeChange'>
-					<text style="{{index == typeItemId?'background-color:#1FAFFF;color:#FFFFFF;border:1rpx #FFFFFF solid':''}}">{{item}} </text>
+					<text style="{{index == typeItemId?'background-color:#1FAFFF;color:#FFFFFF;':''}}">{{item}} </text>
 				</view>
 			</block>
 		</view>
-    <view class='button-area flex-inline-between'>
+    <view class='button-area bottom-area flex-inline-between'>
       <button bindtap='typeReset'>重置</button>
       <button bindtap='typeOk'>确认</button>
     </view>
@@ -73,8 +73,8 @@
 	<!------------------Tab4-------------------->
 	<view class="tab4 {{needAnimation[3]?(opickers[3]?'slidown':'slidup'):''}}">
 		<block wx:for="{{tabOrders}}" wx:for-item="item" wx:key="*this">
-      <view data-index="{{index}}" bindtap='orderChange'>
-        <text style="{{index == orderItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}">{{item}} </text>
+      <view data-index="{{index}}" bindtap='orderChange' style="{{index == orderItemId?'color:#1FAFFF;background-color:rgba(187, 187, 187, 0.3)':''}}">
+        <text>{{item}} </text>
       </view>
     </block>
 	</view>
@@ -85,17 +85,17 @@
 
   <!--列表-->
   <view class='page-body'>
-    <view class='page-list' wx:for="{{list.data}}" wx:key="id">
+    <view class='page-list' wx:for="{{list}}" wx:key="id">
       <!--类型判断,显示不同的数据-->
       <block wx:if="{{type === 'us_box'}}">
         <navigator url='../project/project?pId={{item.pId}}'>
           <view class='item'>
             <image class='poster' src='{{item.thumbnail}}'></image>
             <view class='meta flex-vertical'>
-              <text class='title'>{{item.pName}}</text>
-              <text class='area'>{{item.countryId}}</text>
+              <text class='title' decode="{{true}}">{{item.area__countryId__name}}&nbsp;{{item.area__cityId__name}}&nbsp;{{item.pName}}</text>
+              <text class='area'>{{item.area__countryId__name}}</text>
               <view class='square'>
-                <text>{{item.minSquare}}m2-{{item.maxSquare}}m2</text>
+                <text>{{item.minSquare}}平米-{{item.maxSquare}}平米</text>
               </view>
               <view class='price'>
                 <text>{{item.minPrice}}万~{{item.maxPrice}}万</text>

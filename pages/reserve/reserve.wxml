@@ -11,7 +11,7 @@
 		<input class="nameInput {{nameError?'error':'normal'}}" auto-focus placeholder="真实姓名" bindinput="nameInput" />
 		<view class="mobileArea flex-inline-between {{mobileError?'error':'normal'}}">
 			<input class="mobileInput" auto-focus placeholder="手机号码" bindinput="mobileInput" />
-			<button class="mobileBtn" bindtap='sendVerify'>发送验证码</button>
+			<button class="mobileBtn {{verifytext.length < 5?'inactive':'active'}}" bindtap='sendVerify' disabled='{{verifytext.length < 5}}'>{{verifytext}}</button>
 		</view>
 		<input class="verifyInput {{verifyError?'error':'normal'}}" auto-focus placeholder="验证码" bindinput="verifyInput" />
 		<view class="timeArea flex-vertical">

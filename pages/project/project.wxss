@@ -60,10 +60,7 @@
   align-items: center;
   margin: 40rpx 0rpx;
 }
-.layout {
-  margin-top: 60rpx;
-  margin-bottom: 40rpx;
-}
+
 .provider {
 	border-bottom: 1rpx #E5E5E5 solid;
 }
@@ -78,6 +75,37 @@
 	border-right: 4rpx rgba(0,0,0,0.9) solid;
 	transform:rotate(45deg);
 }
+
+.layout {
+  padding: 60rpx 0rpx 40rpx 0rpx;
+}
+.layout-swiper {
+	margin-top: 20rpx;
+	width: 100%;
+	height: 400rpx;
+}
+
+.lorooms {
+	font-size: 28rpx;
+	color: #4B4B4B;
+
+}
+.loimage {
+	width:345rpx;
+	height: 230rpx;
+	padding: 10rpx 0rpx;
+}
+.losq {
+	font-size: 28rpx;
+	color: #BBBBBB;
+}
+.loprice {
+	font-size: 36rpx;
+	color: #FF4081;
+	font-family: 方正兰亭黑-标准;
+	padding-top: 10rpx;
+}
+
 .etcc {
   border-top: 1rpx solid #EEEEEE;
   border-bottom: 1rpx solid #EEEEEE;

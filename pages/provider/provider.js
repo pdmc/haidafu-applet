@@ -28,7 +28,7 @@ Page({
 			provider: provider
 		});
 		// 拼接请求url
-		const url = 'https://zhuabo.pk4yo.com/projects/getbycond?spId=' + provider.spid;
+		const url = app.globalData.main_url + '/projects/getbycond?spId=' + provider.spid;
 		// 请求数据
 		wx.request({
 			url: url,

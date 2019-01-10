@@ -16,7 +16,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "抓贝",
+    "navigationBarTitleText": "bhost(拍砖版)",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

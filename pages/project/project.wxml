@@ -25,7 +25,7 @@
   <view class="main-body">
     <view class='meta'>
       <!--image class='poster' src='{{project.picture1}}' background-size="cover"></image-->
-      <text class='title'decode="{{true}}">{{project.area__countryId__name}}&nbsp;{{project.area__cityId__name}}&nbsp;{{project.pName}}</text>
+      <text class='title' decode="{{true}}">{{project.area__countryId__name}}&nbsp;{{project.area__cityId__name}}&nbsp;{{project.pName}}</text>
       <text class='info'>{{project.area__countryId__name}}</text>
       <text class='info'>{{project.minSquare}}平米-{{project.maxSquare}}平米</text>
       <view class='flex-inline-between markable'>
@@ -51,35 +51,21 @@
 		</view>
     <view class='layout'>
       <text class='title'>户型介绍</text>
-
 			<swiper current="0" class="layout-swiper" 
-				indicator-dots="false"
+				display-multiple-items="2"
 				circular="true"
 				bindchange="bindChange111">
-				<block wx:for="{{select_list[cindex]}}" wx:for-index="sindex" wx:key="*this">
+				<block wx:for="{{layouts}}" wx:for-index="index" wx:key="*this">
 					<swiper-item class="select-swiper-item">
 						<view class="flex-vertical">
-							<!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
-							<view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
-								<view class='select-text-high'>
-									<text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
-									</text>
-								</view>
-								<view class='select-text-low flex-inline-between'>
-									<view>
-										<text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
-										<text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
-									</view>
-									<view>
-										<text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>
-									</view>
-								</view>
-							</view>
+							<text class='lorooms'>{{item.livingroomNum}}室{{item.bedroomNum}}厅{{item.bathroomNum}}卫</text>
+							<image class="loimage" src="{{item.picture1}}" mode='scaleToFill' />
+							<text class='losq'>{{item.hlSquare}}平米|{{item.housetype__name}}|{{item.fitmenttype__name}}</text>
+							<text class='loprice'>￥{{item.minPrice}}万</text>
 						</view>
 					</swiper-item>
 				</block>
 			</swiper>
-
 
     </view>
     <view class='etcc'>
@@ -112,7 +98,7 @@
 <view class="bottom flex-inline-between">
   <view class="bottomleft flex-inline-left">
 		<navigator url='../index/index'>
-			<view class="btm-btn flex-vertical">
+			<view class="btm-btn flex-vertical" bindtap="goHome">
 				<image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
 				<text class='btnlbl'>首页</text>
 			</view>

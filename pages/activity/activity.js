@@ -16,8 +16,12 @@ Page({
 		nameError: false,
 		mobile: '',
 		mobileError: false,
+		showerror: '',
+		verifytext: '发送验证码',
 		verify: '',
+		veriId: -1,
 		verifyError: false,
+		currentTime: 61,
 
 		userInfo: {},
 		//isLogin: false,
@@ -47,7 +51,7 @@ Page({
 			});
 		}
 		
-		const url = 'https://zhuabo.pk4yo.com/activity/getbyid?actId=' + options.actId;
+		const url = app.globalData.main_url + '/activity/getbyid?actId=' + options.actId;
 		// 请求数据
 		wx.request({
 			url: url,
@@ -79,7 +83,7 @@ Page({
 						});
 					} else if (_this.data.userInfo && _this.data.userInfo.userId > 0) {	// 存在即修正，虚无非真空
 						// 拼接请求url
-						const url = 'https://zhuabo.pk4yo.com/myactivity/getbycond?actId=' + options.actId + '&userId=' + _this.data.userInfo.userId;
+						const url = app.globalData.main_url + '/myactivity/getbycond?actId=' + options.actId + '&userId=' + _this.data.userInfo.userId;
 						// 请求数据
 						//var _res = res;
 						wx.request({
@@ -125,16 +129,14 @@ Page({
 		}
 		if (name.length > 1 && name.length < 50) {
 			this.setData({
-				nameError: false
+				nameError: false,
+				name: name
 			});
 		} else {
 			this.setData({
 				nameError: true
 			});
 		}
-		this.setData({
-			name: name
-		});
 
 	},
 
@@ -142,41 +144,119 @@ Page({
 		var mobile = e.detail.value;
 		if (util.checkMobile(mobile)) {
 			this.setData({
-				mobileError: false
+				mobileError: false,
+				mobile: mobile
 			});
 		} else {
 			this.setData({
 				mobileError: true
 			});
 		}
-		this.setData({
-			mobile: mobile
-		});
 	},
 
 	verifyInput: function (e) {
 		var verify = e.detail.value;
-		if (verify.length == 6) {
+		if (verify.length == 4) {
+			this.checkVerify(verify);
+		} else {
 			this.setData({
 				verifyError: true
 			});
-		} else {
-			this.setData({
-				verifyError: false
-			});
 		}
-		this.setData({
-			verify: verify
-		});
 	},
 
-	sendVerify: function () {
+	sendVerify1: function () {
 		wx.showToast({
 			title: '暂时不需要短信验证码！',
 			icon: 'success',
 			duration: 1000,
 			mask: false
 		})
+	},
+
+	sendVerify: function () {
+		var _this = this;
+		/*
+		_this.setData({
+			disabled: true,
+			color: '#ccc',
+		});
+		*/
+		console.log('Enter sendVerify()');
+		var mobile = this.data.mobile;
+		var currentTime = _this.data.currentTime //把手机号跟倒计时值变例成js值
+
+		if (!util.checkMobile(mobile)) {
+			this.setData({
+				mobileError: true,
+				showerror: 'showerror'
+			});
+			return;
+		} else {
+			var url = app.globalData.main_url + '/verify/sendverify?mobile=' + mobile;
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					//console.log(res.data);
+					if (res.statusCode == 200 && res.data.veriId > 0) {
+						_this.setData({
+							showerror: '',
+							veriId: res.data.veriId
+						});
+					}
+				}
+			});
+
+			//设置一分钟的倒计时
+			var interval = setInterval(function () {
+				currentTime--; //每执行一次让倒计时秒数减一
+				_this.setData({
+					verifytext: currentTime + 's', //按钮文字变成倒计时对应秒数
+				})
+				if (currentTime <= 0) {
+					clearInterval(interval);
+					_this.setData({
+						verifytext: '发送验证码',
+						currentTime: 61
+					})
+    		}
+			}, 1000);
+
+		}
+
+	},
+
+	checkVerify: function (verify) {
+		var _this = this;
+		var veriId = this.data.veriId;
+		var code = parseInt(verify);
+		var url = app.globalData.main_url + '/verify/verify?veriId=' + veriId + '&code=' + code;
+		wx.request({
+			url: url,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				//console.log(res.data);
+				if (res.statusCode == 200) {
+					if(res.data.pass){
+						_this.setData({
+							verifyError: false,
+							verify: verify
+						});
+					}else{
+						_this.setData({
+							verifyError: true
+						});
+					}
+				}
+			}
+		});
 	},
 
 	goHome: function () {
@@ -215,7 +295,7 @@ Page({
 				});
 				return;
 			}
-			const url = 'https://zhuabo.pk4yo.com/myactivity/addifnotexist?actId=' + this.data.activity.actId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&status=0';
+			const url = app.globalData.main_url + '/myactivity/addifnotexist?actId=' + this.data.activity.actId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&status=0';
 			// 请求数据
 			wx.request({
 				url: url,
@@ -238,7 +318,7 @@ Page({
 						myactivities.unshift(myactivity);
 						wx.setStorage({
 							key: key,
-							data: activities
+							data: myactivities
 						});
 
 						wx.navigateTo({

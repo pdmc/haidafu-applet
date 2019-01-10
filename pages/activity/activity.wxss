@@ -49,6 +49,7 @@
 .formView > input {
 	font-size: 36rpx;
 	width: 100%;
+	height: 72.5rpx;
 	line-height: 100rpx;
 	margin-bottom: 30rpx;
 	padding: 20rpx;
@@ -70,9 +71,17 @@
 	width: 240rpx;
 	margin: 20rpx;
 	font-size: 30rpx;
+	border-radius: 10rpx;
+}
+.mobileBtn.active {
 	background-color: #1FAFFF;
 	color: #FFFFFF;
-	border-radius: 10rpx;
+	border: 1rpx #1FAFFF solid;
+}
+.mobileBtn.inactive {
+	background-color: #FFFFFF;
+	color: #BBBBBB;
+	border: 1rpx #BBBBBB solid;
 }
 .normal {
 	border-top: 1rpx rgba(0,0,0,0.3) solid;
@@ -130,4 +139,18 @@
 }
 
 
+
+ @keyframes showerror {   
+ 	from { 
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+	}   
+ 	to { 
+		border-top: 1rpx #FF0000 solid;
+		border-bottom: 1rpx #FF0000 solid;
+	} 
+} 
+.showerror {  
+	animation: showerror 0.8s ease-in both; 
+} 
 

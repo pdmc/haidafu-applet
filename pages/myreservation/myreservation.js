@@ -50,7 +50,7 @@ Page({
 		} else {
 			const _this = this;
 			// 拼接请求url
-			const url = 'https://zhuabo.pk4yo.com/myactivity/getbycond?userId=' + userinfo.userId;
+			const url = app.globalData.main_url + '/myactivity/getbycond?userId=' + userinfo.userId;
 			// + options.type;
 			// 请求数据
 			wx.request({
@@ -99,7 +99,7 @@ Page({
 		} else {
 			const _this = this;
 			// 拼接请求url
-			const url = 'https://zhuabo.pk4yo.com/reservations/getbycond?userId=' + userinfo.userId;
+			const url = app.globalData.main_url + '/reservations/getbycond?userId=' + userinfo.userId;
 			// + options.type;
 			// 请求数据
 			wx.request({

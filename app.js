@@ -6,15 +6,15 @@ App({
 		//wx.setStorageSync('logs', logs)
 
 		// 登录
-		wx.login({
+		/*wx.login({
 			success: res => {
 				console.log("------------- wx.login -------------");
 				console.log(res);
 				this.globalData.userCode = res.code;
 				// 发送 res.code 到后台换取 openId, sessionKey, unionId
 			}
-		});
-		this.test();
+		});*/
+		//this.test();
 		// 获取用户信息
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo) {	
@@ -53,8 +53,8 @@ App({
 			//var userinfo = app.globalData.userInfo;
 			userinfo.code = this.globalData.userCode;
 			// 请求数据
-			//const url = "https://zhuabo.pk4yo.com/users/login?name=" + app.globalData.userInfo.nickName + "&code=" + app.globalData.userCode;
-			const url = "https://zhuabo.pk4yo.com/users/login";
+			//const url = this.globalData.main_url + "/users/login?name=" + app.globalData.userInfo.nickName + "&code=" + app.globalData.userCode;
+			const url = this.globalData.main_url + "/users/login";
 			wx.request({
 				url: url,
 				method: "POST",
@@ -145,6 +145,7 @@ App({
 		console.log('hhhhhhhhhhhhhhhh')
 	},
 	globalData: {
+		main_url: 'https://bhost.pk4yo.com',
 		hasUserInfo: false,
 		isLogin: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),

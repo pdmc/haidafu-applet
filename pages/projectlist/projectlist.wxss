@@ -122,13 +122,16 @@
 
 .tab2 {     /*   == quyu */
 	width: 100%;   
-	background-color: #FFFFFF;   
 	position: absolute;   
 	z-index: 50;  
-  /* height: 400rpx;  120rpx */
-  border: 1rpx #000 solid;
+  /* 
+	background-color: #FFFFFF;   
+	height: 400rpx;  120rpx 
+	border: 1rpx #000 solid;*/
 	top: -586rpx; 
 	font-size: 28rpx;  
+	padding-left: 20rpx;
+	background-color: #FFFFFF;   
 } 
 .tab2 picker-view {
   height: 300rpx;
@@ -139,19 +142,21 @@
 /*  -------------- 选项卡 3 ------------------ */
 .tab3 {
 	width: 100%;   
-	background-color: #FFFFFF;   
 	position: absolute;   
 	z-index: 50;  
+	background-color: #EEEEEE;   
   /* 
+	background-color: #FFFFFF;   
 	height: 400rpx;  120rpx 
   border: 1rpx #000 solid;
 	*/
-	top: -688rpx; 
+	height: 800rpx;
+	top: -765rpx; 
 	padding: 40rpx 0rpx;
 	font-size: 28rpx;  
 }
 .type-area {
-	margin: 30rpx 0rpx 0rpx 30rpx;
+	margin: 30rpx 0rpx 30rpx 30rpx;
 	flex-flow: row wrap;
 	align-content: space-around;
 }
@@ -159,16 +164,20 @@
 	padding: 15rpx 10rpx;
 }
 .type-area text {
-	background-color: #FFFFFF;
 	padding: 25rpx;
 	margin: 30rpx 0rpx;
 	border-radius: 10rpx;
 	line-height: 80rpx;
+	background-color: #FFFFFF;
 	color: #737373;  
-	border: 1rpx #7373735e solid;
+	/*
+	border: 1rpx #737373 solid;*/
 }
 
-
+.bottom-area {
+	position: absolute;
+	bottom: 30rpx;
+}
 
 /*  -------------- 选项卡 4 ------------------ */
 .tab4 {     /*   == quyu */

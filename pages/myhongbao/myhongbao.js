@@ -44,7 +44,7 @@ Page({
 		} else {
 			const _this = this;
 			// 拼接请求url
-			const url = 'https://zhuabo.pk4yo.com/hongbaos/getbycond?userId=' + userinfo.userId;
+			const url = app.globalData.main_url + '/hongbaos/getbycond?userId=' + userinfo.userId;
 			// + options.type;
 			// 请求数据
 			wx.request({

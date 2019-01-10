@@ -20,7 +20,7 @@ page {
 .swiper-item{
   text-align: center;
   width: 100%;
-	height: 1
+	/*height: 1;*/
   overflow:show;
 }
 .slide-image {
@@ -76,11 +76,11 @@ page {
   padding: 24rpx 0rpx;
 }
 .select-tab > view.inactive {
-  border-bottom:1px solid inherit;
+  border-bottom: 3rpx solid #FFFFFF;
 }
 .select-tab > view.active{
   color: #1FAFFF;
-  border-bottom:1px solid #1FAFFF;
+  border-bottom: 3rpx solid #1FAFFF;
 }
 .select-swiper {
   height: 350rpx;

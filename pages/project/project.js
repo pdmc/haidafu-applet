@@ -10,6 +10,7 @@ Page({
     title: '',
     loading: true,
     project: {},
+		layouts: [],
 		favorite: {},
     imgUrls: [
       'http://image.pk4yo.com/tooopen_sy_143912755726.jpg',
@@ -49,9 +50,8 @@ Page({
 			});
 		}
 		
-    // 拼接请求url
-    const url = 'https://zhuabo.pk4yo.com/projects/getbyid?pId=' + options.pId;
-    // 请求数据
+    // 获取project详细信息
+		const url = app.globalData.main_url + '/projects/getbyid?pId=' + options.pId;
     wx.request({
       url: url,
       data: {},
@@ -82,7 +82,7 @@ Page({
 						});
 					} else if (_this.data.userId && _this.data.userId > 0) {	// 存在即修正，虚无非真空
 						// 拼接请求url
-						const url = 'https://zhuabo.pk4yo.com/favorites/getbycond?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+						const url = app.globalData.main_url + '/favorites/getbycond?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
 						// 请求数据
 						//var _res = res;
 						wx.request({
@@ -113,6 +113,28 @@ Page({
       }
     });
 
+		// 获取project所有的layouts
+		const url_layout = app.globalData.main_url + '/layouts/getbycond?pId=' + options.pId;
+		wx.request({
+			url: url_layout,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				//console.log(res.data);
+				// 赋值
+				if (res.statusCode == 200 && res.data.data.length > 0) {
+					_this.setData({
+						layouts: res.data.data,
+					});
+				}
+			},
+			fail: function () {
+				console.log('layouts request failed !!!')
+			}
+		});
+
   },
 
   favChange: function() {
@@ -137,7 +159,7 @@ Page({
 					data: favs
 				});
 				/*
-				const url = 'https://zhuabo.pk4yo.com/favorites/add?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+				const url = app.globalData.main_url + '/favorites/add?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
 				// 请求数据
 				//var _res = res;
 				wx.request({
@@ -196,7 +218,7 @@ Page({
 		var _this = this;
 		var added = this.data.addfav;
 		if (added) {
-			const url = 'https://zhuabo.pk4yo.com/favorites/addifnotexist?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
+			const url = app.globalData.main_url + '/favorites/addifnotexist?pId=' + _this.data.project.pId + '&userId=' + _this.data.userId;
 			// 请求数据
 			//var _res = res;
 			wx.request({
@@ -237,7 +259,7 @@ Page({
 				});
 			}
 
-			const url = 'https://zhuabo.pk4yo.com/favorites/delete?fId=' + _this.data.favorite.fId;
+			const url = app.globalData.main_url + '/favorites/delete?fId=' + _this.data.favorite.fId;
 			// 请求数据
 			//var _res = res;
 			wx.request({
@@ -254,6 +276,15 @@ Page({
 			});
 
 		}
+	},
+
+	goHome: function () {
+		wx.switchTab({
+			url: "../index/index",
+			fail: function (e) {
+				console.log(e);
+			}
+		})
 	},
 
 	gotoProvider: function () {

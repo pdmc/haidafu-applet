@@ -8,7 +8,7 @@
 		<text class="title">服务商简介</text>
 		<text class="desc">{{provider.detail}}</text>
 	</view>
-	<view>
+	<view class="listarea">
 		<!--类型判断,显示不同的数据-->
 		<text class="title">房源</text>
 		<block class='page-list' wx:for="{{projects}}" wx:key="id">
@@ -16,7 +16,7 @@
 				<view class='item'>
 					<image class='poster' src='{{item.thumbnail}}'></image>
 					<view class='meta flex-vertical'>
-						<text class='title'>{{item.pName}}</text>
+						<text class='title' decode="{{true}}">{{item.area__countryId__name}}&nbsp;{{item.area__cityId__name}}&nbsp;{{item.pName}}</text>
 						<text class='area'>{{item.area__countryId__name}}</text>
 						<view class='square'>
 							<text>{{item.minSquare}}平米-{{item.maxSquare}}平米</text>

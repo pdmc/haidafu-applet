@@ -19,6 +19,9 @@ Page({
 		mobileError: false,
 		verify: '',
 		verifyError: false,
+		verifytext: '发送验证码',
+		veriId: -1,
+		currentTime: 61,
 
 		//isLogin: false,
 		userInfo: {},
@@ -56,7 +59,7 @@ Page({
 			});
 		}
 		// check reservation db
-		var url = 'https://zhuabo.pk4yo.com/reservations/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
+		var url = app.globalData.main_url + '/reservations/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
 		// 请求数据
 		wx.request({
 			url: url,
@@ -91,7 +94,7 @@ Page({
 			}
 		});
 		// check hongbao db
-		url = 'https://zhuabo.pk4yo.com/hongbaos/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
+		url = app.globalData.main_url + '/hongbaos/getbycond?pId=' + options.pId + '&userId=' + this.data.userInfo.userId;
 		// 请求数据
 		wx.request({
 			url: url,
@@ -174,7 +177,7 @@ Page({
 		});
 	},
 	
-	sendVerify: function () {
+	sendVerify1: function () {
 		wx.showToast({
 			title: '暂时不需要短信验证码！',
 			icon: 'success',
@@ -188,6 +191,92 @@ Page({
 		this.setData({
 			reserveDate: e.detail.value
 		})
+	},
+
+
+	sendVerify: function () {
+		var _this = this;
+		/*
+		_this.setData({
+			disabled: true,
+			color: '#ccc',
+		});
+		*/
+		console.log('Enter sendVerify()');
+		var mobile = this.data.mobile;
+		var currentTime = _this.data.currentTime //把手机号跟倒计时值变例成js值
+
+		if (!util.checkMobile(mobile)) {
+			this.setData({
+				mobileError: true,
+				showerror: 'showerror'
+			});
+			return;
+		} else {
+			var url = app.globalData.main_url + '/verify/sendverify?mobile=' + mobile;
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					//console.log(res.data);
+					if (res.statusCode == 200 && res.data.veriId > 0) {
+						_this.setData({
+							showerror: '',
+							veriId: res.data.veriId
+						});
+					}
+				}
+			});
+
+			//设置一分钟的倒计时
+			var interval = setInterval(function () {
+				currentTime--; //每执行一次让倒计时秒数减一
+				_this.setData({
+					verifytext: currentTime + 's', //按钮文字变成倒计时对应秒数
+				})
+				if (currentTime <= 0) {
+					clearInterval(interval);
+					_this.setData({
+						verifytext: '发送验证码',
+						currentTime: 61
+					})
+				}
+			}, 1000);
+
+		}
+
+	},
+
+	checkVerify: function (verify) {
+		var _this = this;
+		var veriId = this.data.veriId;
+		var code = parseInt(verify);
+		var url = app.globalData.main_url + '/verify/verify?veriId=' + veriId + '&code=' + code;
+		wx.request({
+			url: url,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				//console.log(res.data);
+				if (res.statusCode == 200) {
+					if (res.data.pass) {
+						_this.setData({
+							verifyError: false,
+							verify: verify
+						});
+					} else {
+						_this.setData({
+							verifyError: true
+						});
+					}
+				}
+			}
+		});
 	},
 
 	submit: function(){
@@ -219,7 +308,7 @@ Page({
 				});
 				return;
 			}
-			const url = 'https://zhuabo.pk4yo.com/reservations/addwithhbifnotexist?pId=' + this.data.pId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&applyTime=' + this.data.reserveDate + '&source=1&amount=10000';
+			const url = app.globalData.main_url + '/reservations/addwithhbifnotexist?pId=' + this.data.pId + '&userId=' + userinfo.userId + '&trueName=' + this.data.name + '&phone=' + this.data.mobile + '&verify=' + this.data.verify + '&applyTime=' + this.data.reserveDate + '&source=1&amount=10000';
 			// 请求数据
 			wx.request({
 				url: url,
