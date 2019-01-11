@@ -1,5 +1,5 @@
 /* pages/myhongbao/myhongbao.wxss */
-/*@import "../../static/css/common.wxss";*/
+@import "../../static/css/common.wxss";
 
 .page-body {   
 	width: 100%;   
