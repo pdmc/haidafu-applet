@@ -450,8 +450,7 @@ Page({
 			}
 			post = this.data.post;
 			post.countryId = this.data.countryIds[val[0] - 1];
-			post.provinceId = 0;
-			post.cityId = 0;
+			this.postRemove(["provinceId","cityId"]);
 			this.setData({
 				lastval: val,
 				provinces: provinces,
@@ -470,7 +469,7 @@ Page({
 			}
 			post = this.data.post;
 			post.provinceId = this.data.provinceIds[val[1] - 1];
-			post.cityId = 0;
+			this.postRemove(["provinceId", "cityId"]);
 			this.setData({
 				lastval: val,
 				cities: cities,

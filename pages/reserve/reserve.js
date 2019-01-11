@@ -80,8 +80,9 @@ Page({
 					const key = 'myreservations';
 					var myreservations = wx.getStorageSync(key) || [];
 					var fi = util.array_find_obj(myreservations, "rid", rid);
+					var reservation = { "rid": res.data.data[0].rId, "pid": res.data.data[0].pkproject__pId, "userid": userinfo.userId, "applytime": res.data.data[0].applyTime, "status": res.data.data[0].status, "name": res.data.data[0].trueName, "mobile": res.data.data[0].phone };
 					if (fi < 0) {
-						myreservations.unshift({ "rid": rid, "userid": _this.data.userInfo.userId, "reservation": res.data.data[0], "project": project });
+						myreservations.unshift({ "rid": rid, "userid": _this.data.userInfo.userId, "reservation": reservation, "project": project });
 						wx.setStorage({
 							key: key,
 							data: myreservations
