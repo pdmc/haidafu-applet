@@ -63,7 +63,7 @@ Page({
 						
 						for (let i = 0; i < res.data.data.length; i++) {
 							var hongbao = { "hbid": res.data.data[i].hbId, "amount": res.data.data[i].amount, "state": res.data.data[i].state};
-							var project = { "pid": res.data.data[i].pkproject__pId, "name": res.data.data[i].pkproject__pName, "lowsq": res.data.data[i].pkproject__minSquare, "highsq": res.data.data[i].pkproject__maxSquare, "lowprice": res.data.data[i].pkproject__minPrice, "highprice": res.data.data[i].pkproject__maxPrice, "country": res.data.data[i].area__name, "image": res.data.data[i].pkproject__thumbnail};
+							var project = { "pid": res.data.data[i].pkproject__pId, "name": res.data.data[i].pkproject__pName, "lowsq": res.data.data[i].pkproject__minSquare, "highsq": res.data.data[i].pkproject__maxSquare, "lowprice": res.data.data[i].pkproject__minPrice, "highprice": res.data.data[i].pkproject__maxPrice, "country": res.data.data[i].countryId__area__name, "image": res.data.data[i].pkproject__thumbnail};
 							myhongbaos.unshift({ "hbid": res.data.data[i].hbId, "userid": _this.data.userInfo.userId, "hongbao": hongbao, "project": project });
 							wx.setStorage({
 								key: key,

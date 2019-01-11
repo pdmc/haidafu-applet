@@ -8,7 +8,7 @@
 			</view>
 			<navigator url='../project/project?pId={{item.project.pId}}' class='flex-inline-between'>
 				<!--view data-index="{{index}}" class='item' style="{{txtStyle}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"-->
-				<view data-index="{{index}}" class='item'>
+				<view data-index="{{index}}" class='item flex-inline-left'>
 					<image class='poster' src='{{item.project.image}}'></image>
 					<view class='meta'>
 						<text class='title' decode="{{true}}" space="{{true}}">{{item.project.country}}&nbsp;{{item.project.name}}</text>
