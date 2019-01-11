@@ -1,4 +1,5 @@
 // pages/myfavorite/myfavorite.js
+const app = getApp();
 var util = require('../../utils/util.js');
 Page({
 
@@ -20,11 +21,63 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		var userinfo = wx.getStorageSync('userinfo');
+		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
+			var logcb = function () {
+				var userinfo = wx.getStorageSync('userinfo');
+				_this.setData({
+					userInfo: userinfo,
+					hasUserInfo: true
+				});
+			};
+			app.checkUserLogin(logcb);
+		} else {
+			this.setData({
+				userInfo: userinfo,
+				hasUserInfo: true
+			});
+		}
+
+		// 同步hongbao db，需要userId，异步问题？
 		const key = 'myfavorites';
 		var favs = wx.getStorageSync(key) || [];
-		this.setData({
-			list: favs
-		});
+		if (favs.length > 0) {
+			this.setData({
+				list: favs
+			});
+		} else {
+			const _this = this;
+			// 拼接请求url
+			const url = app.globalData.main_url + '/favorites/getbycond?userId=' + userinfo.userId;
+			// + options.type;
+			// 请求数据
+			wx.request({
+				url: url,
+				data: {},
+				header: {
+					'content-type': 'json' // 默认值
+				},
+				success: function (res) {
+					//console.log(res.data);
+					if (res.statusCode == 200 && res.data.data.length > 0) {
+						_this.setData({
+							list: res.data.data,
+							loading: false // 关闭等待框
+						});
+
+						for (let i = 0; i < res.data.data.length; i++) {
+							var favorite = { "fid": res.data.data[i].fId, "pid": res.data.data[i].pkproject__pId, "userid": _this.data.userInfo.userId };
+							var project = { "pid": res.data.data[i].pkproject__pId, "name": res.data.data[i].pkproject__pName, "lowsq": res.data.data[i].pkproject__minSquare, "highsq": res.data.data[i].pkproject__maxSquare, "lowprice": res.data.data[i].pkproject__minPrice, "highprice": res.data.data[i].pkproject__maxPrice, "country": res.data.data[i].countryId__area__name, "image": res.data.data[i].pkproject__thumbnail };
+							favs.unshift({ "fid": res.data.data[i].fId, "pid": res.data.data[i].pkproject__pId, "favorite": favorite, "project": project });
+							wx.setStorage({
+								key: key,
+								data: favs
+							});
+						}
+					}
+				} /* success */
+			});
+		}
 	},
 
 

@@ -6,15 +6,15 @@
 			<navigator url='../project/project?pId={{item.project.pId}}'>
 				<!--view data-index="{{index}}" class='item' style="{{txtStyle}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"-->
 				<view data-index="{{index}}" class='item'>
-					<image class='poster' src='{{item.project.thumbnail}}'></image>
+					<image class='poster' src='{{item.project.image}}'></image>
 					<view class='meta'>
-						<text class='title'>{{item.project.pName}}</text>
-						<text class='area'>{{item.project.countryId}}</text>
+						<text class='title'>{{item.project.name}}</text>
+						<text class='area'>{{item.project.country}}</text>
 						<view class='square'>
-							<text>{{item.project.minSquare}}平米-{{item.project.maxSquare}}平米</text>
+							<text>{{item.project.lowsq}}平米-{{item.project.highsq}}平米</text>
 						</view>
 						<view class='price'>
-							<text>{{item.project.minPrice}}万~{{item.project.maxPrice}}万</text>
+							<text>{{item.project.lowprice}}万~{{item.project.highprice}}万</text>
 						</view>
 					</view>
 				</view>
