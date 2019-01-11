@@ -6,14 +6,14 @@ App({
 		//wx.setStorageSync('logs', logs)
 
 		// 登录
-		/*wx.login({
+		wx.login({
 			success: res => {
 				console.log("------------- wx.login -------------");
 				console.log(res);
 				this.globalData.userCode = res.code;
 				// 发送 res.code 到后台换取 openId, sessionKey, unionId
 			}
-		});*/
+		});
 		//this.test();
 		// 获取用户信息
 		var userinfo = wx.getStorageSync('userinfo');
