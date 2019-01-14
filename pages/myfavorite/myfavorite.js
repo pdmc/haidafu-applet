@@ -60,20 +60,20 @@ Page({
 				success: function (res) {
 					//console.log(res.data);
 					if (res.statusCode == 200 && res.data.data.length > 0) {
-						_this.setData({
-							list: res.data.data,
-							loading: false // 关闭等待框
-						});
-
 						for (let i = 0; i < res.data.data.length; i++) {
 							var favorite = { "fid": res.data.data[i].fId, "pid": res.data.data[i].pkproject__pId, "userid": _this.data.userInfo.userId };
 							var project = { "pid": res.data.data[i].pkproject__pId, "name": res.data.data[i].pkproject__pName, "lowsq": res.data.data[i].pkproject__minSquare, "highsq": res.data.data[i].pkproject__maxSquare, "lowprice": res.data.data[i].pkproject__minPrice, "highprice": res.data.data[i].pkproject__maxPrice, "country": res.data.data[i].countryId__area__name, "image": res.data.data[i].pkproject__thumbnail };
 							favs.unshift({ "fid": res.data.data[i].fId, "pid": res.data.data[i].pkproject__pId, "favorite": favorite, "project": project });
-							wx.setStorage({
-								key: key,
-								data: favs
-							});
 						}
+						_this.setData({
+							list: favs,
+							loading: false // 关闭等待框
+						});
+						wx.setStorage({
+							key: key,
+							data: favs
+						});
+
 					}
 				} /* success */
 			});

@@ -39,8 +39,8 @@ Page({
 				'content-type': 'json' // 默认值
 			},
 			success: function (res) {
-				console.log(res.data);
-				if (res.data == undefined) {
+				//console.log(res.data);
+				if (res.data == undefined || res.data.data == undefined) {
 					return;
 				} 
 				_this.setData({
@@ -60,8 +60,8 @@ Page({
         'content-type': 'json' // 默认值
       },
       success: function(res) {
-        console.log(res.data);
-        if(res.data == undefined){
+        //console.log(res.data);
+				if (res.data == undefined || res.data.data == undefined){
           return;
         }
         // 赋值

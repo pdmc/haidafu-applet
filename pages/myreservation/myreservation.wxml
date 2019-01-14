@@ -56,7 +56,7 @@
 					<text class="smallGrayLabel">预约人电话：{{item.reservation.mobile}}</text>
 				</view>
 				<view>
-					<text class="contact">联系客服</text>
+					<text class="contact" data-phone="15901183573" bindtap="contactService">联系客服</text>
 				</view>
 			</view>
 		</block>

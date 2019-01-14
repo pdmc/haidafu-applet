@@ -147,6 +147,15 @@ Page({
 			})
 		}
 	},
+	contactService: function (e) {
+		var phone = e.currentTarget.dataset.phone;
+		//console.log(e);
+		if(phone != undefined){
+			wx.makePhoneCall({
+				phoneNumber: phone,
+			})
+		}
+	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
