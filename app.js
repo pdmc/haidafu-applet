@@ -69,6 +69,7 @@ App({
 						var uinfo = userinfo; //_this.globalData.userInfo; //_this.data.userInfo;
 						uinfo.userId = res.data.userId;
 						uinfo.openid = res.data.openid;
+						uinfo.mobile = res.data.mobile;
 						uinfo.isLogin = true;
 						_this.globalData.isLogin = true;
 						/*_this.setData({

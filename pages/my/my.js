@@ -115,10 +115,14 @@ Page({
 		console.log(e);
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo) {
-			app.globalData.userInfo = e.detail.userInfo;
+			var uinfo = e.detail.userInfo;
+			app.globalData.userInfo = uinfo;
+			if (uinfo.mobile && uinfo.mobile.length > 0) {
+				uinfo.mobile = uinfo.mobile.substr(0, 3) + '****' + uinfo.mobile.substr(7, 4);
+			}
 			wx.setStorage({
 				key: "userinfo",
-				data: e.detail.userInfo
+				data: uinfo
 			});
 		}
 		if (userinfo && userinfo.userId && userinfo.isLogin) {	// 数据不一致
@@ -129,6 +133,9 @@ Page({
 		} else {
 			var logcb = function () {
 				var userinfo = wx.getStorageSync('userinfo');
+				if (userinfo.mobile && userinfo.mobile.length > 0) {
+					userinfo.mobile = userinfo.mobile.substr(0, 3) + '****' + userinfo.mobile.substr(7, 4);
+				}
 				_this.setData({
 					authorized: true,
 					userInfo: userinfo
@@ -137,18 +144,6 @@ Page({
 			app.loginUser(logcb);
 		}
 	},
-  bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo)
-    if (e.detail.userInfo) {
-      console.log("user approves")
-      //用户按了允许授权按钮
-      this.authorized = true
-    } else {
-      console.log("user rejects")
-      //用户按了拒绝按钮
-    }
-  },
-
 	gotoFav: function () {
 		wx.navigateTo({
 			url: '/pages/myfavorite/myfavorite'
