@@ -16,7 +16,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "bhost(拍砖版)",
+    "navigationBarTitleText": "海大富(内测版)",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
