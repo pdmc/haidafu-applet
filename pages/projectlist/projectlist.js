@@ -360,8 +360,8 @@ Page({
 			start_price = this.data.rightValue;
 			end_price = value;
 		}
-		post.minPrice = minprice;
-		post.maxPrice = maxprice;
+		post.minPrice = start_price;
+		post.maxPrice = end_price;
 		if (postcols.indexOf("minPrice") < 0) postcols.push("minPrice");
 		if (postcols.indexOf("maxPrice") < 0) postcols.push("maxPrice");
 		this.setData({
@@ -388,8 +388,8 @@ Page({
 			start_price = this.data.leftValue
 			end_price = value
 		}
-		post.minPrice = minprice;
-		post.maxPrice = maxprice;
+		post.minPrice = start_price;
+		post.maxPrice = end_price;
 		if (postcols.indexOf("minPrice") < 0) postcols.push("minPrice");
 		if (postcols.indexOf("maxPrice") < 0) postcols.push("maxPrice");
 		this.setData({

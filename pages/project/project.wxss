@@ -67,6 +67,7 @@
 .spimage {
 	height: 100rpx;
 	width: 100rpx;
+	margin: 10rpx;
 }
 .openicon {
 	height: 40rpx;
