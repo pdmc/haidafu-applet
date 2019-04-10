@@ -24,7 +24,7 @@
   height: 1000rpx;*/
 }
 .title {
-  font-size: 42rpx;
+  font-size: 36rpx;
   color: #101010;
   margin-bottom: 20rpx;
 }
