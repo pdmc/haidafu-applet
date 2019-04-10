@@ -104,6 +104,11 @@
   color: #FFFFFF;
   font-family: 方正兰亭黑-标准;
   padding: 200rpx 0rpx 0rpx 30rpx;
+	overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .select-text-low {
   color: #FFFFFF;
