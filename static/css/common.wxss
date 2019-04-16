@@ -96,6 +96,9 @@
 .detailColor {
 	color: #AAAAAA;
 }
+.lightColor {
+	color: #BBBBBB;
+}
 .myred {
 	color: #E51C23;
 }

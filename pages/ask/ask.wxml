@@ -1,2 +1,48 @@
 <!--pages/ask/ask.wxml-->
-<text>pages/ask/ask.wxml</text>
+<view class="page flex-vertical">
+	<view class="form">
+		<view class="flex-inline-left">
+			<text class='middleLabel'>标题</text>
+			<text class='tinyLabel lightColor'>（必填）</text>
+		</view>
+		<view>
+			<textarea class="titleTa smallLabel" placeholder='请输入问题标题（5-30字）' bindinput="inputTitle"></textarea>
+		</view>
+		<view class="flex-inline-right">
+			<text class='tinyLabel lightColor'>{{title.length}}/30</text>
+		</view>
+		<view class="contentLabel flex-inline-left">
+			<text class='middleLabel'>描述</text>
+			<text class='tinyLabel lightColor'>（必填）</text>
+		</view>
+		<view>
+			<textarea class="contentTa smallLabel" placeholder='详细描述，可以让回答者更清晰地帮到您'  bindinput="inputContent"></textarea>
+		</view>
+		<view class="flex-inline-right">
+			<text class='tinyLabel lightColor'>{{content.length}}/500</text>
+		</view>
+		<view class="labelLabel flex-inline-left">
+			<text class='middleLabel'>分类</text>
+			<text class='tinyLabel lightColor'>（必填）</text>
+		</view>
+		<view class="labelArea flex-inline-left">
+			<block wx:for="{{allabels}}" wx:key="*this">
+				<view class="labeltab smallLabel" data-index="{{index}}" bindtap='typeChange'>
+					<text class="labelText">{{item}} </text>
+				</view>
+			</block>
+		</view>
+		<view class="labelLabel flex-inline-left">
+			<text class='middleLabel'>输入验证码</text>
+			<text class='tinyLabel lightColor'>（必填）</text>
+		</view>
+		<view class="verifyArea flex-inline-left">
+			<input class="verifyInput smallLabel" placeholder='验证码' bindinput="inputVerify"></input>
+			<canvas class="verifyImage" style="width:{{cvs.width}}rpx;height:{{cvs.height}}rpx;"  canvas-id="canvas" bindtap="onTap"></canvas>
+			<text class="verifyBtn smallLabel" bindtap="onTap">换一张</text>
+		</view>
+	</view>
+	<view>
+		<text class="submitBtn smallLabel" bindtap="submit">提交</text>
+	</view>
+</view>

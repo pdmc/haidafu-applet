@@ -36,6 +36,11 @@
 			</navigator>
 		</block>
 	</view>
+	<view>
+		<navigator url="../ask/ask">
+			<text class="ask">提问</text>
+		</navigator>
+	</view>
 </view>
 
 

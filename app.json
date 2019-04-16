@@ -1,9 +1,9 @@
 {
   "pages":[
+		"pages/ask/ask",
 		"pages/questionlist/questionlist",
 		"pages/question/question",
 		"pages/myquestion/myquestion",
-		"pages/ask/ask",
 		"pages/index/index",
 		"pages/my/my",
 		"pages/myfavorite/myfavorite",
