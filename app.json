@@ -1,5 +1,9 @@
 {
   "pages":[
+		"pages/questionlist/questionlist",
+		"pages/question/question",
+		"pages/myquestion/myquestion",
+		"pages/ask/ask",
 		"pages/index/index",
 		"pages/my/my",
 		"pages/myfavorite/myfavorite",
@@ -16,7 +20,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "海大富(内测版)",
+    "navigationBarTitleText": "可优选房(内测版)",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
@@ -31,6 +35,12 @@
         "selectedIconPath": "static/images/ic_menu_home_pressed.png",
         "text": "首页"
       },
+			{
+				"pagePath": "pages/questionlist/questionlist",
+				"iconPath": "static/images/ic_menu_ask_nor.png",
+				"selectedIconPath": "static/images/ic_menu_ask_pressed.png",
+				"text": "问答"
+			},
       {
         "pagePath": "pages/my/my",
         "iconPath": "static/images/ic_menu_me_nor.png",

@@ -4,6 +4,12 @@
 .show {
   display:block;
 }
+.flex-inline-around {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;  
+  align-items: center;
+}
 .flex-inline-between {
   display: flex;
   flex-direction: row;
@@ -26,16 +32,70 @@
   display: flex;
   flex-direction: column; 
 }
+.flex-vertical-center {
+  display: flex;
+  flex-direction: column; 
+	justify-content: center;
+}
 .marginLeft {
 	margin-left: 30rpx;
 }
-.smallLabel {
-	font-size: 28rpx;
+/* 40px */
+.largeLabel {
+	font-size: 40rpx;
 }
-.smallGrayLabel {
-	font-size: 28rpx;
-	color: #BBBBBB;
-}
+/* 34px */
 .bigLabel {
 	font-size: 36rpx;
+}
+/* 32px */
+.middleLabel {
+	font-size: 34rpx;
+}
+/* 28px */
+.smallLabel {
+	font-size: 32rpx;
+}
+.smallGrayLabel {
+	font-size: 32rpx;
+	color: #AAAAAA;
+}
+/* 24px */
+.tinyLabel {
+	font-size: 28rpx;
+}
+.tinyGrayLabel {
+	font-size: 28rpx;
+	color: #AAAAAA;
+}
+/* 22px */
+.microLabel {
+	font-size: 24rpx;
+}
+.microGrayLabel {
+	font-size: 24rpx;
+	color: #AAAAAA;
+}
+/* 20px */
+.miuLabel {
+	font-size: 22rpx;
+}
+.nanoLabel {
+	font-size: 20rpx;
+}
+
+.titleColor {
+	color: #101010;
+}
+.deepGray {
+	color: #737373;
+}
+.contentColor {
+	color: #101010;
+}
+.detailColor {
+	color: #AAAAAA;
+}
+.myred {
+	color: #E51C23;
 }

@@ -146,7 +146,9 @@ App({
 		console.log('hhhhhhhhhhhhhhhh')
 	},
 	globalData: {
-		main_url: 'https://bhost.pk4yo.com',
+		main_url: 'https://bhost.dev.pk4yo.com',
+		main_url2: 'https://admin.acm.dev.pk4yo.com',
+		image_url: 'http://image.pk4yo.com',
 		hasUserInfo: false,
 		isLogin: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),
