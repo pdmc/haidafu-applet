@@ -1,0 +1,48 @@
+<!--pages/search/search.wxml-->
+<view class="page">
+	<loading hidden="{{!loading}}">加载中...</loading>
+	<view class="searchArea flex-inline-between">
+		<input class="searchInput smallLabel" placeholder='单行输入' value="{{key}}" bindinput="inputKey"></input>
+		<text class="searchBtn middleLabel" bindtap="submit">搜索</text>
+	</view>
+	<view class="histArea" class="{{state==0?'show':'hidden'}}">
+		<block wx:for="{{keys}}" wx:for-index="index" wx:key="*this">
+			<view data-index="{{index}}" data-item="{{item.val}}" class="keyItem {{index==0?'firstItem':''}}" bindtap="histSubmit">
+				<text class="smallLabel lightColor">{{item.val}}</text>
+			</view>
+		</block>
+		<view class="btnArea {{keys.length>0?'show':'hidden'}}">
+			<text class="histBtn microLabel lightColor" bindtap="histClear">清空历史记录</text>
+		</view>
+	</view>
+	<view class="qArea" class="{{state==1?'show':'hidden'}}">
+		<block wx:for="{{questions}}" wx:for-index="index" wx:key="*this">
+			<navigator url='../question/question?qId={{item.qId}}'>
+			<view class="qitem flex-vertical">
+				<view class='flex-inline-left'>
+					<text class="title">{{item.title}}</text>
+				</view>
+				<view class='flex-inline-left'>
+					<text class='content tinyLabel detailColor'>{{item.content}}</text>
+				</view>
+				<view class='lowerBar flex-inline-between'>
+					<view class='flex-inline-left'>
+						<block wx:for="{{item.labels}}" wx:for-item="itemLabel" wx:key="*this">
+							<text class='labelsq miuLabel'>{{itemLabel}}</text>
+						</block>
+					</view>
+					<view class='flex-inline-right'>
+						<view>
+							<text class="tinyLabel titleColor">{{item.ansNum}}</text>
+						</view>
+						<view>
+							<text class="tinyLabel detailColor">个回答</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			</navigator>
+		</block>
+	</view>
+</view>
+
