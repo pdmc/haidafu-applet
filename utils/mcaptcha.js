@@ -31,15 +31,16 @@ module.exports = class Mcaptcha {
       this.ctx.translate(-dis, -this.options.height * 0.5);
     })
     this.ctx.draw();
+		this.options.code = code;
   }
   validate(code){
-	var code = code.toLowerCase();
-	var v_code = this.options.code.toLowerCase();
-	if(code == v_code){
-		return true;
-	}else{
-		return false;
-	}
+		var code = code.toLowerCase();
+		var v_code = this.options.code.toLowerCase();
+		if(code == v_code){
+			return true;
+		}else{
+			return false;
+		}
   }
   
   randomNum(min, max) {

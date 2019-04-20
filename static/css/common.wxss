@@ -20,13 +20,13 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;  
-  align-items: center;
+  align-items: flex-start;
 }
 .flex-inline-right {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;  
-  align-items: center;
+  align-items: flex-start;
 }
 .flex-vertical {
   display: flex;
@@ -36,6 +36,11 @@
   display: flex;
   flex-direction: column; 
 	justify-content: center;
+}
+.flex-vertical-top {
+  display: flex;
+  flex-direction: column; 
+	justify-content: flex-start;
 }
 .marginLeft {
 	margin-left: 30rpx;
@@ -80,12 +85,16 @@
 .miuLabel {
 	font-size: 22rpx;
 }
+/* 18px */
 .nanoLabel {
 	font-size: 20rpx;
 }
 
 .titleColor {
 	color: #101010;
+}
+.userColor {
+	color: #4B4B4B;
 }
 .deepGray {
 	color: #737373;
