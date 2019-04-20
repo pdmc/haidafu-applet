@@ -1,2 +1,80 @@
 <!--pages/question/question.wxml-->
-<text>pages/question/question.wxml</text>
+<view class="page">
+	<view class='qArea  flex-vertical'>
+		<view class='flex-inline-left'>
+			<text class="title middleLabel">{{question.title}}</text>
+		</view>
+		<view class='qDetail flex-inline-left'>
+			<text class='content tinyLabel detailColor'>{{question.content}}</text>
+		</view>
+		<view class='flex-inline-left'>
+			<block wx:for="{{question.labels}}" wx:key="*this">
+				<text class='labelsq miuLabel'>{{item}}</text>
+			</block>
+		</view>
+		<navigator url='../myquestion/myquestion?userId={{question.userId}}'>
+			<view class='lowerBar flex-inline-left'>
+				<view>
+					<image src="{{question.pkuser__avatarUrl?question.pkuser__avatarUrl:'../../static/images/avatar-default.jpg'}}" mode='aspectFill'></image>
+				</view>
+				<view class="nickName">
+					<text class="tinyLabel userColor">{{question.pkuser__nickName}}</text>
+				</view>
+			</view>
+		</navigator>
+		<view class='infoBar flex-inline-between'>
+			<view>
+				<text class="tinyLabel lightColor">{{question.pkuser__labels}}</text>
+			</view>
+			<view>
+				<text class="tinyLabel lightColor">{{question.createTime}}</text>
+			</view>
+		</view>
+
+
+	</view>
+	<view class='ansHead flex-inline-left'>
+		<view>
+			<text class="middleLabel titleColor">全部回答</text>
+		</view>
+		<view>
+			<text class="tinyLabel lightColor">（{{question.ansNum}}个回答）</text>
+		</view>
+	</view>
+	<view class="aArea">
+		<block wx:for="{{answers}}" wx:for-index="index" wx:key="*this">
+			<view class="aitem flex-vertical">
+				<view class='flex-inline-left'>
+					<image src="{{item.pkuser__avatarUrl?item.pkuser__avatarUrl:'../../static/images/avatar-default.jpg'}}" mode='aspectFill'></image>
+					<text class="ansNickname tinyLabel userColor">{{item.pkuser__nickName}}</text>
+					<text class="tinyLabel detailColor">{{item.pkuser__labels?item.pkuser__labels:""}}</text>
+				</view>
+				<view>
+					<text class="ansText middleLabel titleColor">{{item.text}}</text>
+				</view>
+				<view class='flex-inline-left'>
+					<text class='content tinyLabel detailColor'>{{item.createTime}}</text>
+				</view>
+			</view>
+		</block>	
+
+	</view>
+</view>
+<view class="bottom flex-inline-between">
+	<view class="bottomleft flex-inline-left">
+		<navigator url='../index/index'>
+			<view class="btm-btn flex-vertical" bindtap="goHome">
+				<image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
+				<text class='btnlbl miuLabel'>首页</text>
+			</view>
+		</navigator>
+		<view class="btm-btn flex-vertical" bindtap="favChange">
+			<image src="{{addfav?'../../static/images/ic_btn_fav_pressed.png':'../../static/images/ic_btn_fav_nor.png'}}"></image>
+			<text class='btnlbl miuLabel'>{{addfav?"已收藏":"收藏"}}</text>
+		</view>
+	</view>
+	<view class="bottomright flex-inline-right">
+			<text class='answerBtn tinyLabel' bindtap="gotoAns">我来回答</text>
+	</view>
+</view>
+

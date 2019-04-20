@@ -1,0 +1,65 @@
+/* pages/answer/answer.wxss */
+@import "../../static/css/common.wxss";
+
+.page {
+  width: 100%;
+	height: 100%;
+}
+.qArea {
+	padding: 30rpx 20rpx;
+	text-align: center;
+}
+.qDetail {
+	margin: 10rpx 0;
+}
+
+.labelsq {
+	margin-right: 20rpx;
+	padding: 10rpx 20rpx 0rpx;
+	height: 40rpx;
+	line-height: 29rpx;
+	background-color: rgba(226, 226, 226, 1);
+	color: rgba(16, 16, 16, 1);
+	text-align: center;
+}
+
+
+.formView {
+	padding: 0rpx 20rpx;
+}
+
+.normal {
+	border-top: 1rpx rgba(0,0,0,0.3) solid;
+	border-bottom: 1rpx rgba(0,0,0,0.3) solid;
+}
+.error {	
+	border-top: 1rpx #FF0000 solid;
+	border-bottom: 1rpx #FF0000 solid;
+}
+
+.titleTa {
+	margin: 10rpx 0rpx;
+	width: 690rpx;
+	height: 800rpx;
+	line-height: 41rpx;
+	border-radius: 15rpx;
+	background-color: rgba(248, 248, 248, 1);
+	color: rgba(136, 136, 136, 1);
+	text-align: left;
+	border: 1px solid rgba(187, 187, 187, 1);
+	padding: 10rpx;
+}
+.buttonArea {
+	margin-top: 60rpx;
+}
+.submitBtn {
+	display: block;
+	width: 100%;
+	height: 100rpx;
+	line-height: 100rpx;
+	background-color: rgba(31, 175, 255, 1);
+	text-align: center;
+	border: 0px;
+	border-radius: 0rpx;
+	color: #FFFFFF;
+}

@@ -6,7 +6,7 @@
 			<text class='tinyLabel lightColor'>（必填）</text>
 		</view>
 		<view>
-			<textarea class="titleTa smallLabel" placeholder='请输入问题标题（5-30字）' bindinput="inputTitle"></textarea>
+			<textarea class="titleTa smallLabel" placeholder='请输入问题标题（5-30字）' bindinput="inputTitle" value="{{title}}" ></textarea>
 		</view>
 		<view class="flex-inline-right">
 			<text class='tinyLabel lightColor'>{{title.length}}/30</text>
@@ -16,7 +16,7 @@
 			<text class='tinyLabel lightColor'>（必填）</text>
 		</view>
 		<view>
-			<textarea class="contentTa smallLabel" placeholder='详细描述，可以让回答者更清晰地帮到您'  bindinput="inputContent"></textarea>
+			<textarea class="contentTa smallLabel" placeholder='详细描述，可以让回答者更清晰地帮到您'  bindinput="inputContent"  value="{{content}}"></textarea>
 		</view>
 		<view class="flex-inline-right">
 			<text class='tinyLabel lightColor'>{{content.length}}/500</text>
@@ -27,8 +27,8 @@
 		</view>
 		<view class="labelArea flex-inline-left">
 			<block wx:for="{{allabels}}" wx:key="*this">
-				<view class="labeltab smallLabel" data-index="{{index}}" bindtap='typeChange'>
-					<text class="labelText">{{item}} </text>
+				<view class="labeltab smallLabel" data-index="{{index}}" bindtap='labelToggle'>
+					<text class="labelText" style="{{chooseLabels[index]?'background-color:#1FAFFF;color:#FFFFFF;':''}}">{{item}} </text>
 				</view>
 			</block>
 		</view>

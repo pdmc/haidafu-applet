@@ -1,0 +1,28 @@
+<!--pages/answer/answer.wxml-->
+<view class="page">
+	<view class='qArea  flex-vertical'>
+		<view class='flex-inline-left'>
+			<text class="title middleLabel">{{question.title}}</text>
+		</view>
+		<view class='qDetail flex-inline-left'>
+			<text class='content tinyLabel detailColor'>{{question.content}}</text>
+		</view>
+		<view class='flex-inline-left'>
+			<block wx:for="{{question.labels}}" wx:key="*this">
+				<text class='labelsq miuLabel'>{{item}}</text>
+			</block>
+		</view>
+	</view>
+
+	<view class="formView flex-vertical">
+		<view>
+			<textarea class="titleTa smallLabel" placeholder='添加回答（不少于5个字）' bindinput="inputAns" value="{{ansText}}" ></textarea>
+		</view>
+		<view class="flex-inline-right">
+			<text class='tinyLabel lightColor'>{{title.length}}/1000</text>
+		</view>
+	</view>
+	<view class='buttonArea'>
+		<text class="submitBtn smallLabel" bindtap="submit">提交</text>
+	</view>
+</view>

@@ -11,6 +11,7 @@ Page({
     logged: false,
     takeSession: false,
     requestResult: '',
+		needBack: false,
     authorized: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
 
@@ -22,7 +23,12 @@ Page({
   onLoad: function (options) {
 		const _this = this;
 		// 拼接请求url
-		//console.log(options.actId);
+		console.log(options.needBack);
+		if (options.needBack) {
+			this.setData({
+				needBack: true
+			});
+		}
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
 			var logcb = function () {
@@ -106,7 +112,11 @@ Page({
 		*/
 
   },
-
+	needBack: function() {
+		if (this.data.needBack) {
+			wx.navigateBack();
+		}
+	},
   /**
    * 授权按钮回调函数
    */
@@ -124,12 +134,14 @@ Page({
 				key: "userinfo",
 				data: uinfo
 			});
+			this.needBack()
 		}
 		if (userinfo && userinfo.userId && userinfo.isLogin) {	// 数据不一致
 			this.setData({
 				authorized: true,
 				userInfo: userinfo
 			});
+			this.needBack()
 		} else {
 			var logcb = function () {
 				var userinfo = wx.getStorageSync('userinfo');
@@ -140,6 +152,7 @@ Page({
 					authorized: true,
 					userInfo: userinfo
 				});
+				this.needBack();
 			};
 			app.loginUser(logcb);
 		}

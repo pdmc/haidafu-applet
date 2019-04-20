@@ -2,7 +2,9 @@
 <view class="page">
 	<loading hidden="{{!loading}}">加载中...</loading>
 	<view class="searchArea">
-		<input class="searchInput smallLabel" placeholder='搜索'></input>
+		<navigator url='../search/search'>
+		<text class="searchInput smallLabel">搜索</text>
+		</navigator>
 	</view>
 	<view class="imageArea">
 		<image src="http://image.pk4yo.com/haidafu/ask-image.jpg" mode='aspectFill'></image>
