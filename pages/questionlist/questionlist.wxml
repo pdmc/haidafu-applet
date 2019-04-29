@@ -17,7 +17,7 @@
 					<text class="title">{{item.title}}</text>
 				</view>
 				<view class='flex-inline-left'>
-					<text class='content tinyLabel detailColor'>{{item.content}}</text>
+					<text class='content tinyLabel detailColor'>{{item.content?item.content:" "}}</text>
 				</view>
 				<view class='lowerBar flex-inline-between'>
 					<view class='flex-inline-left'>

@@ -19,7 +19,7 @@ Page({
     nextMargin: 0,
     indicatorDots2: false,
     previousMargin2: 0,
-    nextMargin2: '50rpx',
+    nextMargin2: 0,
     state: 0,
     _num: '0',
     list: [], // 数据列表
@@ -65,6 +65,10 @@ Page({
           return;
         }
         // 赋值
+				for(var i = 0; i < res.data.data.length; i++){
+					if(res.data.data[i].picture1 == null)
+						res.data.data[i].picture1 = app.globalData.image_url + '/banner-default.jpg'
+				}
         _this.setData({
           list: res.data.data,
           loading: false // 关闭等待框
@@ -88,7 +92,7 @@ Page({
             return hit;
             //return value.indexOf(res.data.data[index].area__cityId__name) == 0 && value.length == res.data.data[index].area__cityId__name.length; // lowb判断字符串相同 
           });
-          if (found == -1 && cts.length < 4) {
+					if (found == -1) {	//  && cts.length < 4
             var idx = cts.push(res.data.data[index].area__cityId__name) - 1;
             var slist = _this.data.select_list;
             if (slist[idx] == undefined) {
@@ -111,6 +115,18 @@ Page({
       url: '../projectlist/projectlist'
     })
   },
+	gotoFind: function () {
+		wx.navigateTo({
+			url: '/pages/findhome/findhome'
+		})
+	},
+
+	gotoRobot: function () {
+		wx.navigateTo({
+			url: '/pages/webview/webview'
+		})
+	},
+
   changeProperty: function(e) {
     var propertyName = e.currentTarget.dataset.propertyName
     var newData = {}

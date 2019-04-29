@@ -18,6 +18,11 @@
     <view class="search_section">
       <image bindtap="bindViewTap" src='{{search_img}}' mode='aspectFit'></image>
     </view>
+		<view class="ai_section flex-inline-between">
+      <image bindtap="bindViewTap" src='../../static/images/ai-find.jpg' mode='aspectFit' bindtap="gotoFind"></image>
+      <image bindtap="bindViewTap" src='../../static/images/ai-robot.jpg' mode='aspectFit'  bindtap='gotoRobot'></image>
+    </view>
+
     <view class='select-header'>
       <image src='../../static/images/ic_lbl_select.png' class='img-select'></image>
       <text class='select-title'>精选房源</text>
@@ -43,15 +48,15 @@
             <swiper-item class="select-swiper-item">
 							<navigator url='../project/project?pId={{select_list[cindex][sindex].pId}}'>
 								<!--image src="{{select_list[cindex][sindex].picture1}}" class="slide-image" mode='widthFix'/-->
-								<view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1}});  background-repeat:no-repeat; background-size:100% 100%">
+								<view class='select-swiper-view' style="background-image: url({{select_list[cindex][sindex].picture1?select_list[cindex][sindex].picture1:''}});  background-repeat:no-repeat; background-size:100% 100%">
 									<view class='select-text-high'>
-										<text>{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
+										<text decode="{{true}}" space="{{true}}">{{select_list[cindex][sindex].area__countryId__name}}  {{select_list[cindex][sindex].area__cityId__name}}  {{select_list[cindex][sindex].pName}}
 										</text>
 									</view>
 									<view class='select-text-low flex-inline-between'>
 										<view>
-											<text class='select-text-price'>{{select_list[cindex][sindex].minPrice}}万~{{select_list[cindex][sindex].maxPrice}}万</text>
-											<text class='select-text-sq'>{{select_list[cindex][sindex].minSquare}}平米-{{select_list[cindex][sindex].maxSquare}}平米</text>
+											<text class='select-text-price'>{{select_list[cindex][sindex].minPrice?select_list[cindex][sindex].minPrice+"万"+(select_list[cindex][sindex].maxPrice?"~"+select_list[cindex][sindex].maxPrice+"万":""):"价格暂无"}}</text>
+											<text class='select-text-sq'>{{select_list[cindex][sindex].minSquare?select_list[cindex][sindex].minSquare+"平米"+(select_list[cindex][sindex].maxSquare?"-"+select_list[cindex][sindex].maxSquare+"平米":""):"面积暂无"}}</text>
 										</view>
 										<view>
 											<text class='select-text-country'>{{select_list[cindex][sindex].area__countryId__name}}</text>

@@ -89,7 +89,7 @@ Page({
 				'content-type': 'json' // 默认值
 			},
 			success: function (res) {
-				if (res.statusCode == 200 && res.data.data.length > 0) {
+				if (res.statusCode == 200 && res.data.data.length >= 0) {
 					// 赋值
 					for (var i = 0; i < res.data.data.length; i++) {
 						res.data.data[i].labels = res.data.data[i].labels.split(',')
@@ -106,7 +106,7 @@ Page({
 							'content-type': 'json' // 默认值
 						},
 						success: function (res) {
-							if (res.statusCode == 200 && res.data.data.length > 0) {
+							if (res.statusCode == 200 && res.data.data.length >= 0) {
 								// 赋值
 								for (var i = 0; i < res.data.data.length; i++) {
 									res.data.data[i].labels = res.data.data[i].labels.split(',')

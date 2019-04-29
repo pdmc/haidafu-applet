@@ -33,6 +33,8 @@ Page({
 			question: question
 		});
 
+		console.log(question.content)
+
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
 			var logcb = function () {

@@ -19,7 +19,7 @@ Page({
 	 */
 	onLoad: function (options) {
 		var _this = this;
-		const url = app.globalData.main_url + '/users/getbyid?userId=3' //+ options.userId;
+		const url = app.globalData.main_url + '/users/getbyid?userId=' + options.userId;
 		wx.request({
 			url: url,
 			data: {},
@@ -41,7 +41,7 @@ Page({
 			}
 		});
 
-		const url2 = app.globalData.main_url + '/question/getbycond?userId=3' //+ options.userId;
+		const url2 = app.globalData.main_url + '/question/getbycond?state=1&userId=' + options.userId;
 		wx.request({
 			url: url2,
 			data: {},

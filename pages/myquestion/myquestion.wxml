@@ -7,7 +7,7 @@
 		<view class='userRight flex-vertical-top'>
 			<text class="title smallLabel">{{userInfo.nickName}}</text>
 			<text class='labels tinyLabel lightColor'>{{userInfo.labels}}</text>
-			<text class='desc tinyLabel lightColor'>{{userInfo.desc}}</text>
+			<text class='desc tinyLabel lightColor'>{{userInfo.desc?userInfo.desc:""}}</text>
 		</view>
 	</view>
 	<view class='ansHead flex-inline-left'>
@@ -26,7 +26,7 @@
 					<text class="title middleLabel">{{item.title}}</text>
 				</view>
 				<view class='flex-inline-left'>
-					<text class='content tinyLabel detailColor'>{{item.content}}</text>
+					<text class='content tinyLabel detailColor'>{{item.content?item.content:""}}</text>
 				</view>
 				<view class='lowerBar flex-inline-between'>
 					<view class='flex-inline-left'>
@@ -34,13 +34,16 @@
 							<text class='labelsq miuLabel'>{{itemLabel}}</text>
 						</block>
 					</view>
-					<view class='flex-inline-right'>
+					<view wx:if="{{item.state==1}}" class='flex-inline-right'>
 						<view>
 							<text class="tinyLabel titleColor">{{item.ansNum}}</text>
 						</view>
 						<view>
 							<text class="tinyLabel detailColor">个回答</text>
 						</view>
+					</view>
+					<view wx:else class='flex-inline-right'>
+						<text class="tinyLabel myred">审核未通过</text>
 					</view>
 				</view>
 			</view>

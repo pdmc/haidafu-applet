@@ -5,7 +5,7 @@
 			<text class="title middleLabel">{{question.title}}</text>
 		</view>
 		<view class='qDetail flex-inline-left'>
-			<text class='content tinyLabel detailColor'>{{question.content}}</text>
+			<text class='content tinyLabel detailColor'>{{question.content && question.content!='null'?question.content:""}}</text>
 		</view>
 		<view class='flex-inline-left'>
 			<block wx:for="{{question.labels}}" wx:key="*this">
@@ -19,7 +19,7 @@
 			<textarea class="titleTa smallLabel" placeholder='添加回答（不少于5个字）' bindinput="inputAns" value="{{ansText}}" ></textarea>
 		</view>
 		<view class="flex-inline-right">
-			<text class='tinyLabel lightColor'>{{title.length}}/1000</text>
+			<text class='tinyLabel lightColor'>{{ansText.length}}/1000</text>
 		</view>
 	</view>
 	<view class='buttonArea'>

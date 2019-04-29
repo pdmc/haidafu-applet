@@ -204,6 +204,7 @@
 	position: absolute;   
 	top: 120rpx;   
 	z-index: 20; 
+	padding-bottom: 30rpx;
 }
 
 .page-list {
@@ -214,9 +215,12 @@
 .item {
   display: flex;
   padding: 40rpx 40rpx;
-  border-top: 1rpx solid rgba(0,0,0,0.1);
   border-bottom: 1rpx solid rgba(0,0,0,0.1);
   cursor: pointer;
+}
+.firstItem {
+  border-top: 1rpx solid rgba(0,0,0,0.1);
+
 }
 .item .poster {
   width: 200rpx;

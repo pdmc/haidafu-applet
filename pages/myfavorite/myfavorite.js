@@ -8,8 +8,11 @@ Page({
 	 */
 	data: {
 		title: "我的收藏",
-		list: [], // 数据列表
-		loading: true, // 显示等待框
+		labels: ['房产', '问题'],
+		_num: 0,
+		questions: [], 
+		list: [], 
+		loading: false, // 显示等待框
 
 		txtStyle: [],
 		startX: 0,
@@ -21,6 +24,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		const _this = this;
 		var userinfo = wx.getStorageSync('userinfo');
 		if (!userinfo || userinfo.isLogin == undefined || !userinfo.isLogin) {
 			var logcb = function () {
@@ -46,7 +50,6 @@ Page({
 				list: favs
 			});
 		} else {
-			const _this = this;
 			// 拼接请求url
 			const url = app.globalData.main_url + '/favorites/getbycond?userId=' + userinfo.userId;
 			// + options.type;
@@ -77,6 +80,43 @@ Page({
 					}
 				} /* success */
 			});
+		}
+
+		const url2 = app.globalData.main_url + '/favoritequestions/getbycond?userId=' + userinfo.userId;
+		// 请求数据
+		wx.request({
+			url: url2,
+			data: {},
+			header: {
+				'content-type': 'json' // 默认值
+			},
+			success: function (res) {
+				if (res.statusCode == 200 && res.data.data.length > 0) {
+					// 赋值
+					for (var i = 0; i < res.data.data.length; i++) {
+						for (var i = 0; i < res.data.data.length; i++) {
+							res.data.data[i].question__labels = res.data.data[i].question__labels.split(',')
+						}
+						_this.setData({
+							questions: res.data.data
+						})
+					}
+				}
+			}
+		});
+
+		
+
+	},
+
+	toggle: function (e) {
+		console.log(e.currentTarget.dataset.index);
+		if (this.data._num === e.currentTarget.dataset.index) {
+			return false;
+		} else {
+			this.setData({
+				_num: e.currentTarget.dataset.index
+			})
 		}
 	},
 

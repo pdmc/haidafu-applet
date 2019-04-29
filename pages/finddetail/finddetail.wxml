@@ -1,0 +1,31 @@
+<!--pages/finddetail/finddetail.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-article">
+      <view class="weui-article__h1 title">{{ row.name }}</view>
+      <view class="weui-article__section">
+        <view class="weui-article__section">
+          <view class="weui-article__p video-box" wx:if="{{ row.video }}">
+            <video id="video" src="{{ config.imageUrl }}{{ row.video }}" controls></video>
+          </view>
+          <view class="weui-article__title title">介绍</view>
+          <view class="weui-article__p audio-box" wx:if="{{ row.voice }}">
+            <audio controls id="audio" name="音频介绍" author="" src="{{ config.imageUrl }}{{ row.voice }}" ></audio>
+            <!--audio controls id="audio" name="音频介绍" author="" src="http://image.pk4yo.com/jigong.mp3"></audio-->
+            <!--text id="toggleaudio">（由于版本问题，如果以上控件无法播放，可以点击下面的按钮：）</text-->
+            <button id="togglebtn" type="default" bindtap="audioToggle">{{btext}}</button>  
+            <!--button type="primary" bindtap="audioToggle">播放</button>  
+            <button type="primary" bindtap="audioPause">暂停</button-->  
+          </view>
+          <view class="weui-article__p contents">
+            <view wx:if="{{ row.description }}">
+              <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+            </view>
+            <view wx:else>{{ parseMsg }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

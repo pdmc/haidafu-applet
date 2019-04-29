@@ -1,3 +1,14 @@
+var host = "admin.acm.pk4yo.com/",
+	util = require('./utils/util.js'),
+	imageUrl = "http://image.pk4yo.com";
+
+var config = {
+	host,
+	imageUrl,
+	searchSimilarImage: `https://${host}/api/Maintenance/searchImg`,
+	getDetailImage: `https://${host}/api/Maintenance/getDetailImage`,
+};
+
 App({
 	onLaunch: function () {
 		// 展示本地存储能力
@@ -146,9 +157,11 @@ App({
 		console.log('hhhhhhhhhhhhhhhh')
 	},
 	globalData: {
-		main_url: 'https://bhost.dev.pk4yo.com',
-		main_url2: 'https://admin.acm.dev.pk4yo.com',
-		image_url: 'http://image.pk4yo.com',
+		config: config,
+		util: util,
+		main_url: 'https://bhost.pk4yo.com',
+		main_url2: 'https://admin.acm.pk4yo.com',
+		image_url: 'http://image.pk4yo.com/haidafu',
 		hasUserInfo: false,
 		isLogin: false,
 		canIUse: wx.canIUse('button.open-type.getUserInfo'),

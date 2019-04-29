@@ -45,6 +45,14 @@
   margin: 0rpx 0rpx;
 }
 
+.ai_section {
+	margin: 0rpx 30rpx 30rpx;
+}
+.ai_section image {
+	width: 333rpx;
+	height: 125rpx;
+}
+
 .select-header {
   display: flex;
   flex-direction: row;
@@ -64,21 +72,45 @@
   font-family: 方正兰亭黑-标准;
 }
 .select-tab{
-  display: flex;
+	display: inline-block;
+	width: 100%;
+	margin: 0rpx 20rpx;
+  font-size: 32rpx;
+	white-space: nowrap;
+	overflow-x:scroll;
+  /*
+	height: 130rpx;
+	display: flex;
   flex-direction: row;
   align-items: stretch;
   justify-content: space-around;
-  height:130rpx;
-  font-size: 32rpx;
-  /*background-color: #fff;
+  overflow-x: show;
+	display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+	background-color: #fff;
   border-top:1px solid #FFFFFF;
   border-bottom:1px solid #FFFFFF;*/
 }
 .select-tab > view{
-  display: flex;
+	display: inline-block;
+	line-height: 40rpx;
+	margin: 30rpx 20rpx;
+  padding: 24rpx 0rpx;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+  /*display: flex;
   align-items: center;
   margin: 30rpx 0rpx;
-  padding: 24rpx 0rpx;
+  padding: 24rpx 0rpx;*/
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
 }
 .select-tab > view.inactive {
   border-bottom: 3rpx solid #FFFFFF;
@@ -92,12 +124,12 @@
   min-height: 350rpx;
 }
 .select-swiper-item {
-  padding: 0rpx 30rpx;
-  height: 100%;
+  margin: 0rpx 30rpx;
 }
 .select-swiper-view {
   border-radius: 10rpx;
-  height: 100%;
+	margin-right: 30rpx;
+	width: 690rpx;
 }
 .select-text-high {
   font-size: 36rpx;
@@ -114,12 +146,6 @@
   color: #FFFFFF;
   font-family: 方正兰亭黑-标准;
   padding: 0rpx 20rpx 10rpx 30rpx;
-}
-.flex-inline-between {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;  
-  align-items: center;
 }
 .select-text-price{
   font-size: 36rpx;

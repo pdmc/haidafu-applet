@@ -26,6 +26,7 @@ Page({
     previousMargin: 0,
     nextMargin: 0,
     addfav: false,
+		showAgentWx: false,
 		userId: -1
   },
 
@@ -316,6 +317,29 @@ Page({
 		wx.navigateTo({
 			url: '../provider/provider?spid=' + this.data.project.pkprovider__spId + '&name=' + this.data.project.pkprovider__spName + '&detail=' + this.data.project.pkprovider__description + '&image=' + this.data.project.pkprovider__imgurl,
 		})
+	},
+
+	showAgent: function () {
+		this.setData({
+			showAgentWx: !this.data.showAgentWx
+		});
+	},
+
+	contactAgent: function (e) {
+		var phone = e.currentTarget.dataset.phone;
+		//console.log(e);
+		if (phone != undefined && phone) {
+			wx.makePhoneCall({
+				phoneNumber: phone,
+			})
+		}else{
+			wx.showToast({
+				title: '暂无联系电话',
+				icon: 'none',
+				duration: 1000,
+				mask: false
+			});
+		}
 	},
 
   /**

@@ -1,0 +1,37 @@
+<!--pages/findlist/findlist.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="main_content">
+      <view class="weui-panel__hd title-line">
+        <view class='ico-title'>找到{{ list.length }}种相似文物</view>
+        <view class='ico-down'>></view>
+      </view>
+      <view class='row' wx:for="{{ list }}" wx:key="{{ item }}" bindtap="goDetail" data-id="{{ item.artwork_id }}">
+        <view class="weui-flex">
+          <view class="weui-flex__item">
+            <view class="placeholder img-box">
+              <image class="img" src="{{ config.imageUrl }}{{ item.img_url }}" />
+            </view>
+          </view>
+        </view>
+        <view class="weui-flex description-line">
+          <view class="weui-flex__item left">
+            <view class="placeholder name">{{ item.name }}</view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="weui-flex right">
+              <view class="weui-flex__item">
+                <view class="placeholder reliability-val">匹配度{{ item.score }}%</view>
+              </view>
+              <view class="weui-flex__item">
+                <view class="placeholder">
+                  <button class="weui-btn mini-btn right-btn" type="warn" size="mini">是这个</button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

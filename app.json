@@ -1,12 +1,16 @@
 {
   "pages":[
+		"pages/index/index",
 		"pages/search/search",
 		"pages/questionlist/questionlist",
 		"pages/myquestion/myquestion",
 		"pages/question/question",
 		"pages/ask/ask",
 		"pages/answer/answer",
-		"pages/index/index",
+		"pages/finddetail/finddetail",
+		"pages/findlist/findlist",
+		"pages/findhome/findhome",
+		"pages/webview/webview",
 		"pages/my/my",
 		"pages/myfavorite/myfavorite",
 		"pages/myreservation/myreservation",

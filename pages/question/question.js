@@ -59,7 +59,7 @@ Page({
 					});
 					
 					// 获取question的answer列表
-					const url2 = app.globalData.main_url + '/answer/getbycond?qId=' + options.qId;
+					const url2 = app.globalData.main_url + '/answer/getbycond?state=1&qId=' + options.qId;
 					wx.request({
 						url: url2,
 						data: {},
@@ -91,7 +91,7 @@ Page({
 						});
 					} else if (_this.data.userInfo.userId && _this.data.userInfo.userId > 0) {	// 存在即修正，虚无非真空
 						// 拼接请求url
-						const url3 = app.globalData.main_url + '/favorites/getbycond?articleId=' + qid + '&userId=' + _this.data.userInfo.userId;
+						const url3 = app.globalData.main_url + '/favoritequestions/getbycond?articleId=' + qid + '&userId=' + _this.data.userInfo.userId;
 						// 请求数据
 						//var _res = res;
 						wx.request({
@@ -205,7 +205,7 @@ Page({
 		var _this = this;
 		var added = this.data.addfav;
 		if (added) {
-			const url = app.globalData.main_url + '/favorites/addifnotexist?articleId=' + _this.data.question.qId + '&userId=' + _this.data.userInfo.userId;
+			const url = app.globalData.main_url + '/favoritequestions/addifnotexist?articleId=' + _this.data.question.qId + '&userId=' + _this.data.userInfo.userId;
 			// 请求数据
 			//var _res = res;
 			wx.request({
@@ -255,7 +255,7 @@ Page({
 				});
 			}
 
-			const url = app.globalData.main_url + '/favorites/delete?fId=' + _this.data.favorite.fId;
+			const url = app.globalData.main_url + '/favoritequestions/delete?fId=' + _this.data.favorite.fId;
 			// 请求数据
 			//var _res = res;
 			wx.request({
@@ -299,7 +299,7 @@ Page({
 		var _this = this;
 		if (!this.data.loaded) {
 			// 获取question的answer列表
-			const url2 = app.globalData.main_url + '/answer/getbycond?qId=' + this.data.question.qId;
+			const url2 = app.globalData.main_url + '/answer/getbycond?state=1&qId=' + this.data.question.qId;
 			wx.request({
 				url: url2,
 				data: {},

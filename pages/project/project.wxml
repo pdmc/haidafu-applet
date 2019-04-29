@@ -25,12 +25,24 @@
   <view class="main-body">
     <view class='meta'>
       <!--image class='poster' src='{{project.picture1}}' background-size="cover"></image-->
-      <text class='title' decode="{{true}}">{{project.area__countryId__name}}&nbsp;{{project.area__cityId__name}}&nbsp;{{project.pName}}</text>
+      <view class='titleArea flex-inline-left'>
+				<text class='state tinyLabel' decode="{{true}}" space="{{true}}">{{project.status==0?"待开盘":(project.status==1?"在售":"售完")}}&nbsp;</text>
+				<text class='bigLabel titleColor' decode="{{true}}">{{project.area__countryId__name}}&nbsp;{{project.area__cityId__name}}&nbsp;{{project.pName}}</text>
+			</view>
       <text class='info'>{{project.area__countryId__name}}</text>
-      <text class='info'>{{project.minSquare}}平米-{{project.maxSquare}}平米</text>
-      <view class='flex-inline-between markable'>
-        <text class='price'>{{project.minPrice}}万~{{project.maxPrice}}万</text>
-        <text class='state'>{{project.status==0?"待开盘":(project.status==1?"在售":"售完")}}</text>
+      <text class='info'>{{project.minSquare?project.minSquare+"平米"+(project.maxSquare?"-"+project.maxSquare+"平米":""):"面积暂无"}}</text>
+      <view class='priceArea flex-inline-between-top markable'>
+				<view class='flex-inline-left-bottom'>
+					<text class='price bigLabel dpink' decode="{{true}}" space="{{true}}">{{project.minPrice?project.minPrice+"万"+(project.maxPrice?"~"+project.maxPrice+"万":""):"价格暂无"}}</text>
+					<text wx:if="{{project.minPrice}}" class='smallLabel dpink' decode="{{true}}" space="{{true}}">RMB</text>
+				</view>
+ 				<view class='ratioArea flex-vertical'>
+					<text class='middleLabel' decode="{{true}}" space="{{true}}">首付比例：{{project.firstpayRatio?project.firstpayRatio+"%":"暂无"}}</text>
+					<view class='flex-inline-right'>
+						<text class='middleLabel' decode="{{true}}" space="{{true}}">近12月涨幅：</text>
+						<text class='middleLabel {{project.recent12AscRatio>0?"dpink":""}} {{project.recent12AscRatio<0?"fgreen":""}}' decode="{{true}}" space="{{true}}">{{project.recent12AscRatio?project.recent12AscRatio+"%":"暂无"}}</text>
+					</view>
+				</view>
       </view>
     </view>
     <view class='content'>
@@ -38,13 +50,13 @@
     </view>
     <view class='etcc'>
       <text class='info'>楼盘地址</text>
-      <text class='sentence'>{{project.fullAddr}}</text>
+      <text class='sentence'>{{project.fullAddr?project.fullAddr:""}}</text>
     </view>
     <view class='provider flex-inline-between' bindtap="gotoProvider">
 			<view class="flex-inline-left">
 				<text class='title'>服务商</text>
 				<image class="spimage" src="{{project.pkprovider__imgurl}}"></image>
-				<text class='sentence'>{{project.pkprovider__spName}}</text>
+				<text class='sentence'>{{project.pkprovider__spName?project.pkprovider__spName:""}}</text>
 			</view>
 			<view class="openicon">
 			</view>
@@ -70,11 +82,11 @@
     </view>
     <view class='etcc'>
       <text class='info'>产权年限</text>
-      <text class='sentence'>{{project.prighttype__name}}</text>
+      <text class='sentence'>{{project.prighttype__name?project.prighttype__name:"暂无"}}</text>
     </view>
     <view class='etcc'>
       <text class='info'>交房时间</text>
-      <text class='sentence'>{{project.handoverYear}}年{{project.handoverMonth}}月</text>
+      <text class='sentence'>{{project.handoverYear?project.handoverYear+"年"+(project.handoverMonth?project.handoverMonth+"月":""):"暂无"}}{{}}</text>
     </view>
     <view class='etcc'>
       <text class='info'>能否贷款</text>
@@ -83,35 +95,43 @@
     </view>
     <view class='etcc'>
       <text class='info'>规划面积</text>
-      <text class='sentence'>{{project.totalSquare}}平方米</text>
+      <text class='sentence'>{{project.totalSquare?project.totalSquare+"平方米":"暂无"}}</text>
     </view>
     <view class='etcc'>
-      <text class='info'>总户数</text>
-      <text class='sentence1'>{{project.totalAmount}}</text>
+      <text class='info'>可售/总户数</text>
+      <text class='sentence1'>{{project.availAmount?project.availAmount:"暂无"}}/{{project.totalAmount?project.totalAmount:"暂无"}}</text>
     </view>
     <view class='flex-inline-between predict'>
       <text class='title'>预计包租收益</text>
-      <text class='rent'>￥{{project.predictYearRent}}/年</text>
+      <text class='rent'>{{project.predictYearRent?"￥"+project.predictYearRent+"/年":"暂无"}}</text>
     </view>
   </view>
 </scroll-view>
+<view class="agentPhoneArea {{showAgentWx?'show':'hidden'}}">
+	<image src="{{project.agentUrl?project.agentUrl:'../../static/images/ercode-default.jpg'}}" bindlongtap="saveAgent"></image>
+</view>
 <view class="bottom flex-inline-between">
   <view class="bottomleft flex-inline-left">
 		<navigator url='../index/index'>
-			<view class="btm-btn flex-vertical" bindtap="goHome">
-				<image src="../../static/images/ic_btn_return_home_nor.png" bindtap=""></image>
-				<text class='btnlbl'>首页</text>
+			<view class="btm-btn flex-vertical-center" bindtap="goHome">
+				<image src="../../static/images/ic_btn_return_home_nor.png"></image>
+				<text class='btnlbl miuLabel'>首页</text>
 			</view>
 		</navigator>
-    <view class="btm-btn flex-vertical" bindtap="favChange">
+    <view class="btm-btn flex-vertical-center" bindtap="showAgent">
+      <image src="../../static/images/ic_btn_agent_phone_nor.png"></image>
+      <text class='btnlbl miuLabel'>顾问微信</text>
+   </view>
+    <view class="btm-btn flex-vertical-center" bindtap="favChange">
       <image src="{{addfav?'../../static/images/ic_btn_fav_pressed.png':'../../static/images/ic_btn_fav_nor.png'}}"></image>
-      <text class='btnlbl'>{{addfav?"已收藏":"收藏"}}</text>
+      <text class='btnlbl miuLabel'>{{addfav?"已收藏":"收藏"}}</text>
    </view>
   </view>
   <view class="bottomright flex-inline-right">
     <!--text class='share'>分享得红包</text-->
 		<!--navigator class="hongbao-nav" url='../index/index'-->
-    	<text class='hongbao' bindtap="gotoHongbao">预约看房拿红包</text>
+    	<text class='phoneBtn tinyLabel' data-phone="{{project.agentPhone}}" bindtap="contactAgent">咨询电话</text>
+    	<text class='hongbaoBtn tinyLabel' bindtap="gotoHongbao">预约看房拿红包</text>
 		<!--/navigator-->
   </view>
 </view>

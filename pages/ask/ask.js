@@ -62,8 +62,8 @@ Page({
 			return;
 		}
 		var text = e.detail.value;
-		console.log(this.data.title)
-		console.log(text)
+		//console.log(this.data.title)
+		//console.log(text)
 		this.setData({
 			title: text
 		});
@@ -147,7 +147,7 @@ Page({
 			if (this.data.chooseLabels[i] && labels.length == 0) labels += this.data.allabels[i]
 			else if (this.data.chooseLabels[i]) labels += "," + this.data.allabels[i]
 		}
-		if (this.data.title.length < 5 || this.data.content.length == 0 || labels.length == 0){
+		if (this.data.title.length < 5 || labels.length == 0){
 			wx.showToast({
 				title: '请输入必填项！',
 				icon: 'none',

@@ -1,0 +1,9 @@
+<!--pages/findhome/findhome.wxml-->
+<view class="page">
+  <view class='bg-box' style="height: {{Height}}px;">
+    <image src='http://image.pk4yo.com/haidafu/default_bg.png'></image>
+  </view>
+  <view class='btn-box' bindtap="choice" style='top:{{BtnTop}}px;'>
+    <image src='../../static/images/cammer_btn.png'></image>
+  </view>
+</view>

@@ -5,7 +5,7 @@
 			<text class="title middleLabel">{{question.title}}</text>
 		</view>
 		<view class='qDetail flex-inline-left'>
-			<text class='content tinyLabel detailColor'>{{question.content}}</text>
+			<text class='content tinyLabel detailColor'>{{question.content?question.content:" "}}</text>
 		</view>
 		<view class='flex-inline-left'>
 			<block wx:for="{{question.labels}}" wx:key="*this">

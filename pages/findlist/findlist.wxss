@@ -1,0 +1,49 @@
+/* pages/findlist/findlist.wxss */
+.main_content{
+	color: #fff;
+}
+.main_content .row{
+	margin-bottom: -140rpx;
+}
+.main_content .img-box{
+  text-align: center;
+}
+.main_content .img{
+  width: 95%;
+  height: 380rpx;
+  line-height: 380rpx;
+}
+.main_content .left .name{
+	padding: 46rpx 40rpx;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 400rpx;
+	color: #bbbbbb;
+}
+.main_content .right{
+	flex-direction: column;
+	text-align: right;
+	padding-right: 40rpx;
+}
+.main_content .right .right-btn{
+	width: inherit;
+}
+.right .reliability-val{
+	font-size: 27rpx;
+	padding-bottom: 10rpx;
+	color: #bbbbbb;
+}
+.main_content .description-line{
+	top:-140rpx;
+	position: relative;
+}
+.main_content .title-line{
+	padding:0;
+	padding-top:10rpx;
+	text-align: center;
+}
+.main_content .title-line .ico-down{
+	transform: rotate(90deg);
+	margin-top: -10rpx;
+}

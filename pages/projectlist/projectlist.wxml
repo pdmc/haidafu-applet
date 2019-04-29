@@ -89,7 +89,7 @@
       <!--类型判断,显示不同的数据-->
       <block wx:if="{{type === 'us_box'}}">
         <navigator url='../project/project?pId={{item.pId}}'>
-          <view class='item'>
+          <view class='{{index==0?"firstItem":""}} item'>
             <image class='poster' src='{{item.thumbnail}}'></image>
             <view class='meta flex-vertical'>
               <text class='title' decode="{{true}}">{{item.area__countryId__name}}&nbsp;{{item.area__cityId__name}}&nbsp;{{item.pName}}</text>

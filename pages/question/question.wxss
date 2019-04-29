@@ -9,7 +9,6 @@
 	margin: 20rpx 20rpx;
   padding: 30rpx 20rpx 20rpx 20rpx;
 	width: 670rpx;
-	height: 260rpx;
 	text-align: center;
 	box-shadow: 0px 6px 30px 6px rgba(229, 229, 229, 1);
 	border: 1px solid rgba(255, 255, 255, 0);

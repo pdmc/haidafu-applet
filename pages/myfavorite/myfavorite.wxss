@@ -1,17 +1,58 @@
 /* pages/myfavorite/myfavorite.wxss */
-.page-body {   
-	width: 100%;   
+@import "../../static/css/common.wxss";
+
+/*---------------- 总体 ---------------*/
+.container {
+	width: 100%;
 }
 
+
+.select-tab{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  height: 100%;
+  font-size: 32rpx;
+  /*background-color: #fff;
+  border-top:1px solid #FFFFFF;
+  border-bottom:1px solid #FFFFFF;*/
+}
+.select-tab view{
+  display: flex;
+  align-items: center;
+  margin: 30rpx 0rpx;
+  padding: 24rpx 0rpx;
+}
+.select-tab view.inactive {
+  border-bottom: 6rpx solid inherit;
+}
+.select-tab view.active{
+  color: #1FAFFF;
+  border-bottom: 6rpx solid #1FAFFF;
+}
+
+/*---------------- 房产 ---------------*/
+.select-page {
+	position: absolute;
+	left: 0;
+	top: 152rpx;
+	width: 100%;
+	overflow: show;
+	/*border-top: 1rpx #E5E5E5 solid;
+	*/
+}
 .page-list {
   width: 100%;
 	height: 280rpx;
+}
+.page-list navigator {
+	width: 100%;
 }
 .item {
 	position: relative;
   display: flex;
   padding: 40rpx 40rpx;
-  border-top: 1rpx solid rgba(0,0,0,0.1);
   border-bottom: 1rpx solid rgba(0,0,0,0.1);
   cursor: pointer;
 	background-color: #FFFFFF;
@@ -46,7 +87,7 @@
 }
 
 .delete {
-	position: absolute;
+	position: relative;
 	top:0;
 	right: 0;
 	height: 280rpx;
@@ -73,4 +114,27 @@
     z-index: 4;
     right: 0;
     color: #fff
+}
+
+/*---------------- 问答 ---------------*/
+
+.qitem {
+  padding: 30rpx 20rpx 20rpx;
+  border-bottom: 1rpx solid rgba(229,229,229,1);
+}
+.firstItem {
+	border-top: 1rpx solid rgba(229,229,229,1);
+}
+.lowerBar {
+	margin-top: 10rpx;
+}
+.labelsq {
+	margin-right: 20rpx;
+	padding: 10rpx 20rpx 0rpx;
+	height: 40rpx;
+	line-height: 29rpx;
+	background-color: rgba(226, 226, 226, 1);
+	color: rgba(16, 16, 16, 1);
+	text-align: center;
+
 }

@@ -26,6 +26,8 @@
 .title {
   font-size: 36rpx;
   color: #101010;
+}
+.titleArea {
   margin-bottom: 20rpx;
 }
 .info {
@@ -35,15 +37,19 @@
 }
 
 .markable {
-  margin: 39rpx 0rpx;
+  margin: 20rpx 0rpx;
 }
 .price {
-  font-size: 42rpx;
-  color: #FF4081;
+  /*font-size: 36rpx;
+  color: #FF4081; */
+	margin-right: 30rpx;
 }
 .state {
-  font-size: 30rpx;
   color: #1FAFFF;
+	width: 90rpx;
+}
+.ratioArea {
+	text-align: right;
 }
 .content {
   margin-top: 40rpx;
@@ -132,27 +138,42 @@
   margin-top: 60rpx;
   border-bottom: 1rpx solid #EEEEEE;
 }
+
+.agentPhoneArea {
+  position: fixed;
+  bottom: 100rpx;
+	left: 100rpx;
+  width: 500rpx;
+  height: 500rpx;
+	border: 20rpx solid #EEEEEE;
+}
+.agentPhoneArea image {
+	width: 500rpx;
+  height: 500rpx;
+
+}
 /*   --------------- 底部固定栏 -----------------   */
 .bottom {
   background-color: #FFFFFF;
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 150rpx;
+  height: 100rpx;
 }
+
 .bottomleft {
 	padding: 10rpx;
 }
 .bottomleft image {
-  width: 100rpx;
-  height: 100rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 .btm-btn {
-  padding: 10rpx;
+	width: 90rpx;
+  margin: 10rpx;
 }
 .btnlbl {
   color: #4B4B4B;
-  font-size: 28rpx;
   text-align: center;
 }
 .bottomright {
@@ -170,13 +191,19 @@
   background-color: #1FAFFF;
   align-items: stretch;
 }
-.hongbao {
-  font-size: 36rpx;
-  height: 150rpx;
-  line-height: 150rpx;
+.phoneBtn {
+  height: 100rpx;
+  line-height: 100rpx;
+	padding: 0rpx 30rpx;
+  background-color: #1FAFFF;
+	color: #FFFFFF;
+	text-align: center;
+}
+.hongbaoBtn {
+  height: 100rpx;
+  line-height: 100rpx;
 	padding: 0rpx 30rpx;
   background-color: #FFA94D;
 	color: #FFFFFF;
 	text-align: center;
-	font-family: 方正兰亭黑-标准;
 }

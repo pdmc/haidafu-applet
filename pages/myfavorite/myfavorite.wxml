@@ -1,11 +1,19 @@
 <!--pages/myfavorite/myfavorite.wxml-->
   <!--列表-->
 <view class="container">
-  <view class='page-body'>
+	<view class="select-tab">
+		<block wx:for="{{labels}}" wx:for-index="bindex"  wx:key="*this">
+			<view data-index='{{bindex}}' class="{{_num==bindex?'active':'inactive'}}" bindtap='toggle'>
+				{{item}}
+			</view>
+		</block>
+	</view>
+	<loading hidden="{{!loading}}">加载中...</loading>
+  <view data-index="0" class="select-page {{_num==0?'show':'hidden'}}">
     <view class='page-list flex-inline-between' wx:for="{{list}}" wx:key="*this">
-			<navigator url='../project/project?pId={{item.project.pId}}'>
+			<navigator url='../project/project?pId={{item.project.pid}}'>
 				<!--view data-index="{{index}}" class='item' style="{{txtStyle}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"-->
-				<view data-index="{{index}}" class='item'>
+				<view data-index="{{index}}" class='{{index==0?"firstItem":""}} item'>
 					<image class='poster' src='{{item.project.image}}'></image>
 					<view class='meta'>
 						<text class='title'>{{item.project.name}}</text>
@@ -19,7 +27,36 @@
 					</view>
 				</view>
 			</navigator>
-			<view class="delete" bindtap="delItem">删除</view>
+			<!--view class="delete" bindtap="delItem">删除</view-->
     </view>
   </view>
+	<view data-index="1" class="select-page {{_num==1?'show':'hidden'}}">
+		<block wx:for="{{questions}}" wx:for-index="index" wx:key="*this">
+			<navigator url='../question/question?qId={{item.question__qId}}'>
+			<view class="{{index==0?'firstItem':''}} qitem flex-vertical">
+				<view class='flex-inline-left'>
+					<text class="title">{{item.question__title}}</text>
+				</view>
+				<view class='flex-inline-left'>
+					<text class='content tinyLabel detailColor'>{{item.question__content?item.question__content:" "}}</text>
+				</view>
+				<view class='lowerBar flex-inline-between'>
+					<view class='flex-inline-left'>
+						<block wx:for="{{item.question__labels}}" wx:for-item="itemLabel" wx:key="*this">
+							<text class='labelsq miuLabel'>{{itemLabel}}</text>
+						</block>
+					</view>
+					<view class='flex-inline-right'>
+						<view>
+							<text class="tinyLabel titleColor">{{item.question__ansNum}}</text>
+						</view>
+						<view>
+							<text class="tinyLabel detailColor">个回答</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			</navigator>
+		</block>
+	</view>
 </view>
